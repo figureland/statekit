@@ -1,9 +1,9 @@
 import {
   type LocalStorageValidator,
+  type Settable,
+  type SettableType,
   setLocalStorage,
-  getLocalStorage,
-  SignalLikeType,
-  SignalLike
+  getLocalStorage
 } from '.'
 
 export type PersistenceName = string[]
@@ -13,12 +13,12 @@ export type PersistenceOptions<V extends any = any> = {
   validate: LocalStorageValidator
   syncTabs?: boolean
   interval?: number
-  set?: (s: SignalLike<V>, v: any) => void
+  set?: (s: Settable<V>, v: any) => void
 }
 
-export const persist = <S extends SignalLike<any>>(
+export const persist = <S extends Settable<any>>(
   s: S,
-  options: PersistenceOptions<SignalLikeType<S>>
+  options: PersistenceOptions<SettableType<S>>
 ) => {
   let lastUpdate: number = performance.now()
   const existing = getLocalStorage(options.name, options.validate, s.get)

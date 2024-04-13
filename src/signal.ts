@@ -10,7 +10,7 @@ import {
 import { createSubscriptions, type Subscription } from './utils/subscriptions'
 import { shallowEquals, type Equals } from './utils/equals'
 import { createEvents } from './utils/events'
-import { Signal, UseSignalDependency } from './api'
+import type { Signal, UseSignalDependency } from './api'
 
 const createSignalContext = () => {
   let id: number = 0

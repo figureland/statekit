@@ -1,7 +1,9 @@
 import { isArray, isString } from '@figureland/typekit'
 import { parse, stringify } from 'superjson'
 import type { Unsubscribe } from './subscriptions'
-import { PersistenceName } from '../persist'
+import type { PersistenceName } from '../persist'
+
+declare var localStorage: Storage
 
 export type LocalStorageValidator = (v: unknown) => boolean
 
@@ -68,7 +70,7 @@ export const listenToLocalStorage = <T>(
   validate: LocalStorageValidator,
   fn: (v: T) => void
 ): Unsubscribe => {
-  const onStorageChange = ({ key, newValue }) => {
+  const onStorageChange = ({ key, newValue }: StorageEvent) => {
     if (key === getLocalStorageName(name) && isString(newValue)) {
       const result = retrieve(newValue)
 

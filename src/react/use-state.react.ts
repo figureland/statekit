@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react'
 import { isString } from '@figureland/typekit'
-import { State, signal, Subscribable } from '..'
+import { type State, signal, type Subscribable } from '..'
 
 export const useSubscribable = <S>(s: Subscribable<S>) => useSyncExternalStore<S>(s.on, s.get)
 

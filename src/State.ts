@@ -13,8 +13,6 @@ export type StateOptions<S extends object = object> = {
   signal?: SignalOptions
 }
 
-const DEFAULT_THROTTLE = 16 * 30 // Half a second at 60fps
-
 /* Generic foundation class for managing reactive state */
 export class State<S extends object, K extends string & keyof S = string & keyof S>
   implements SignalState<S, K>
@@ -22,7 +20,7 @@ export class State<S extends object, K extends string & keyof S = string & keyof
   public readonly id: string
   public signal: SignalObject<S>
   private subscriptions = createSubscriptions()
-  private throttle: number
+  private throttle!: number
   private lastThrottle = 0
   protected initial: () => S
 
@@ -90,7 +88,6 @@ export class State<S extends object, K extends string & keyof S = string & keyof
   public reset = () => {
     this.set(this.initial())
   }
-  mutate = (u: (val: S) => void, sync: boolean = true) => this.signal.mutate(u, sync)
 }
 
 /*  Check if a value is a State */
