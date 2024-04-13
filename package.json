@@ -1,5 +1,5 @@
 {
-  "name": "@figureland/bun-typescript-template",
+  "name": "@figureland/statekit",
   "version": "0.0.1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,13 +9,23 @@
       "require": "./dist/index.js",
       "import": "./dist/index.js"
     },
-    "./entry": {
-      "types": "./dist/entry.d.ts",
-      "require": "./dist/entry.js",
-      "import": "./dist/entry.js"
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "require": "./dist/vue.js",
+      "import": "./dist/vue.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "require": "./dist/react.js",
+      "import": "./dist/react.js"
+    },
+    "./svelte": {
+      "types": "./dist/svelte.d.ts",
+      "require": "./dist/svelte.js",
+      "import": "./dist/svelte.js"
     }
   },
-  "description": "",
+  "description": "git@github.com:figureland/statekit.git",
   "scripts": {
     "build": "bun run build.ts",
     "prepublishOnly": "bun run build",
@@ -32,20 +42,52 @@
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^19.1.0",
     "@types/bun": "^1.0.0",
+    "@types/react": "^18.2.78",
     "bun-plugin-dts": "^0.2.1",
     "eslint": "^9.0.0",
     "husky": "^9.0.11",
     "prettier": "^3.2.5",
+    "react": "^18.2.0",
+    "superjson": "^2.2.1",
+    "svelte": "^4.2.14",
     "typescript": "^5.2.2",
-    "typescript-eslint": "^7.6.0"
+    "typescript-eslint": "^7.6.0",
+    "vue": "^3.4.21"
+  },
+  "peerDependencies": {
+    "@types/react": ">=16.8",
+    "react": ">=16.8",
+    "superjson": ">=2.0.0",
+    "svelte": "^4.0,0",
+    "vue": ">=3.0,0"
+  },
+  "peerDependenciesMeta": {
+    "vue": {
+      "optional": true
+    },
+    "@types/react": {
+      "optional": true
+    },
+    "react": {
+      "optional": true
+    },
+    "svelte": {
+      "optional": true
+    },
+    "superjson": {
+      "optional": true
+    }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/figureland/bun-typescript-template.git"
+    "url": "git+https://github.com/figureland/statekit.git"
   },
   "author": "Figure Systems",
   "bugs": {
-    "url": "https://github.com/figureland/bun-typescript-template"
+    "url": "https://github.com/figureland/statekit"
   },
-  "homepage": "https://github.com/figureland/bun-typescript-template#readme"
+  "homepage": "https://github.com/figureland/statekit#readme",
+  "dependencies": {
+    "@figureland/typekit": "latest"
+  }
 }
