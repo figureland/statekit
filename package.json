@@ -1,0 +1,51 @@
+{
+  "name": "@figureland/bun-typescript-template",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.js"
+    },
+    "./entry": {
+      "types": "./dist/entry.d.ts",
+      "require": "./dist/entry.js",
+      "import": "./dist/entry.js"
+    }
+  },
+  "description": "",
+  "scripts": {
+    "build": "bun run build.ts",
+    "prepublishOnly": "bun run build",
+    "prepare": "husky",
+    "lint": "eslint src/",
+    "format": "prettier --write src/",
+    "release": "bunx changelogen@latest --release"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@commitlint/cli": "^19.2.1",
+    "@commitlint/config-conventional": "^19.1.0",
+    "@types/bun": "^1.0.0",
+    "bun-plugin-dts": "^0.2.1",
+    "eslint": "^9.0.0",
+    "husky": "^9.0.11",
+    "prettier": "^3.2.5",
+    "typescript": "^5.2.2",
+    "typescript-eslint": "^7.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/figureland/bun-typescript-template.git"
+  },
+  "author": "Figure Systems",
+  "bugs": {
+    "url": "https://github.com/figureland/bun-typescript-template"
+  },
+  "homepage": "https://github.com/figureland/bun-typescript-template#readme"
+}
