@@ -1,4 +1,16 @@
 # 
+## v0.0.11
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.10...v0.0.11)
+
+### 🚀 Enhancements
+
+- Updated readonly function to support all subscribable types ([37ae6fa](https://github.com/figureland/statekit/commit/37ae6fa))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.10
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.9...v0.0.10)
