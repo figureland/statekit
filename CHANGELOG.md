@@ -1,4 +1,16 @@
 # 
+## v0.0.10
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.9...v0.0.10)
+
+### 🚀 Enhancements
+
+- Made local storage more modular and flexible ([edb5437](https://github.com/figureland/statekit/commit/edb5437))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.9
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.8...v0.0.9)
