@@ -1,4 +1,16 @@
 # 
+## v0.0.8
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.7...v0.0.8)
+
+### 📖 Documentation
+
+- Updated documentation for signal ([465b010](https://github.com/figureland/statekit/commit/465b010))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.7
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.6...v0.0.7)
