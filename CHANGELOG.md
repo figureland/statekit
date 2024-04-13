@@ -1,4 +1,16 @@
 # 
+## v0.0.3
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.2...v0.0.3)
+
+### 🏡 Chore
+
+- Fixing typescript and build bugs ([90c7975](https://github.com/figureland/statekit/commit/90c7975))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.2
 
 
