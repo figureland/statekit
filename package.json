@@ -56,7 +56,6 @@
     "vue": "^3.4.21"
   },
   "peerDependencies": {
-    "@types/react": ">=16.8",
     "react": ">=16.8",
     "superjson": ">=2.0.0",
     "svelte": "^4.0,0",
@@ -64,9 +63,6 @@
   },
   "peerDependenciesMeta": {
     "vue": {
-      "optional": true
-    },
-    "@types/react": {
       "optional": true
     },
     "react": {
