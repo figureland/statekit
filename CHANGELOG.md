@@ -1,4 +1,16 @@
 # 
+## v0.0.6
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.5...v0.0.6)
+
+### 🚀 Enhancements
+
+- Added typing to persistence options ([7164e33](https://github.com/figureland/statekit/commit/7164e33))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.5
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.4...v0.0.5)
