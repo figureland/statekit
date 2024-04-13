@@ -1,4 +1,16 @@
 # 
+## v0.0.7
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.6...v0.0.7)
+
+### 🏡 Chore
+
+- Updated description ([b7b1eb9](https://github.com/figureland/statekit/commit/b7b1eb9))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.6
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.5...v0.0.6)
