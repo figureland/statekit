@@ -24,6 +24,11 @@
       "types": "./dist/svelte.d.ts",
       "require": "./dist/svelte.js",
       "import": "./dist/svelte.js"
+    },
+    "./local-storage": {
+      "types": "./dist/local-storage.d.ts",
+      "require": "./dist/local-storage.js",
+      "import": "./dist/local-storage.js"
     }
   },
   "description": "Primitives for managing data flow using messages, events and signals",

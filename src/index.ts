@@ -1,12 +1,11 @@
-export {
-  type LocalStorageValidator,
-  type LocalStorageOptions,
-  getLocalStorage,
-  setLocalStorage,
-  listenToLocalStorage
-} from './utils/local-storage'
 export { type StateOptions, type StateType, State, isState } from './State'
-export { type PersistenceName, type PersistenceOptions, persist } from './persist'
+export {
+  type PersistenceName,
+  type PersistenceOptions,
+  persist,
+  type LocalStorageValidator,
+  type StorageOptions
+} from './persist'
 export { type Events, createEvents } from './utils/events'
 export { signal } from './signal'
 export {

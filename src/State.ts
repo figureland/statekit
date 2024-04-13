@@ -8,7 +8,7 @@ import { type PersistenceOptions, persist } from './persist'
 
 export type StateOptions<S extends object = object> = {
   initial: () => S
-  persistence?: PersistenceOptions
+  persistence?: PersistenceOptions<SignalObject<S>>
   throttle?: number
   signal?: SignalOptions
 }
