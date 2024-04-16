@@ -6,7 +6,7 @@ await Bun.build({
     './src/svelte.ts',
     './src/react.ts',
     './src/vue.ts',
-    './src/local-storage.ts'
+    './src/typed-local-storage.ts'
   ],
   outdir: './dist',
   minify: false,
