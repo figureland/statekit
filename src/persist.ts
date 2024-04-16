@@ -1,7 +1,7 @@
 import type { Settable, SettableType } from '.'
 import { isArray } from '@figureland/typekit'
 
-export type StorageAPI<T extends any = any> = {
+export type StorageAPI<T> = {
   get: (name: string) => T | null
   set: (name: string, data: T) => void
 }
