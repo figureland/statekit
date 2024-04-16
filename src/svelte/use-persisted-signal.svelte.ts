@@ -1,5 +1,5 @@
-import { signal, persist, type PersistenceOptions, type Signal } from '..'
+import { signal, persist, type StorageAPI } from '..'
 import { useWritableSignal } from './use-state.svelte'
 
-export const usePersistedSignal = <T>(initial: () => T, options: PersistenceOptions<Signal<T>>) =>
-  useWritableSignal(persist(signal(initial), options))
+export const usePersistedSignal = <T>(initial: () => T, storage: StorageAPI<T>) =>
+  useWritableSignal(persist(signal(initial), storage))

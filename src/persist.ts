@@ -8,34 +8,17 @@ export type StorageAPI<T> = {
 
 export type StorageAPIOptions<T> = {
   name: PersistenceName
-  validate: LocalStorageValidator
+  validate: (v: unknown) => boolean
   fallback: () => T
 }
-
-export type LocalStorageValidator = (v: unknown) => boolean
 
 export const getStorageName = (n: string | PersistenceName) => (isArray(n) ? n.join('/') : n)
 
 export type PersistenceName = string[]
 
-export type PersistenceOptions<S extends Settable> = {
-  name: PersistenceName
-  storage: StorageAPI<SettableType<S>>
-  syncTabs?: boolean
-  interval?: number
-}
-
-export const persist = <S extends Settable<any>>(s: S, options: PersistenceOptions<S>) => {
-  let lastUpdate: number = performance.now()
-  const existing = options.storage.get()
+export const persist = <S extends Settable<any>>(s: S, storage: StorageAPI<SettableType<S>>) => {
+  const existing = storage.get()
   if (existing) s.set(s, existing)
-
-  s.on((state) => {
-    const now = performance.now()
-    if (!options.interval || now - lastUpdate >= options.interval) {
-      options.storage.set(state)
-      lastUpdate = now
-    }
-  })
+  s.on(storage.set)
   return s
 }

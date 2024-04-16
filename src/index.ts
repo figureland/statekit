@@ -1,11 +1,5 @@
 export { type StateOptions, type StateType, State, isState } from './State'
-export {
-  type PersistenceName,
-  persist,
-  type LocalStorageValidator,
-  type PersistenceOptions,
-  type StorageAPI
-} from './persist'
+export { type PersistenceName, persist, type StorageAPI, type StorageAPIOptions } from './persist'
 export { type Events, createEvents } from './utils/events'
 export { signal } from './signal'
 export {

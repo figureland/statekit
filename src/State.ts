@@ -3,12 +3,12 @@ import type { Unsubscribe } from './utils/subscriptions'
 import { createSubscriptions } from './utils/subscriptions'
 import { signalObject } from './signal-object'
 import type { SignalOptions } from './signal'
-import type { SignalObject, SignalState } from '.'
-import { type PersistenceOptions, persist } from './persist'
+import type { SignalObject, SignalState, StorageAPI } from '.'
+import { persist } from './persist'
 
 export type StateOptions<S extends object = object> = {
   initial: () => S
-  persistence?: PersistenceOptions<SignalObject<S>>
+  persistence?: StorageAPI<S>
   throttle?: number
   signal?: SignalOptions
 }

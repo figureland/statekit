@@ -1,5 +1,5 @@
-import { signal, persist, type PersistenceOptions, type Signal } from '..'
+import { signal, persist, type StorageAPI } from '..'
 import { useSubscribable } from './use-state.vue'
 
-export const usePersistedSignal = <T>(initial: () => T, options: PersistenceOptions<Signal<T>>) =>
-  useSubscribable(persist(signal(initial), options))
+export const usePersistedSignal = <T>(initial: () => T, storage: StorageAPI<T>) =>
+  useSubscribable(persist(signal(initial), storage))

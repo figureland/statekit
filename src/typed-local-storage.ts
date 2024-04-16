@@ -6,10 +6,20 @@ declare var localStorage: Storage
 export const typedLocalStorage = <T>({
   name,
   validate,
-  fallback
-}: StorageAPIOptions<T>): StorageAPI<T> => {
+  fallback,
+  interval
+}: StorageAPIOptions<T> & { interval?: number }): StorageAPI<T> => {
+  let lastUpdate: number = performance.now()
+
   const target = getStorageName(name)
-  const set = (v: T) => localStorage.setItem(target, stringify(v))
+  const set = (v: T) => {
+    const now = performance.now()
+
+    if (!interval || now - lastUpdate >= interval) {
+      localStorage.setItem(target, stringify(v))
+      lastUpdate = now
+    }
+  }
   const get = () => {
     const result = parse(localStorage.getItem(target) || '')
     if (validate(result)) {
