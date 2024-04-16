@@ -2,7 +2,7 @@ import type { Settable, SettableType } from '.'
 import { isArray } from '@figureland/typekit'
 
 export type StorageAPI<T> = {
-  get: (name: string) => T | null
+  get: (name: string) => T
   set: (name: string, data: T) => void
 }
 
@@ -17,13 +17,12 @@ export type PersistenceOptions<S extends Settable> = {
   storage: StorageAPI<SettableType<S>>
   syncTabs?: boolean
   interval?: number
-  set?: (s: S, value: any) => void
 }
 
 export const persist = <S extends Settable<any>>(s: S, options: PersistenceOptions<S>) => {
   let lastUpdate: number = performance.now()
   const existing = options.storage.get(getStorageName(options.name))
-  options.set ? options.set(s, existing) : s.set(existing)
+  if (existing) s.set(s, existing)
 
   s.on((state) => {
     const now = performance.now()
