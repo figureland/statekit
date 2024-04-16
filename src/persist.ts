@@ -1,10 +1,5 @@
-import type { Settable } from '.'
+import type { Settable, SettableType } from '.'
 import { isArray } from '@figureland/typekit'
-
-export type StorageOptions = {
-  name: PersistenceName
-  storage: StorageAPI
-}
 
 export type StorageAPI<T extends any = any> = {
   get: (name: string) => T | null
@@ -17,7 +12,9 @@ const getStorageName = (n: string | PersistenceName) => (isArray(n) ? n.join('/'
 
 export type PersistenceName = string[]
 
-export type PersistenceOptions<S extends Settable> = StorageOptions & {
+export type PersistenceOptions<S extends Settable> = {
+  name: PersistenceName
+  storage: StorageAPI<SettableType<S>>
   syncTabs?: boolean
   interval?: number
   set?: (s: S, value: any) => void
