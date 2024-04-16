@@ -1,4 +1,16 @@
 # 
+## v0.0.12
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.11...v0.0.12)
+
+### 🚀 Enhancements
+
+- Removed readonly and fixed peer dependencies bug ([89c2c13](https://github.com/figureland/statekit/commit/89c2c13))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.11
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.10...v0.0.11)
