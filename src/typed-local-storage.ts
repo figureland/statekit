@@ -21,10 +21,13 @@ export const typedLocalStorage = <T>({
     }
   }
   const get = () => {
-    const result = parse(localStorage.getItem(target) || '')
-    if (validate(result)) {
-      return result as T
-    } else {
+    try {
+      const result = parse(localStorage.getItem(target) || '')
+      if (validate(result)) {
+        return result as T
+      }
+      throw new Error(`Invalid value in ${target}`)
+    } catch (e) {
       const v = fallback()
       set(v)
       return v
