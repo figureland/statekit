@@ -1,4 +1,16 @@
 # 
+## v0.0.13
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.12...v0.0.13)
+
+### 🚀 Enhancements
+
+- Simplified localstorage api ([5647590](https://github.com/figureland/statekit/commit/5647590))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.12
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.11...v0.0.12)
