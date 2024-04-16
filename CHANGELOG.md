@@ -1,4 +1,16 @@
 # 
+## v0.0.22
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.21...v0.0.22)
+
+### 🚀 Enhancements
+
+- Added try...catch safety block to typed local storage ([69635f1](https://github.com/figureland/statekit/commit/69635f1))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.21
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.20...v0.0.21)
