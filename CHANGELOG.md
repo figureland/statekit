@@ -1,4 +1,16 @@
 # 
+## v0.0.15
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.14...v0.0.15)
+
+### 🚀 Enhancements
+
+- Refined types for local storage and tidied up scripts ([df956b0](https://github.com/figureland/statekit/commit/df956b0))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.14
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.13...v0.0.14)
