@@ -1,4 +1,16 @@
 # 
+## v0.0.14
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.13...v0.0.14)
+
+### 🚀 Enhancements
+
+- Refined typing for local storage ([10a99b3](https://github.com/figureland/statekit/commit/10a99b3))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.13
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.12...v0.0.13)
