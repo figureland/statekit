@@ -1,4 +1,16 @@
 # 
+## v0.0.21
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.20...v0.0.21)
+
+### 🩹 Fixes
+
+- Tiny bug in persist implementation ([d4a25a0](https://github.com/figureland/statekit/commit/d4a25a0))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.20
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.19...v0.0.20)
