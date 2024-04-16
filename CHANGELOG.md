@@ -1,4 +1,16 @@
 # 
+## v0.0.18
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.17...v0.0.18)
+
+### 🚀 Enhancements
+
+- Refining and simplifying options for persist() ([5f89f59](https://github.com/figureland/statekit/commit/5f89f59))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.17
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.16...v0.0.17)
