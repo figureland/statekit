@@ -1,6 +1,6 @@
 {
   "name": "@figureland/statekit",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
@@ -33,8 +33,8 @@
   },
   "description": "Primitives for managing data flow using messages, events and signals",
   "scripts": {
-    "build": "bun run build.ts",
-    "dev": "bun --watch dev.ts",
+    "build": "bun run scripts/build.ts",
+    "dev": "bun --watch scripts/dev.ts",
     "prepublishOnly": "bun run build",
     "prepare": "husky",
     "lint": "eslint src/",
