@@ -1,4 +1,16 @@
 # 
+## v0.0.19
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.18...v0.0.19)
+
+### 🚀 Enhancements
+
+- Simplified StorageAPI options arguments ([dfd25a3](https://github.com/figureland/statekit/commit/dfd25a3))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.18
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.17...v0.0.18)
