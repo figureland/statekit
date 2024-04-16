@@ -34,6 +34,7 @@
   "description": "Primitives for managing data flow using messages, events and signals",
   "scripts": {
     "build": "bun run build.ts",
+    "dev": "bun --watch dev.ts",
     "prepublishOnly": "bun run build",
     "prepare": "husky",
     "lint": "eslint src/",
@@ -63,8 +64,8 @@
   "peerDependencies": {
     "react": ">=16.8",
     "superjson": ">=2.0.0",
-    "svelte": "^4.0,0",
-    "vue": ">=3.0,0"
+    "svelte": "^4.0.0",
+    "vue": ">=3.0.0"
   },
   "peerDependenciesMeta": {
     "vue": {

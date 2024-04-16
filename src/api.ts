@@ -22,8 +22,6 @@ export type SubscribableType<S> = S extends Subscribable<infer T> ? T : never
 
 export type UseSignalDependency = <S extends Subscribable>(u: S) => SubscribableType<S>
 
-export type ReadonlySubscribable<S extends Subscribable> = Pick<S, 'id' | 'get' | 'on' | 'use'>
-
 export type Signal<V> = Settable<V> & {
   mutate: (u: (val: V) => void, sync?: boolean) => void
 }

@@ -19,5 +19,4 @@ export {
 export { simpleEquals, shallowEquals, type Equals } from './utils/equals'
 export { signalObject } from './signal-object'
 export { machine } from './machine'
-export { readonly } from './readonly'
 export * from './api'
