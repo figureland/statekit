@@ -48,13 +48,13 @@ describe('State', () => {
     expect(subscriber).toHaveBeenCalledWith({ count: 10 })
   })
 
-  it('disposes of subscriptions and signals', async () => {
+  it('disposes of subscriptions and signals', () => {
     const initialState = { count: 0 }
     const state = new State({ initial: () => initialState })
     state.dispose = mock(state.dispose)
     state.signal.dispose = mock(state.signal.dispose)
 
-    await state.dispose()
+    state.dispose()
     expect(state.signal.dispose).toHaveBeenCalled()
   })
 

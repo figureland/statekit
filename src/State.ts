@@ -68,12 +68,12 @@ export class State<S extends object, K extends string & keyof S = string & keyof
   public on = (sub: (value: S) => void) => this.signal.on(sub)
 
   /*  Subscribe to state changes */
-  public dispose = async () => {
+  public dispose = () => {
     this.signal.dispose()
     this.subscriptions.dispose()
     for (const entry of values(this)) {
       if (isState(entry)) {
-        await entry.dispose()
+        entry.dispose()
       }
     }
   }
