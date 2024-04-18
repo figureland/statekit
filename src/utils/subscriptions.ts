@@ -25,7 +25,7 @@ export const createSubscriptions = <S extends Subscription = Subscription>(): Su
     listeners.clear()
   }
 
-  const each = (v: any) => {
+  const each = (v?: any) => {
     for (const sub of listeners) {
       sub(v)
     }
