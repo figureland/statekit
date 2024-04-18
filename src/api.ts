@@ -4,8 +4,11 @@ export type Subscribable<V extends any = any> = {
   id: string
   on: (sub: Subscription<V>) => Unsubscribe
   get: () => V
-  dispose: () => void
   use: (...sub: Unsubscribe[]) => void
+} & Disposable
+
+export type Disposable = {
+  dispose: () => void
 }
 
 export type Settable<V extends any = any> = Subscribable<V> & {
