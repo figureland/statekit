@@ -1,4 +1,16 @@
 # 
+## v0.0.26
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.25...v0.0.26)
+
+### 🚀 Enhancements
+
+- Updated manager to be more generic, allowing any type of disposable signal ([e8d4955](https://github.com/figureland/statekit/commit/e8d4955))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.25
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.24...v0.0.25)
