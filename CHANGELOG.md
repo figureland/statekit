@@ -1,4 +1,16 @@
 # 
+## v0.0.24
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.23...v0.0.24)
+
+### 🚀 Enhancements
+
+- Removed async dispose method ([768e45d](https://github.com/figureland/statekit/commit/768e45d))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.23
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.22...v0.0.23)
