@@ -1,4 +1,16 @@
 # 
+## v0.0.25
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.24...v0.0.25)
+
+### 🚀 Enhancements
+
+- Added manager ([01d9fa2](https://github.com/figureland/statekit/commit/01d9fa2))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.24
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.23...v0.0.24)
