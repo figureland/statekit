@@ -1,4 +1,20 @@
 # 
+## v0.0.28
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.27...v0.0.28)
+
+### 🚀 Enhancements
+
+- Minor tweak to manager and subscriptions ([3986b43](https://github.com/figureland/statekit/commit/3986b43))
+
+### 🏡 Chore
+
+- Tidying up types and adding test ([1e7c082](https://github.com/figureland/statekit/commit/1e7c082))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.27
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.26...v0.0.27)
