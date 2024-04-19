@@ -4,8 +4,8 @@ import { createSubscriptions } from './subscriptions'
 export const manager = () => {
   const subs = createSubscriptions()
 
-  const use = <S extends Disposable>(s: S) => {
-    subs.add(s.dispose)
+  const use = <S extends Disposable | (() => void)>(s: S) => {
+    subs.add('dispose' in s ? s.dispose : s)
     return s
   }
 
@@ -19,3 +19,5 @@ export const manager = () => {
     dispose
   }
 }
+
+export const disposable = (fn: () => void): Disposable => ({ dispose: fn })
