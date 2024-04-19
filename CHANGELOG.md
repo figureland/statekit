@@ -1,4 +1,16 @@
 # 
+## v0.0.29
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.28...v0.0.29)
+
+### 🚀 Enhancements
+
+- Allowed multiple arguments for manager.use() ([4a271cd](https://github.com/figureland/statekit/commit/4a271cd))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.28
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.27...v0.0.28)
