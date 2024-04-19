@@ -1,4 +1,16 @@
 # 
+## v0.0.31
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.30...v0.0.31)
+
+### ✅ Tests
+
+- Added updated manager tests ([443eb13](https://github.com/figureland/statekit/commit/443eb13))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.30
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.29...v0.0.30)
