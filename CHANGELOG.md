@@ -1,4 +1,16 @@
 # 
+## v0.0.33
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.32...v0.0.33)
+
+### 🚀 Enhancements
+
+- Added disposable helper to make manager more flexible ([3857a89](https://github.com/figureland/statekit/commit/3857a89))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.32
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.31...v0.0.32)
