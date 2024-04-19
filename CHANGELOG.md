@@ -1,4 +1,16 @@
 # 
+## v0.0.27
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.26...v0.0.27)
+
+### ✅ Tests
+
+- Added simple tests for manager ([ad75caa](https://github.com/figureland/statekit/commit/ad75caa))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.26
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.25...v0.0.26)
