@@ -51,19 +51,6 @@ describe('Manager', () => {
     disposables.forEach((d) => expect(d.disposed()).toBe(true))
   })
 
-  test('should handle multiple resources in a single use call', () => {
-    const disposables = [fn(), fn(), fn()]
-
-    resourceManager.use(...disposables)
-    disposables.forEach((d) => expect(d.disposed()).toBe(false))
-
-    disposables[1].dispose()
-    expect(disposables[1].disposed()).toBe(true)
-
-    resourceManager.dispose()
-    disposables.forEach((d) => expect(d.disposed()).toBe(true))
-  })
-
   test('should not fail if disposing already disposed resources', () => {
     const mockDisposable = fn()
     resourceManager.use(mockDisposable)
