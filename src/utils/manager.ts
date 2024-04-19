@@ -10,7 +10,7 @@ export const manager = () => {
   }
 
   const dispose = () => {
-    subs.each(() => {})
+    subs.each()
     subs.dispose()
   }
 

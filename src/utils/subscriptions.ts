@@ -43,7 +43,7 @@ export type Subscriptions<S extends Subscription = Subscription> = {
   add: (...sub: S[]) => Unsubscribe
   dispose: () => void
   delete: (...sub: S[]) => void
-  each: (value: any) => void
+  each: (value?: any) => void
 }
 
 /**
