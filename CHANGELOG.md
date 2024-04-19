@@ -1,4 +1,16 @@
 # 
+## v0.0.30
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.29...v0.0.30)
+
+### 🚀 Enhancements
+
+- Update to manager.use() to revert to previous api ([3fc8fe1](https://github.com/figureland/statekit/commit/3fc8fe1))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.29
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.28...v0.0.29)
