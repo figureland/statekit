@@ -1,6 +1,6 @@
 import { describe, test, expect, beforeEach } from 'bun:test'
 import { manager } from '../utils/manager'
-import { Disposable } from '../api'
+import type { Disposable } from '../api'
 
 type DisposableMock = Disposable & {
   disposed: () => boolean
@@ -43,6 +43,9 @@ describe('Manager', () => {
 
     disposables.forEach((d) => resourceManager.use(d))
     disposables.forEach((d) => expect(d.disposed()).toBe(false))
+
+    disposables[1].dispose()
+    expect(disposables[1].disposed()).toBe(true)
 
     resourceManager.dispose()
     disposables.forEach((d) => expect(d.disposed()).toBe(true))
