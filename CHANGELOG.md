@@ -1,4 +1,20 @@
 # 
+## v0.0.34
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.33...v0.0.34)
+
+### 🚀 Enhancements
+
+- Added animation engine and animated signal value ([4646430](https://github.com/figureland/statekit/commit/4646430))
+
+### 🏡 Chore
+
+- Added AnimatedSignal to api ([265272a](https://github.com/figureland/statekit/commit/265272a))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.33
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.32...v0.0.33)
