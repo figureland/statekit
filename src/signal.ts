@@ -7,7 +7,7 @@ import {
   isSet,
   simpleMerge
 } from '@figureland/typekit'
-import { createSubscriptions, type Subscription } from './utils/subscriptions'
+import { createSubscriptions, type Subscription, type Unsubscribe } from './utils/subscriptions'
 import { shallowEquals, type Equals } from './utils/equals'
 import { createEvents } from './utils/events'
 import type { Signal, UseSignalDependency } from './api'
@@ -45,7 +45,7 @@ const createSignal = <V>(
 ): Signal<V> => {
   const dependencies = new Set<Signal<any>['on']>()
   const subs = createSubscriptions()
-  const e = createEvents<{ state: V }>()
+  const e = createEvents<{ state: V; dispose: true }>()
   let loaded = false
 
   const handleDependency: UseSignalDependency = (s) => {
@@ -77,12 +77,16 @@ const createSignal = <V>(
 
   const on = (sub: Subscription<V>) => e.on('state', sub)
 
+  const onDispose = (fn: () => void): Unsubscribe => e.on('dispose', fn)
+
   return {
     set,
     on,
     mutate,
     get: () => value,
+    onDispose,
     dispose: () => {
+      e.emit('dispose', true)
       e.dispose()
       subs.dispose()
       dependencies.clear()

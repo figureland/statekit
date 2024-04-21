@@ -16,7 +16,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noPropertyAccessFromIndexSignature": true,
-    "types": ["bun-types", "./src/global.d.ts"]
+    "types": ["bun-types", "./src/global.d.ts"],
+    "baseUrl": ".",
+    "paths": {
+      "@figureland/statekit": ["./src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "src/**/*.test.ts", "dist"],
   "include": ["src/**/*"]

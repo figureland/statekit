@@ -40,6 +40,7 @@ export const signalObject = <R extends Record<string, any>>(
     on: parent.on,
     get: parent.get,
     dispose: parent.dispose,
+    onDispose: parent.onDispose,
     use: parent.use
   }
 }

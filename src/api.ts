@@ -5,6 +5,7 @@ export type Subscribable<V extends any = any> = {
   on: (sub: Subscription<V>) => Unsubscribe
   get: () => V
   use: (...sub: Unsubscribe[]) => void
+  onDispose: (fn: () => void) => Unsubscribe
 } & Disposable
 
 export type Disposable = {

@@ -20,6 +20,7 @@ export class State<S extends object, K extends string & keyof S = string & keyof
   public readonly id: string
   public signal: SignalObject<S>
   private subscriptions = createSubscriptions()
+  private disposeSubs = createSubscriptions()
   private throttle!: number
   private lastThrottle = 0
   protected initial: () => S
@@ -69,6 +70,8 @@ export class State<S extends object, K extends string & keyof S = string & keyof
 
   /*  Subscribe to state changes */
   public dispose = () => {
+    this.disposeSubs.each()
+    this.disposeSubs.dispose()
     this.signal.dispose()
     this.subscriptions.dispose()
     for (const entry of values(this)) {
@@ -77,6 +80,8 @@ export class State<S extends object, K extends string & keyof S = string & keyof
       }
     }
   }
+
+  public onDispose = (fn: () => void): Unsubscribe => this.disposeSubs.add(fn)
 
   /*
    *  Add a unsubscribe hook to be called when the state is disposed

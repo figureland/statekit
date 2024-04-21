@@ -29,6 +29,11 @@
       "types": "./dist/typed-local-storage.d.ts",
       "require": "./dist/typed-local-storage.js",
       "import": "./dist/typed-local-storage.js"
+    },
+    "./animated": {
+      "types": "./dist/animated.d.ts",
+      "require": "./dist/animated.js",
+      "import": "./dist/animated.js"
     }
   },
   "description": "Primitives for managing data flow using messages, events and signals",
@@ -46,6 +51,7 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@babel/types": "^7.24.0",
     "@commitlint/cli": "^19.2.1",
     "@commitlint/config-conventional": "^19.1.0",
     "@types/bun": "^1.0.0",
@@ -62,12 +68,20 @@
     "vue": "^3.4.21"
   },
   "peerDependencies": {
+    "@figureland/mathkit": "latest",
+    "@figureland/typekit": "latest",
     "react": ">=16.8",
     "superjson": ">=2.0.0",
     "svelte": "^4.0.0",
     "vue": ">=3.0.0"
   },
   "peerDependenciesMeta": {
+    "@figureland/mathkit": {
+      "optional": false
+    },
+    "@figureland/typekit": {
+      "optional": false
+    },
     "vue": {
       "optional": true
     },
@@ -91,6 +105,7 @@
   },
   "homepage": "https://github.com/figureland/statekit#readme",
   "dependencies": {
+    "@figureland/mathkit": "latest",
     "@figureland/typekit": "latest"
   }
 }

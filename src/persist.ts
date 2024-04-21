@@ -1,4 +1,4 @@
-import type { Settable, SettableType } from '.'
+import type { Settable, SettableType } from '@figureland/statekit'
 import { isArray } from '@figureland/typekit'
 
 export type StorageAPI<T> = {

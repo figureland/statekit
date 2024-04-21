@@ -1,6 +1,6 @@
 import { customRef } from 'vue'
 import { isString } from '@figureland/typekit'
-import { State, signal, type UseSignalDependency, type Subscribable } from '..'
+import { State, signal, type UseSignalDependency, type Subscribable } from '@figureland/statekit'
 
 export const useSubscribable = <S>(subscribable: Subscribable<S>) =>
   customRef<S>((track, set) => ({

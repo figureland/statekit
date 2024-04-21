@@ -1,5 +1,5 @@
 import { isString } from '@figureland/typekit'
-import { type State, type Signal, signal, type Subscribable } from '..'
+import { type State, type Signal, signal, type Subscribable } from '@figureland/statekit'
 
 export const useSubscribable = <S>(subscribable: Subscribable<S>) => ({
   subscribe: (run: (value: S) => void) => {
