@@ -3,6 +3,7 @@ import {
   createEvents,
   manager,
   signal,
+  type AnimatedSignal,
   type Events,
   type Signal,
   type Unsubscribe
@@ -146,11 +147,6 @@ type AnimatedSignalOptions<V> = {
   interpolate: InterpolationFn<V>
   easing?: (p: number) => number
   epsilon?: number
-}
-
-export type AnimatedSignal<V extends any> = Signal<V> & {
-  update: (delta: number) => void
-  raw: Signal<V>
 }
 
 export const loop = (e: Animated, { autoStart = true }: { autoStart?: boolean } = {}) => {
