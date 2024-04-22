@@ -1,4 +1,16 @@
 # 
+## v0.0.41
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.40...v0.0.41)
+
+### 🩹 Fixes
+
+- Added vue entrypoint built step : ) ([3a2d267](https://github.com/figureland/statekit/commit/3a2d267))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.40
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.39...v0.0.40)
