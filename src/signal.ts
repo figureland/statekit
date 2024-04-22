@@ -53,23 +53,21 @@ const createSignal = <V>(
     return s.get()
   }
 
-  const store = {
-    value: initial(handleDependency)
-  }
+  let value = initial(handleDependency)
 
   loaded = true
 
-  const mutate = (u: (val: { value: V }) => void, sync: boolean = true) => {
-    u(store)
-    if (sync) e.emit('state', store.value)
+  const mutate = (u: (value: V) => void, sync: boolean = true) => {
+    u(value)
+    if (sync) e.emit('state', value)
   }
 
   const set = (v: V | Partial<V> | ((v: V) => V | Partial<V>), sync: boolean = true): void => {
-    const next = isFunction(v) ? (v as (v: V) => V)(store.value) : v
-    if (!equality || !equality(next, store.value)) {
+    const next = isFunction(v) ? (v as (v: V) => V)(value) : v
+    if (!equality || !equality(next, value) || sync) {
       const shouldMerge = isObject(next) && !isArray(next) && !isMap(next) && !isSet(next)
-      store.value = shouldMerge ? merge(store.value, next) : (next as V)
-      if (sync) e.emit('state', store.value)
+      value = shouldMerge ? merge(value, next) : (next as V)
+      if (sync) e.emit('state', value)
     }
   }
 
@@ -85,7 +83,7 @@ const createSignal = <V>(
     set,
     on,
     mutate,
-    get: () => store.value,
+    get: () => value,
     onDispose,
     dispose: () => {
       e.emit('dispose', true)

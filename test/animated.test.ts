@@ -103,17 +103,18 @@ describe('Animation System', () => {
       duration: 500
     })
 
-    animatedVector.on(() => {
+    animatedVector.on((vx) => {
+      console.log(vx)
       count++
     })
 
     v.set(vector2(10, 10))
     engine.tick(250)
 
-    expect(count).toBeGreaterThan(0)
+    expect(count).toBe(2)
 
     engine.tick(500)
-    expect(count).toBeGreaterThan(1)
+    expect(count).toBe(3)
   })
   test('Number animation should emit events', () => {
     const v = signal(() => 0)
@@ -132,9 +133,11 @@ describe('Animation System', () => {
     v.set(10)
     engine.tick(250)
 
-    expect(count).toBeGreaterThan(0)
+    expect(count).toBe(2)
+    expect(animatedNumber.get()).toBe(5)
 
     engine.tick(500)
-    expect(count).toBeGreaterThan(1)
+    expect(count).toBe(3)
+    expect(v.get()).toBe(10)
   })
 })

@@ -7,8 +7,9 @@ import {
   type Signal,
   type Unsubscribe
 } from '@figureland/statekit'
-import { isBrowser } from './utils'
 import { clamp, mapRange } from '@figureland/mathkit/number'
+import { isObject } from '@figureland/typekit'
+import { isBrowser } from './utils'
 
 type EngineEvents = {
   start: void
@@ -112,15 +113,19 @@ const createAnimated = <V extends any>(
     progress: 0.0
   }
 
+  const objectLike = isObject(state.target)
+
   const tick = (delta: number) => {
     state.progress = clamp(state.progress + delta, 0, duration)
     const finished = state.progress === duration || duration - state.progress < epsilon
 
     if (!finished || state.active) {
       const amount = easing(mapRange(state.progress, 0, duration, 0, 1))
-      clone.mutate((d) => {
-        d.value = interpolate(d.value, state.target, amount)
-      }, true)
+      objectLike
+        ? clone.mutate((d) => {
+            d = interpolate(d, state.target, amount)
+          }, true)
+        : clone.set((d) => interpolate(d, state.target, amount), true)
       state.active = !finished
     }
   }
