@@ -66,6 +66,5 @@ export interface SignalState<R extends Record<string, any>, K extends keyof R = 
 }
 
 export type AnimatedSignal<V extends any> = Signal<V> & {
-  update: (delta: number) => void
-  raw: Signal<V>
+  tick: (delta: number) => void
 }

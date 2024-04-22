@@ -92,4 +92,27 @@ describe('Animation System', () => {
     expect(animatedVector.get().x).toBeCloseTo(-20)
     expect(animatedVector.get().y).toBeCloseTo(0)
   })
+
+  test('Vector2 animation should emit events', () => {
+    const v = signal(() => vector2())
+
+    let count = 0
+
+    const animatedVector = engine.animated(v, {
+      interpolate: (from, to, amount) => lerpVec2(vector2(), from, to, amount),
+      duration: 500
+    })
+
+    animatedVector.on(() => {
+      count++
+    })
+
+    v.set(vector2(10, 10))
+    engine.tick(250)
+
+    expect(count).toBeGreaterThan(0)
+
+    engine.tick(500)
+    expect(count).toBeGreaterThan(1)
+  })
 })

@@ -49,7 +49,7 @@ export const animation = ({ fps = 60 }: { fps?: number; epsilon?: number } = {})
     delta = timestamp - lastTimestamp
     lastTimestamp = timestamp
     for (const a of animations) {
-      a.update(delta)
+      a.tick(delta)
     }
     events.emit('tick', delta)
   }
@@ -108,13 +108,13 @@ const createAnimated = <V extends any>(
     progress: 0.0
   }
 
-  const update = (delta: number) => {
+  const tick = (delta: number) => {
     state.progress = clamp(state.progress + delta, 0, duration)
     const finished = state.progress === duration || duration - state.progress < epsilon
 
     if (!finished || state.active) {
       const amount = easing(mapRange(state.progress, 0, duration, 0, 1))
-      clone.set((d) => interpolate(d, state.target, amount))
+      clone.set((d) => interpolate(d, state.target, amount), true)
       state.active = !finished
     }
   }
@@ -123,15 +123,19 @@ const createAnimated = <V extends any>(
     state.progress = 0
     state.target = v
     state.active = true
-    update(0)
+    tick(0)
   })
 
   return {
-    ...clone,
+    id: clone.id,
+    use: m.use,
+    get: clone.get,
+    on: clone.on,
     set: raw.set,
-    raw,
-    update,
-    dispose: m.dispose
+    mutate: raw.mutate,
+    tick,
+    dispose: m.dispose,
+    onDispose: clone.onDispose
   }
 }
 
