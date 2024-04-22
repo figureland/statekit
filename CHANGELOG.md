@@ -1,4 +1,16 @@
 # 
+## v0.0.38
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.37...v0.0.38)
+
+### 🚀 Enhancements
+
+- Fix for animated value events ([d459b27](https://github.com/figureland/statekit/commit/d459b27))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.37
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.36...v0.0.37)
