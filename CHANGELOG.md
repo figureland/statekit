@@ -1,4 +1,16 @@
 # 
+## v0.0.40
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.39...v0.0.40)
+
+### 🩹 Fixes
+
+- Trying to address issue with object/array based animated tracking values ([9147260](https://github.com/figureland/statekit/commit/9147260))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.39
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.38...v0.0.39)
