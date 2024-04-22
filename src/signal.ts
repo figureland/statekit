@@ -30,18 +30,18 @@ export const signal = <R>(
   { equality = shallowEquals, merge = simpleMerge }: SignalOptions = {}
 ): Signal<R> => {
   const id = context.register()
-  const s = createSignal<R>(id, fn, equality, merge)
+  const s = createSignal<R>(id, fn, merge, equality)
   return s
 }
 
 /**
- * Creates a simple {@link Signal} for tracking a value
+ * Creates a simple {@link Signal} for tracking a store.value
  */
 const createSignal = <V>(
   id: string,
   initial: (use: UseSignalDependency) => V,
-  equality: Equals,
-  merge: Merge
+  merge: Merge,
+  equality?: Equals
 ): Signal<V> => {
   const dependencies = new Set<Signal<any>['on']>()
   const subs = createSubscriptions()
@@ -53,21 +53,23 @@ const createSignal = <V>(
     return s.get()
   }
 
-  let value = initial(handleDependency)
+  const store = {
+    value: initial(handleDependency)
+  }
 
   loaded = true
 
-  const mutate = (u: (val: V) => void, sync: boolean = true) => {
-    u(value)
-    if (sync) e.emit('state', value)
+  const mutate = (u: (val: { value: V }) => void, sync: boolean = true) => {
+    u(store)
+    if (sync) e.emit('state', store.value)
   }
 
   const set = (v: V | Partial<V> | ((v: V) => V | Partial<V>), sync: boolean = true): void => {
-    const next = isFunction(v) ? (v as (v: V) => V)(value) : v
-    if (!equality || !equality(next, value)) {
+    const next = isFunction(v) ? (v as (v: V) => V)(store.value) : v
+    if (!equality || !equality(next, store.value)) {
       const shouldMerge = isObject(next) && !isArray(next) && !isMap(next) && !isSet(next)
-      value = shouldMerge ? merge(value, next) : (next as V)
-      if (sync) e.emit('state', value)
+      store.value = shouldMerge ? merge(store.value, next) : (next as V)
+      if (sync) e.emit('state', store.value)
     }
   }
 
@@ -83,7 +85,7 @@ const createSignal = <V>(
     set,
     on,
     mutate,
-    get: () => value,
+    get: () => store.value,
     onDispose,
     dispose: () => {
       e.emit('dispose', true)

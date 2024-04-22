@@ -27,7 +27,7 @@ export type SubscribableType<S> = S extends Subscribable<infer T> ? T : never
 export type UseSignalDependency = <S extends Subscribable>(u: S) => SubscribableType<S>
 
 export type Signal<V> = Settable<V> & {
-  mutate: (u: (val: V) => void, sync?: boolean) => void
+  mutate: (u: (val: { value: V }) => void, sync?: boolean) => void
 }
 
 export interface SignalObject<R extends Record<string, any>, K extends keyof R = keyof R>

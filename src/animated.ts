@@ -95,7 +95,11 @@ const createAnimated = <V extends any>(
   { duration = 500, easing = (v) => v, interpolate, epsilon = 16 }: AnimatedSignalOptions<V>
 ): AnimatedSignal<V> => {
   const m = manager()
-  const clone = m.use(signal(raw.get))
+  const clone = m.use(
+    signal(raw.get, {
+      equality: () => false
+    })
+  )
   m.use(
     raw.onDispose(() => {
       m.dispose()
@@ -114,7 +118,9 @@ const createAnimated = <V extends any>(
 
     if (!finished || state.active) {
       const amount = easing(mapRange(state.progress, 0, duration, 0, 1))
-      clone.set((d) => interpolate(d, state.target, amount), true)
+      clone.mutate((d) => {
+        d.value = interpolate(d.value, state.target, amount)
+      }, true)
       state.active = !finished
     }
   }
@@ -151,19 +157,20 @@ type AnimatedSignalOptions<V> = {
 export const loop = (e: Animated, { autoStart = true }: { autoStart?: boolean } = {}) => {
   let raf: number
   const browser = isBrowser()
-  const loop = (timestamp: number) => {
-    e.tick(timestamp)
+  const stop = () => {
+    if (browser) cancelAnimationFrame(raf)
+  }
+  const run = () => {
     if (browser) raf = requestAnimationFrame(loop)
   }
-  e.on('start', () => {
-    if (browser) raf = requestAnimationFrame(loop)
-  })
-  e.on('stop', () => {
-    if (browser) cancelAnimationFrame(raf)
-  })
-  e.on('dispose', () => {
-    if (browser) cancelAnimationFrame(raf)
-  })
+  const loop = (timestamp: number) => {
+    e.tick(timestamp)
+    run()
+  }
+
+  e.on('start', run)
+  e.on('stop', stop)
+  e.on('dispose', stop)
   if (autoStart) e.start()
   return e
 }

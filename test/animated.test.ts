@@ -115,4 +115,26 @@ describe('Animation System', () => {
     engine.tick(500)
     expect(count).toBeGreaterThan(1)
   })
+  test('Number animation should emit events', () => {
+    const v = signal(() => 0)
+
+    let count = 0
+
+    const animatedNumber = engine.animated(v, {
+      interpolate: lerp,
+      duration: 500
+    })
+
+    animatedNumber.on(() => {
+      count++
+    })
+
+    v.set(10)
+    engine.tick(250)
+
+    expect(count).toBeGreaterThan(0)
+
+    engine.tick(500)
+    expect(count).toBeGreaterThan(1)
+  })
 })
