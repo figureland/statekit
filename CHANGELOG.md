@@ -1,4 +1,16 @@
 # 
+## v0.0.37
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.36...v0.0.37)
+
+### 🏡 Chore
+
+- Removed typing from animated ([3177a35](https://github.com/figureland/statekit/commit/3177a35))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.36
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.35...v0.0.36)
