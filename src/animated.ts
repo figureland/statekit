@@ -1,4 +1,3 @@
-import type { Vector2 } from '@figureland/mathkit/vector2'
 import {
   createEvents,
   manager,
@@ -70,10 +69,7 @@ export const animation = ({ fps = 60 }: { fps?: number; epsilon?: number } = {})
     tick,
     onDispose: (fn) => events.on('dispose', fn),
     on: events.on,
-    animated: <V extends number | Vector2>(
-      s: Signal<V>,
-      options: AnimatedSignalOptions<V>
-    ): AnimatedSignal<V> => {
+    animated: <V>(s: Signal<V>, options: AnimatedSignalOptions<V>): AnimatedSignal<V> => {
       const a = m.use(createAnimated(s, options))
       animations.add(a)
       a.onDispose(() => animations.delete(a))
@@ -91,10 +87,7 @@ export type Animated = {
   dispose: () => void
   on: Events<EngineEvents>['on']
   onDispose: (fn: () => void) => Unsubscribe
-  animated: <V extends number | Vector2>(
-    s: Signal<V>,
-    options: AnimatedSignalOptions<V>
-  ) => AnimatedSignal<V>
+  animated: <V>(s: Signal<V>, options: AnimatedSignalOptions<V>) => AnimatedSignal<V>
 }
 
 const createAnimated = <V extends any>(
