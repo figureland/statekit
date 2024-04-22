@@ -1,4 +1,16 @@
 # 
+## v0.0.42
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.41...v0.0.42)
+
+### 🚀 Enhancements
+
+- Refined set method for animated ([648af37](https://github.com/figureland/statekit/commit/648af37))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.41
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.40...v0.0.41)
