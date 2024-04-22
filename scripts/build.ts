@@ -5,7 +5,7 @@ await Bun.build({
     './src/index.ts',
     './src/svelte.ts',
     './src/react.ts',
-    // './src/vue.ts',
+    './src/vue.ts',
     './src/typed-local-storage.ts',
     './src/animated.ts'
   ],
