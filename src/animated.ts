@@ -18,7 +18,7 @@ type EngineEvents = {
   dispose: void
 }
 
-export const animation = ({ fps = 30 }: { fps?: number; epsilon?: number } = {}): Animated => {
+export const animation = ({ fps = 60 }: { fps?: number; epsilon?: number } = {}): Animated => {
   const m = manager()
   const active = m.use(signal(() => false))
   const events = m.use(createEvents<EngineEvents>())
@@ -63,6 +63,7 @@ export const animation = ({ fps = 30 }: { fps?: number; epsilon?: number } = {})
   }
 
   return {
+    active,
     start,
     stop,
     dispose,
@@ -83,6 +84,7 @@ export const animation = ({ fps = 30 }: { fps?: number; epsilon?: number } = {})
 }
 
 export type Animated = {
+  active: Signal<boolean>
   tick: (timestamp: number) => void
   start: () => void
   stop: () => void
