@@ -137,12 +137,19 @@ const createAnimated = <V extends any>(
     tick(0)
   })
 
+  const set = (v: V | Partial<V> | ((v: V) => V | Partial<V>), sync: boolean = true) => {
+    state.progress = 1.0
+    clone.set(v, sync)
+    state.target = clone.get()
+    state.active = false
+  }
+
   return {
     id: clone.id,
     use: m.use,
     get: clone.get,
     on: clone.on,
-    set: raw.set,
+    set,
     mutate: raw.mutate,
     tick,
     dispose: m.dispose,
