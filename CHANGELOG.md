@@ -1,4 +1,16 @@
 # 
+## v0.0.39
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.38...v0.0.39)
+
+### 🚀 Enhancements
+
+- Revised mutate method to be more flexible ([d2b8cbb](https://github.com/figureland/statekit/commit/d2b8cbb))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.38
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.37...v0.0.38)
