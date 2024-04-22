@@ -1,4 +1,16 @@
 # 
+## v0.0.35
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.34...v0.0.35)
+
+### 🏡 Chore
+
+- Exported active signal from animated ([1e1e305](https://github.com/figureland/statekit/commit/1e1e305))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.34
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.33...v0.0.34)
