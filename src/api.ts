@@ -68,3 +68,8 @@ export interface SignalState<R extends Record<string, any>, K extends keyof R = 
 export type AnimatedSignal<V extends any> = Signal<V> & {
   tick: (delta: number) => void
 }
+
+export type Manager = Disposable & {
+  unique: <S extends Subscribable>(key: string, s: () => S) => S
+  use: <S extends Disposable | (() => void)>(s: S) => S
+}
