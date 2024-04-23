@@ -48,14 +48,7 @@ const createSignal = <V>(
   let loaded = false
   let lastSyncTime: number = 0
 
-  const shouldThrottle = () => {
-    if (throttle) {
-      console.log(performance.now() - lastSyncTime)
-      console.log('throttle?', throttle && performance.now() - lastSyncTime < throttle)
-    }
-    return throttle && performance.now() - lastSyncTime < throttle
-  }
-
+  const shouldThrottle = () => throttle && performance.now() - lastSyncTime < throttle
 
   const handleDependency: UseSignalDependency = (s) => {
     if (!loaded) dependencies.add(s.on)
