@@ -27,10 +27,10 @@ const context = createSignalContext()
 
 export const signal = <R>(
   fn: (use: UseSignalDependency) => R,
-  { equality = shallowEquals, merge = simpleMerge }: SignalOptions<R> = {}
+  options: SignalOptions<R> = {}
 ): Signal<R> => {
   const id = context.register()
-  const s = createSignal<R>(id, fn, merge, equality)
+  const s = createSignal<R>(id, fn, options)
   return s
 }
 
@@ -40,13 +40,22 @@ export const signal = <R>(
 const createSignal = <V>(
   id: string,
   initial: (use: UseSignalDependency) => V,
-  merge: Merge,
-  equality?: Equals<V>
+  { merge = simpleMerge, equality = shallowEquals, throttle }: SignalOptions<V>
 ): Signal<V> => {
   const dependencies = new Set<Signal<any>['on']>()
   const subs = createSubscriptions()
   const e = createEvents<{ state: V; dispose: true }>()
   let loaded = false
+  let lastSyncTime: number = 0
+
+  const shouldThrottle = () => {
+    if (throttle) {
+      console.log(performance.now() - lastSyncTime)
+      console.log('throttle?', throttle && performance.now() - lastSyncTime < throttle)
+    }
+    return throttle && performance.now() - lastSyncTime < throttle
+  }
+
 
   const handleDependency: UseSignalDependency = (s) => {
     if (!loaded) dependencies.add(s.on)
@@ -58,11 +67,14 @@ const createSignal = <V>(
   loaded = true
 
   const mutate = (u: (value: V) => void, sync: boolean = true) => {
+    if (shouldThrottle()) return
     u(value)
     if (sync) e.emit('state', value)
+    lastSyncTime = performance.now()
   }
 
   const set = (v: V | Partial<V> | ((v: V) => V | Partial<V>), sync: boolean = true): void => {
+    if (shouldThrottle()) return
     const next = isFunction(v) ? (v as (v: V) => V)(value) : v
     const shouldMerge = isObject(next) && !isArray(next) && !isMap(next) && !isSet(next)
     const newValue = shouldMerge ? merge(value, next) : (next as V)
@@ -70,6 +82,7 @@ const createSignal = <V>(
       value = newValue
       if (sync) e.emit('state', value)
     }
+    lastSyncTime = performance.now()
   }
 
   for (const dep of dependencies) {
@@ -101,4 +114,5 @@ export type SignalOptions<R> = {
   track?: boolean
   equality?: Equals<R>
   merge?: Merge
+  throttle?: number
 }

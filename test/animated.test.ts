@@ -104,7 +104,6 @@ describe('Animation System', () => {
     })
 
     animatedVector.on((vx) => {
-      console.log(vx)
       count++
     })
 

@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'bun:test'
 import { signal } from '../src'
 
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
 describe('signal', () => {
   it('creates a signal and retrieves its value', () => {
     const initialValue = 10
@@ -58,5 +60,56 @@ describe('signal with options', () => {
   it('uses typed custom equality function', () => {
     const customEquality = (a: { v: number }, b: { v: number }) => a.v === b.v
     const signalWithOptions = signal(() => ({ v: 1 }), { equality: customEquality })
+  })
+})
+
+describe('signal with throttle', () => {
+  it('does not emit updates more frequently than throttle limit', async () => {
+    const startValue = 10
+    const throttleDuration = 200
+    const testSignal = signal(() => startValue, { throttle: throttleDuration })
+    await delay(throttleDuration)
+
+    let emitCount = 0
+    testSignal.on(() => {
+      emitCount++
+    })
+
+    testSignal.set(20)
+    testSignal.set(30)
+    await delay(throttleDuration)
+    testSignal.set(40)
+    testSignal.set(10)
+
+    expect(emitCount).toBe(2)
+  })
+
+  it('emits immediately for the first update', () => {
+    const initialValue = 5
+    const testSignal = signal(() => initialValue, { throttle: 100 })
+    let receivedValue = 0
+    testSignal.on((value) => {
+      receivedValue = value
+    })
+
+    testSignal.set(15) // Should emit immediately
+    expect(receivedValue).toBe(15)
+  })
+
+  it('throttle does not affect the last update after throttle period', async () => {
+    const initialValue = 100
+    const throttleDuration = 100
+    const testSignal = signal(() => initialValue, { throttle: throttleDuration })
+    let latestValue = 0
+
+    testSignal.on((value) => {
+      latestValue = value
+    })
+
+    testSignal.set(200) // Should emit immediately
+    await delay(throttleDuration + 10)
+    testSignal.set(300) // Should emit after throttle duration
+
+    expect(latestValue).toBe(300)
   })
 })
