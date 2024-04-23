@@ -1,4 +1,16 @@
 # 
+## v0.0.43
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.42...v0.0.43)
+
+### 🚀 Enhancements
+
+- Added unique method to manager ([c1cf94f](https://github.com/figureland/statekit/commit/c1cf94f))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.42
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.41...v0.0.42)
