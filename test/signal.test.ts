@@ -51,10 +51,12 @@ describe('signal', () => {
 })
 
 describe('signal with options', () => {
-  it('tracks nested signals when track option is true', () => {})
-
   it('uses custom equality function', () => {
     const customEquality = (a: any, b: any) => JSON.stringify(a) === JSON.stringify(b)
     const signalWithOptions = signal(() => ({ a: 1 }), { equality: customEquality })
+  })
+  it('uses typed custom equality function', () => {
+    const customEquality = (a: { v: number }, b: { v: number }) => a.v === b.v
+    const signalWithOptions = signal(() => ({ v: 1 }), { equality: customEquality })
   })
 })

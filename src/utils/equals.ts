@@ -1,6 +1,6 @@
 import { has, is, keys } from '@figureland/typekit'
 
-export type Equals = (s: unknown, t: unknown) => boolean
+export type Equals<T extends any = any> = (s: T, t: T) => boolean
 
 export const simpleEquals: Equals = (state, prevState) => is(state, prevState)
 

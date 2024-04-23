@@ -27,7 +27,7 @@ const context = createSignalContext()
 
 export const signal = <R>(
   fn: (use: UseSignalDependency) => R,
-  { equality = shallowEquals, merge = simpleMerge }: SignalOptions = {}
+  { equality = shallowEquals, merge = simpleMerge }: SignalOptions<R> = {}
 ): Signal<R> => {
   const id = context.register()
   const s = createSignal<R>(id, fn, merge, equality)
@@ -41,7 +41,7 @@ const createSignal = <V>(
   id: string,
   initial: (use: UseSignalDependency) => V,
   merge: Merge,
-  equality?: Equals
+  equality?: Equals<V>
 ): Signal<V> => {
   const dependencies = new Set<Signal<any>['on']>()
   const subs = createSubscriptions()
@@ -64,9 +64,10 @@ const createSignal = <V>(
 
   const set = (v: V | Partial<V> | ((v: V) => V | Partial<V>), sync: boolean = true): void => {
     const next = isFunction(v) ? (v as (v: V) => V)(value) : v
-    if (!equality || !equality(next, value) || sync) {
-      const shouldMerge = isObject(next) && !isArray(next) && !isMap(next) && !isSet(next)
-      value = shouldMerge ? merge(value, next) : (next as V)
+    const shouldMerge = isObject(next) && !isArray(next) && !isMap(next) && !isSet(next)
+    const newValue = shouldMerge ? merge(value, next) : (next as V)
+    if (!equality || !equality(newValue, value) || sync) {
+      value = newValue
       if (sync) e.emit('state', value)
     }
   }
@@ -96,8 +97,8 @@ const createSignal = <V>(
   }
 }
 
-export type SignalOptions = {
+export type SignalOptions<R> = {
   track?: boolean
-  equality?: Equals
+  equality?: Equals<R>
   merge?: Merge
 }
