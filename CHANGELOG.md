@@ -1,4 +1,16 @@
 # 
+## v0.0.45
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.44...v0.0.45)
+
+### 🚀 Enhancements
+
+- Updated typing for equality function ([9a8847d](https://github.com/figureland/statekit/commit/9a8847d))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.44
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.43...v0.0.44)
