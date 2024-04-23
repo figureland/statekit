@@ -4,13 +4,13 @@ import type { Signal, SignalObject } from './api'
 
 export const signalObject = <R extends Record<string, any>>(
   r: R,
-  options?: SignalOptions
+  options?: SignalOptions<R>
 ): SignalObject<R> => {
   const parent = signal<R>(() => r, options)
   const signals = {} as { [K in keyof R]: Signal<R[K]> }
 
   for (const k in r) {
-    signals[k] = signal(() => r[k], options)
+    signals[k] = signal(() => r[k])
     parent.use(signals[k].on(() => parent.set(getObject())))
     parent.use(signals[k].dispose)
   }

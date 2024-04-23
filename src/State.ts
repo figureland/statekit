@@ -10,7 +10,7 @@ export type StateOptions<S extends object = object> = {
   initial: () => S
   persistence?: StorageAPI<S>
   throttle?: number
-  signal?: SignalOptions
+  signal?: SignalOptions<S>
 }
 
 /* Generic foundation class for managing reactive state */
