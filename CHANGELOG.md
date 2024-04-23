@@ -1,4 +1,20 @@
 # 
+## v0.0.49
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.48...v0.0.49)
+
+### 🚀 Enhancements
+
+- Added signal throttling ([d5b1710](https://github.com/figureland/statekit/commit/d5b1710))
+
+### 🏡 Chore
+
+- Remove console.log ([de1e1ed](https://github.com/figureland/statekit/commit/de1e1ed))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.48
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.47...v0.0.48)
