@@ -1,4 +1,16 @@
 # 
+## v0.0.46
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.45...v0.0.46)
+
+### 🩹 Fixes
+
+- Added options types for SignalObject and State ([6dd54f8](https://github.com/figureland/statekit/commit/6dd54f8))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.45
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.44...v0.0.45)
