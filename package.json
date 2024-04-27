@@ -105,7 +105,7 @@
   },
   "homepage": "https://github.com/figureland/statekit#readme",
   "dependencies": {
-    "@figureland/mathkit": "^0.0.17",
+    "@figureland/mathkit": "^0.0.18",
     "@figureland/typekit": "^0.0.15"
   }
 }

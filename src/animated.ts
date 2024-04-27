@@ -91,7 +91,7 @@ export type Animated = {
   animated: <V>(s: Signal<V>, options: AnimatedSignalOptions<V>) => AnimatedSignal<V>
 }
 
-const createAnimated = <V extends any>(
+export const createAnimated = <V extends any>(
   raw: Signal<V>,
   { duration = 500, easing = (v) => v, interpolate, epsilon = 16 }: AnimatedSignalOptions<V>
 ): AnimatedSignal<V> => {
