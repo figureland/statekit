@@ -68,7 +68,7 @@
     "vue": "^3.4.21"
   },
   "peerDependencies": {
-    "@figureland/mathkit": "^0.0.17",
+    "@figureland/mathkit": "^0.0.18",
     "@figureland/typekit": "^0.0.15",
     "react": ">=16.8",
     "superjson": ">=2.0.0",
@@ -77,7 +77,7 @@
   },
   "peerDependenciesMeta": {
     "@figureland/mathkit": {
-      "optional": false
+      "optional": true
     },
     "@figureland/typekit": {
       "optional": false
