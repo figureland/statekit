@@ -1,4 +1,6 @@
-This library provides a simple, powerful toolkit of primitives for building apps and systems driven by data, events and messages.
+![statekit illustration](./docs/statekit-hero.svg)
+
+**statekit** is a simple, powerful toolkit of primitives for building apps and systems driven by data, events and messages.
 
 ### `Signal<V>(() => V)`
 
