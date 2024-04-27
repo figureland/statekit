@@ -1,4 +1,16 @@
 # 
+## v0.0.52
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.51...v0.0.52)
+
+### 📖 Documentation
+
+- Added poster illustration ([f556c11](https://github.com/figureland/statekit/commit/f556c11))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.51
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.50...v0.0.51)
