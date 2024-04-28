@@ -69,8 +69,8 @@ const createSignal = <V>(
   const set = (v: V | Partial<V> | ((v: V) => V | Partial<V>), sync: boolean = true): void => {
     if (shouldThrottle()) return
     const next = isFunction(v) ? (v as (v: V) => V)(value) : v
-    const shouldMerge = isObject(next) && !isArray(next) && !isMap(next) && !isSet(next)
-    const newValue = shouldMerge ? merge(value, next) : (next as V)
+    const shouldMerge = isObject(next) && !isMap(next) && !isSet(next)
+    const newValue = shouldMerge && isObject(value) ? (merge(value, next) as V) : (next as V)
     if (!equality || !equality(newValue, value) || sync) {
       value = newValue
       if (sync) e.emit('state', value)
