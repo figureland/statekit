@@ -1,4 +1,17 @@
 # 
+## v0.0.57
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.56...v0.0.57)
+
+### 🏡 Chore
+
+- Fixing type error ([0a559c4](https://github.com/figureland/statekit/commit/0a559c4))
+- Fixing type error ([1519218](https://github.com/figureland/statekit/commit/1519218))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.56
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.55...v0.0.56)
