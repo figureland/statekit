@@ -1,12 +1,4 @@
-import {
-  type Merge,
-  isArray,
-  isFunction,
-  isObject,
-  isMap,
-  isSet,
-  simpleMerge
-} from '@figureland/typekit'
+import { type Merge, isFunction, isObject, isMap, isSet, simpleMerge } from '@figureland/typekit'
 import { createSubscriptions, type Subscription, type Unsubscribe } from './utils/subscriptions'
 import { shallowEquals, type Equals } from './utils/equals'
 import { createEvents } from './utils/events'
