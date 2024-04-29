@@ -1,4 +1,16 @@
 # 
+## v0.0.60
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.59...v0.0.60)
+
+### 📖 Documentation
+
+- Added better, up to date documentation ([14fa5af](https://github.com/figureland/statekit/commit/14fa5af))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.59
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.58...v0.0.59)
