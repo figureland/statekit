@@ -1,4 +1,16 @@
 # 
+## v0.0.59
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.58...v0.0.59)
+
+### 🏡 Chore
+
+- Bump down dependency ([d3d2709](https://github.com/figureland/statekit/commit/d3d2709))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.58
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.57...v0.0.58)
