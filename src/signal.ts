@@ -20,11 +20,7 @@ const context = createSignalContext()
 export const signal = <R>(
   fn: (use: UseSignalDependency) => R,
   options: SignalOptions<R> = {}
-): Signal<R> => {
-  const id = context.register()
-  const s = createSignal<R>(id, fn, options)
-  return s
-}
+): Signal<R> => createSignal<R>(context.register(), fn, options)
 
 /**
  * Creates a simple {@link Signal} for tracking a store.value
@@ -36,7 +32,7 @@ const createSignal = <V>(
 ): Signal<V> => {
   const dependencies = new Set<Signal<any>['on']>()
   const subs = createSubscriptions()
-  const e = createEvents<{ state: V; dispose: true }>()
+  const e = createEvents<{ state: V; dispose: true; previous: [number, V] }>()
   let loaded = false
   let lastSyncTime: number = 0
 
@@ -64,10 +60,11 @@ const createSignal = <V>(
     const shouldMerge = isObject(next) && !isMap(next) && !isSet(next)
     const newValue = shouldMerge && isObject(value) ? (merge(value, next) as V) : (next as V)
     if (!equality || !equality(newValue, value) || sync) {
+      lastSyncTime = performance.now()
       value = newValue
       if (sync) e.emit('state', value)
+      e.emit('previous', [lastSyncTime, value])
     }
-    lastSyncTime = performance.now()
   }
 
   for (const dep of dependencies) {
@@ -78,11 +75,14 @@ const createSignal = <V>(
 
   const onDispose = (fn: () => void): Unsubscribe => e.on('dispose', fn)
 
+  const onPrevious = (fn: (p: [number, V]) => void): Unsubscribe => e.on('previous', fn)
+
   return {
     set,
     on,
     mutate,
     get: () => value,
+    onPrevious,
     onDispose,
     dispose: () => {
       e.emit('dispose', true)

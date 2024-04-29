@@ -1,11 +1,14 @@
 import type { Subscription, Unsubscribe } from '.'
 
+export type SubscribableHistoryEntry<V extends any> = [number, V]
+
 export type Subscribable<V extends any = any> = {
   id: string
   on: (sub: Subscription<V>) => Unsubscribe
   get: () => V
   use: (...sub: Unsubscribe[]) => void
   onDispose: (fn: () => void) => Unsubscribe
+  onPrevious: (fn: (e: SubscribableHistoryEntry<V>) => void) => Unsubscribe
 } & Disposable
 
 export type Disposable = {
@@ -72,4 +75,8 @@ export type AnimatedSignal<V extends any> = Signal<V> & {
 export type Manager = Disposable & {
   unique: <S extends Subscribable>(key: string, s: () => S) => S
   use: <S extends Disposable | (() => void)>(s: S) => S
+}
+
+export type SubscribableHistory<V> = Signal<V> & {
+  restore: () => void
 }

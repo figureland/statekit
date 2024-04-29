@@ -44,7 +44,7 @@ pointer.dispose()
 
 #### Deriving Signals
 
-If you want to create new signals derived from other signals or other sources that implement the `Subscribable` interface. You can use the first argument in the initialiser function. You can wrap this around any other signals, states or reactive objects from this library. It will pick up the dependencies and update automatically whenever they change.
+You can create new signals derived from other signals or other sources that implement the `Subscribable` interface. You can use the first argument in the initialiser function. You can wrap this around any other signals, states or reactive objects from this library. It will pick up the dependencies and update automatically whenever they change.
 
 ```typescript
 import { signal } from '@figureland/statekit'
@@ -53,7 +53,7 @@ const x = signal(() => 2)
 const y = signal(() => 1)
 const pos = signal((get) => ({
   x: get(x),
-  y: get(x)
+  y: get(y)
 }))
 
 post.on((newValue: { x: number; y: number }) => {
@@ -128,9 +128,9 @@ v.key('point').set({ x: 1, y: 2 })
 The persist will wrap a signal and persist its value to a storage API (synchronously). The storage API is supplied as the second argument. This package provides a `typedLocalStorage` method that uses [superjson](https://github.com/blitz-js/superjson) to safely storage objects with a wider range of supported types than `JSON.stringify()`. If we want to persist in a type-safe way, we need to supply some extra information.
 
 - `name` provides the path for the storage key. So, for example `['my','example','1']` would produce the key `my-example-1`.
-- `validate` checks that the value in storage is of the same type as the signal.
-- `fallback` is a value to immediately store if nothing valid is found.
-- `interval` is a way of improving throttling the storage of values, for example if that don't need to be immediately persisted
+- `validate` returns a boolean checking that the value in storage is of the same type as the signal.
+- `fallback` is a value to immediately set in the store if nothing valid is found.
+- `interval` is a way of improving throttling the storage of values, useful if you are sending many updates to a signal and don't need to guarantee they are always up to date.
 
 ```typescript
 import { type PersistenceName, typedLocalStorage } from '@figureland/statekit/typed-local-storage'
@@ -185,6 +185,80 @@ const create = () => {
     subscribe
   }
 }
+```
+
+### `history`
+
+This is a dumb helper which maintains a log of past values of a `Subscribable`, alongside the timestamp when they were changed. It was mainly created as a tool for debugging.
+
+```typescript
+import { history, signal } from '@figureland/statekit'
+
+const x = signal(() => 2)
+const h = history(x, { limit: 2 })
+
+x.set(3)
+h.get() // [[1714414077814, 2]]
+
+x.set(4)
+h.get() // [[1714414077814, 2], [1714414077815, 3]]
+
+x.set(5)
+h.get() // [[1714414077815, 3], [1714414077816, 4]]
+
+// There's probably a much better way of managing all of this, but you
+// can revert to the previous version by calling restore() on the history
+// with the associated timestamp.
+
+x.get() // 5
+h.restore()
+x.get() // 4
+
+h.restore()
+x.get() // 5
+```
+
+### `State`
+
+This is a class-based extension of the `signalObject`, that is likely going to be removed in future versions. It's just a different pattern for a simple architecture where you are using classes heavily. Essentially it allows a pattern like this:
+
+```typescript
+import { State } from '@figureland/statekit'
+
+export class Pointer extends State {
+  constructor() {
+    super({
+      initial: () => ({ x: 0, y: 0 })
+    })
+  }
+}
+
+const pointer = new Pointer()
+
+// This is helpful for more complicated representations of state,
+// for example if there is internal logic or you want to associate
+// the state with additional methods
+
+export class Pointer extends State {
+  constructor() {
+    super({
+      initial: () => ({ x: 0, y: 0 })
+    })
+  }
+  public transform = () => {
+    const { x, y } = this.state.get()
+    return `transform: translateX(${x}px, ${y}px)`
+  }
+}
+
+// You can also reset the state to initial arguments
+
+pointer.reset()
+
+// And subscribe to it like a signal or any other object
+// which implements the Subscribable interface
+
+const x2 = signal((get) => get(pointer.key('x')) * 2)
 ```
 
 ## Scripts

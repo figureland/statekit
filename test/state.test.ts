@@ -18,26 +18,6 @@ describe('State', () => {
     expect(state.get()).toEqual({ count: 10 })
   })
 
-  it('throttles set calls based on provided throttle time', async () => {
-    const initialState = { count: 0 }
-    const state = new State({
-      initial: () => initialState,
-      throttle: 1 // 1 millisecond for test purposes
-    })
-
-    state.set({ count: 1 })
-    expect(state.get()).toEqual({ count: 1 })
-
-    // Immediately try to set again, should be throttled
-    state.set({ count: 2 })
-    expect(state.get()).toEqual({ count: 1 })
-
-    // Wait for throttle duration and try setting again
-    await new Promise((resolve) => setTimeout(resolve, 100))
-    state.set({ count: 2 })
-    expect(state.get()).toEqual({ count: 2 })
-  })
-
   it('subscribes to state changes', () => {
     const initialState = { count: 0 }
     const state = new State({ initial: () => initialState })

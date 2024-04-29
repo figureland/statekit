@@ -1,63 +1,36 @@
-import { values } from '@figureland/typekit'
-import type { Unsubscribe } from './utils/subscriptions'
-import { createSubscriptions } from './utils/subscriptions'
 import { signalObject } from './signal-object'
-import type { SignalOptions } from './signal'
-import type { SignalObject, SignalState, StorageAPI } from '.'
+import { manager, type SignalObject, type SignalState, type StorageAPI } from '.'
 import { persist } from './persist'
 
 export type StateOptions<S extends object = object> = {
   initial: () => S
   persistence?: StorageAPI<S>
-  throttle?: number
-  signal?: SignalOptions<S>
 }
 
 /* Generic foundation class for managing reactive state */
 export class State<S extends object, K extends string & keyof S = string & keyof S>
   implements SignalState<S, K>
 {
+  private manager = manager()
   public readonly id: string
   public signal: SignalObject<S>
-  private subscriptions = createSubscriptions()
-  private disposeSubs = createSubscriptions()
-  private throttle!: number
-  private lastThrottle = 0
   protected initial: () => S
 
-  constructor({ initial, persistence, throttle, signal: signalOptions }: StateOptions<S>) {
+  constructor({ initial, persistence }: StateOptions<S>) {
     this.initial = initial
-    if (throttle) this.throttle = throttle
-    this.signal = signalObject(initial(), signalOptions)
+    this.signal = this.manager.use(signalObject(initial()))
     this.id = this.signal.id
     if (persistence) {
       persist(this.signal, persistence)
     }
   }
 
-  /*
-   * @param t - throttle time in milliseconds
-   * @returns true if the update should be throttled
-   */
-  private shouldThrottle = (): boolean => {
-    const t = this.throttle
-    if (!t) {
-      return false
-    }
-    const now = performance.now()
-    if (t && now - this.lastThrottle < t) {
-      return true
-    }
-    this.lastThrottle = now
-    return false
-  }
-
   public set: SignalState<S, K>['set'] = (u, sync) => {
-    if (!this.shouldThrottle()) this.signal.set(u, sync)
+    this.signal.set(u, sync)
   }
 
   /*  Get the current state */
-  public get = (): S => this.signal.get()
+  public get: SignalState<S, K>['get'] = () => this.signal.get()
 
   public key: SignalState<S, K>['key'] = (k) => this.signal.key(k)
 
@@ -66,28 +39,22 @@ export class State<S extends object, K extends string & keyof S = string & keyof
   }
 
   /* Subscribe to all state changes */
-  public on = (sub: (value: S) => void) => this.signal.on(sub)
+  public on: SignalState<S, K>['on'] = (sub) => this.signal.on(sub)
 
-  /*  Subscribe to state changes */
   public dispose = () => {
-    this.disposeSubs.each()
-    this.disposeSubs.dispose()
     this.signal.dispose()
-    this.subscriptions.dispose()
-    for (const entry of values(this)) {
-      if (isState(entry)) {
-        entry.dispose()
-      }
-    }
+    this.manager.dispose()
   }
 
-  public onDispose = (fn: () => void): Unsubscribe => this.disposeSubs.add(fn)
+  public onDispose: SignalState<S, K>['onDispose'] = (fn) => this.signal.onDispose(fn)
+
+  public onPrevious: SignalState<S, K>['onPrevious'] = (fn) => this.signal.onPrevious(fn)
 
   /*
    *  Add a unsubscribe hook to be called when the state is disposed
    *  @param subs - unsubscribe hooks
    */
-  public use = (...sub: Unsubscribe[]) => this.subscriptions.add(...sub)
+  public use: SignalState<S, K>['use'] = (s) => this.manager.use(s)
 
   /* Reset the state to its initial provided value, initial() */
   public reset = () => {
