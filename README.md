@@ -205,11 +205,12 @@ This is a helper function which provides the raw ingredients to create animated 
 
 > Observation: There are lots of great UI libraries for motion like Svelte's [motion](https://svelte.dev/docs/svelte-motion) and of course [react-spring](https://www.react-spring.dev/). [Motion One](https://motion.dev/) is also amazing. But they are very much based on animating HTML UI, and the animation management tends to happen within UI/framework code. Particularly in the case of React Spring I always struggle with remembering the API which seems to be extremely powerful but (in my opinion) very complicated but which is constantly battling between React's internal rendering and more declarative style of animation. This solution allows you to hoist the animation loop/update logic into separate state, which you could then subscribe to efficiently within your UI code.
 
-Probably it could use the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API)
+Probably it could use the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API). But this part of the library is intended for a slightly different use case and I would suggest a battle-tested animation library like Motion or GSAP for that.
 
 So the problem that solved for me was:
 
 - Complex app state
+- Very lightweight additional JS; ideally <1kb. (no need to do anything fancy with timelines). Bring your own easing curve and interpolation. Bring your own animation engine if you like.
 - Wanting to produce derived animated values from that state
 - Fine-grained control over the animation loop
 - Wanting to animate a mix of HTML UI, Canvas, data visualisation elements and update them all from the same source animated value
