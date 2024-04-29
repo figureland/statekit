@@ -94,7 +94,7 @@ This is a helper function that creates a record of multiple signals. You can sub
 ```typescript
 import { signalObject } from '@figureland/statekit'
 
-const v = signal({
+const v = signalObject({
   arr: [1],
   point: {
     x: 0,
@@ -220,7 +220,9 @@ x.get() // 5
 
 ### `State`
 
-This is a class-based extension of the `signalObject`, that is likely going to be removed in future versions. It's just a different pattern for a simple architecture where you are using classes heavily. Essentially it allows a pattern like this:
+> This is likely going to be removed from future versions to reduce the footprint of this library.
+
+This is a class-based extension of the `signalObject`. It's just a different pattern for a simple architecture where you are using classes heavily. Essentially it allows a pattern like this:
 
 ```typescript
 import { State } from '@figureland/statekit'
@@ -259,6 +261,27 @@ pointer.reset()
 // which implements the Subscribable interface
 
 const x2 = signal((get) => get(pointer.key('x')) * 2)
+```
+
+In practise, it's easier just to do this:
+
+```typescript
+import { signal } from '@figureland/statekit'
+
+const initial = () => ({ x: 0, y: 0 })
+
+class Pointer {
+  public state = signal(initial)
+
+  reset = () => {
+    this.state.set(initial)
+  }
+  // and other methods
+}
+
+const pointer = new Pointer()
+
+const x2 = signal((get) => get(pointer.state).x * 2)
 ```
 
 ## Scripts
