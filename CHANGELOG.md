@@ -1,4 +1,16 @@
 # 
+## v0.0.61
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.60...v0.0.61)
+
+### 📖 Documentation
+
+- Added to docs and transferred history() helper ([3e398c7](https://github.com/figureland/statekit/commit/3e398c7))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.60
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.59...v0.0.60)
