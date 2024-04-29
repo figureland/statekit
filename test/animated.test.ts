@@ -1,7 +1,7 @@
 import { test, describe, beforeEach, afterEach, expect } from 'bun:test'
 import { vector2, lerp as lerpVec2 } from '@figureland/mathkit/vector2'
 import { lerp } from '@figureland/mathkit/number'
-import { Animated, animation } from '../src/animated'
+import { type Animated, animation } from '../src/animated'
 import { signal } from '../src/signal'
 
 let lastTime = 0
