@@ -137,12 +137,12 @@ v.key('point').set({ x: 1, y: 2 })
 
 ### `persist`
 
-The persist will wrap a signal and persist its value to a storage API (synchronously). The storage API is supplied as the second argument. This package provides a `typedLocalStorage` method that uses [superjson](https://github.com/blitz-js/superjson) to safely storage objects with a wider range of supported types than `JSON.stringify()`. If we want to persist in a type-safe way, we need to supply some extra information.
+The persist will wrap a signal and persist its value to a storage API (synchronously). The storage API is supplied as the second argument. This package provides a `typedLocalStorage` method that uses [superjson](https://github.com/blitz-js/superjson) to safely store data in LocalStorage (with a wider range of supported types than `JSON.stringify()`). If we want to persist in a type-safe way, we need to supply some extra information.
 
 - `name` provides the path for the storage key. So, for example `['my','example','1']` would produce the key `my-example-1`.
 - `validate` returns a boolean checking that the value in storage is of the same type as the signal.
-- `fallback` is a value to immediately set in the store if nothing valid is found.
-- `interval` is a way of improving throttling the storage of values, useful if you are sending many updates to a signal and don't need to guarantee they are always up to date.
+- `fallback` is a value to immediately set in storage if nothing valid is found.
+- `interval` is a way of throttling the storage of values; useful if you are sending many updates to a signal and don't need to guarantee they are always up to date.
 
 ```typescript
 import { type PersistenceName, typedLocalStorage } from '@figureland/statekit/typed-local-storage'
@@ -163,7 +163,7 @@ persist(
 
 ### `manager`
 
-Often you need to manage multiple signals in one place, disposing of them all together when cleaning up.
+Often you need to manage multiple signals in one place, disposing of them all together when cleaning up. Mr Manager comes in handy here.
 
 ```typescript
 import { manager, signal } from '@figureland/statekit'
@@ -201,9 +201,22 @@ const create = () => {
 
 ### `animated`
 
-This is a helper function which provides scaffolding to create animated signal values.
+This is a helper function which provides the raw ingredients to create animated signal values.
 
-> Observation: There are lots of great UI libraries for motion like Svelte's [motion](https://svelte.dev/docs/svelte-motion) and of course [react-spring](https://www.react-spring.dev/). But they are very much based on animating HTML UI, and the animation management tends to happen within UI/framework code. Particularly in the case of `react-spring` I always struggle with remembering the API which seems to be extremely powerful but (in my opinion) very complicated but which is constantly battling between React's internal rendering and more declarative style of animation. This solution allows you to hoist the animation loop/update logic into separate state, which you could then subscribe to efficiently within your UI code.
+> Observation: There are lots of great UI libraries for motion like Svelte's [motion](https://svelte.dev/docs/svelte-motion) and of course [react-spring](https://www.react-spring.dev/). [Motion One](https://motion.dev/) is also amazing. But they are very much based on animating HTML UI, and the animation management tends to happen within UI/framework code. Particularly in the case of React Spring I always struggle with remembering the API which seems to be extremely powerful but (in my opinion) very complicated but which is constantly battling between React's internal rendering and more declarative style of animation. This solution allows you to hoist the animation loop/update logic into separate state, which you could then subscribe to efficiently within your UI code.
+
+Probably it could use the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API)
+
+So the problem that solved for me was:
+
+- Complex app state
+- Wanting to produce derived animated values from that state
+- Fine-grained control over the animation loop
+- Wanting to animate a mix of HTML UI, Canvas, data visualisation elements and update them all from the same source animated value
+- Not wanting to have a load of animation code in the front-end
+- Not be bothered at all if its running on the server or in the browser
+
+It doesn't even attempt to solve the same problems that Motion One, React Spring solve which is not hitting the UI framework's internal reactivity system with 60 (or more) updates a second. This is intended for directly animating specific DOM elements or declaratively updating a WebGL/2D canvas.
 
 Here's a breakdown of how it works. Bear in mind API is likely to change here.
 
@@ -212,7 +225,7 @@ import { loop, animation } from '@figureland/statekit'
 
 // We create an instance of animation which in simple terms manages a set
 // of signals that need to be updated based on a desired FPS
-const engine = animation({ fps: 60 })
+const engine = animation({ fps: 90 })
 
 // You can manually update the engine tick by tick if you like
 engine.tick(16)
@@ -242,7 +255,7 @@ const a = animated(s, {
 // To update the animation, update the source
 s.set({ x: 10, y: -10 })
 
-// Over 14.4 frames (240 / (1000 / 60)) the animated signal
+// Over 21.6 frames (@ 90fps) the animated signal
 // will be automatically tweened.
 
 // If you want to set the value immediately, just call the
