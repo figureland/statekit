@@ -2,6 +2,18 @@
 
 **statekit** is a simple toolkit of primitives for building apps and systems driven by data and events.
 
+### Prior art
+
+This codebase draws on a lot of previous ideas in other projects, like:
+
+- [Solid Signals](https://www.solidjs.com/tutorial/introduction_signals)
+- The brilliant [@thi.ng/rstream](https://github.com/thi-ng/umbrella/tree/develop/packages/rstream)
+- [RxJS](https://rxjs.dev/)
+- [Jotai](https://jotai.org/) and [Zustand](https://github.com/pmndrs/zustand)
+- And the [TC39 Signals proposal](https://github.com/tc39/proposal-signals)
+
+You should use those projects! They will make you happy and/or rich. This is a project for learning and building a specific sharp tool that manages state in an opinionated way.
+
 ### `signal`
 
 This is the base reactive primitive.
@@ -185,6 +197,62 @@ const create = () => {
     subscribe
   }
 }
+```
+
+### `animated`
+
+This is a helper function which provides scaffolding to create animated signal values.
+
+> Observation: There are lots of great UI libraries for motion like Svelte's [motion](https://svelte.dev/docs/svelte-motion) and of course [react-spring](https://www.react-spring.dev/). But they are very much based on animating HTML UI, and the animation management tends to happen within UI/framework code. Particularly in the case of `react-spring` I always struggle with remembering the API which seems to be extremely powerful but (in my opinion) very complicated but which is constantly battling between React's internal rendering and more declarative style of animation. This solution allows you to hoist the animation loop/update logic into separate state, which you could then subscribe to efficiently within your UI code.
+
+Here's a breakdown of how it works. Bear in mind API is likely to change here.
+
+```typescript
+import { loop, animation } from '@figureland/statekit'
+
+// We create an instance of animation which in simple terms manages a set
+// of signals that need to be updated based on a desired FPS
+const engine = animation({ fps: 60 })
+
+// You can manually update the engine tick by tick if you like
+engine.tick(16)
+
+// The best solution is to use the loop() wrapped which automatically ticks
+// the engine along with a requestAnimationFrame render loop. If there are no active
+// animations, the loop pauses.
+
+const engine = loop(animation({ fps: 60 }), { autoStart: true })
+
+// Create a plain old signal here
+const s = signal(() => ({ x: 0, y: 0 }))
+
+// a is an 'animated mirror' of that signal. When that signal changes,
+// will automatically tween towards the new target. You'll need to supply
+// an interpolate function which tells the animated signal how to
+// transition between different states.
+
+// You can also supply an easing function if you want to control the curve
+// of the motion.
+const a = animated(s, {
+  duration: 240,
+  easing: easeInOut,
+  interpolate: (f, t, a) => lerpVec2(f, f, t, a)
+})
+
+// To update the animation, update the source
+s.set({ x: 10, y: -10 })
+
+// Over 14.4 frames (240 / (1000 / 60)) the animated signal
+// will be automatically tweened.
+
+// If you want to set the value immediately, just call the
+// set() method on the animated signal rather than the source.
+// It will finish any active animations immediately and stop
+// updating.
+
+a.set({ x: 1, y: 1 })
+// Bear in mind it will start animating again if it detects that
+// the source signal changes.
 ```
 
 ### `history`
