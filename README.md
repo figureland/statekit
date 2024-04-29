@@ -14,7 +14,9 @@ This codebase draws on a lot of previous ideas in other projects, like:
 
 You should use those projects! They will make you happy and/or rich. This is a project for learning and building a specific sharp tool that manages state in an opinionated way.
 
-### `signal`
+## Ways to use statekit
+
+### Create a reactive, subscribable value with `signal`
 
 This is the base reactive primitive.
 
@@ -33,6 +35,8 @@ v.on((newValue: number) => {
 
 v.get() // returns 0
 ```
+
+### Managing incoming events and updating a `signal`
 
 The signal provides a `use()` method you want to attach other dependencies to the signal. This is useful for attaching derived or related signals or event listeners
 
@@ -54,7 +58,7 @@ pointer.use(() => window.removeEventListener('pointermove', onMove))
 pointer.dispose()
 ```
 
-#### Deriving Signals
+### Combining multiple signals to create a derived Signal
 
 You can create new signals derived from other signals or other sources that implement the `Subscribable` interface. You can use the first argument in the initialiser function. You can wrap this around any other signals, states or reactive objects from this library. It will pick up the dependencies and update automatically whenever they change.
 
@@ -74,7 +78,9 @@ post.on((newValue: { x: number; y: number }) => {
 })
 ```
 
-#### Equality
+> Note: Be sure to wrap the whole signal dependency e.g. `get(mySignal)`, not `get(mySignal.get())`, which will produce errors.
+
+### Checking for equality on Signal update
 
 This library encourages you to decide yourself how a signal value has changed. You can do this using a custom equality check function. By default, signal does a basic shallow equality check to see if the value has changed.
 
@@ -86,7 +92,7 @@ const num = signal(() => 0, {
 })
 ```
 
-#### Merging
+### Handling merged updates to Signal values
 
 If you have an object complex nested state, you can provide your own custom merging function. By default, if the value is an object, it will use a simple `(a, b) => ({ ...a, ...b })` merge. More complex object-like variables such as `Map`, `Set`, or Arrays won't be merged unless you want them to. Something like [`deepmerge-ts`](https://github.com/RebeccaStevens/deepmerge-ts) could be a good way to do that.
 
@@ -99,9 +105,9 @@ const obj = signal(() => ({ x: 0, y: [{ a: 1, b: '2', c: { x: 1 } }] }), {
 })
 ```
 
-### `signalObject`
+### Creating a record of Signals with `signalObject`
 
-This is a helper function that creates a record of multiple signals. You can subscribe to them as a collection or individually.
+This is a helper function that creates a record of multiple signals. You can subscribe to them as a collection or individually. Although you can store an object in a regular `signal()`, this is helpful for a complex stateful object where you might want to subscribe to both the whole object and individual keys.
 
 ```typescript
 import { signalObject } from '@figureland/statekit'
@@ -135,7 +141,7 @@ v.key('point').get() // { x: 0, y: 0 }
 v.key('point').set({ x: 1, y: 2 })
 ```
 
-### `persist`
+### Persisting a Signal's value to storage with `persist`
 
 The persist will wrap a signal and persist its value to a storage API (synchronously). The storage API is supplied as the second argument. This package provides a `typedLocalStorage` method that uses [superjson](https://github.com/blitz-js/superjson) to safely store data in LocalStorage (with a wider range of supported types than `JSON.stringify()`). If we want to persist in a type-safe way, we need to supply some extra information.
 
@@ -161,7 +167,7 @@ persist(
 )
 ```
 
-### `manager`
+### Using `manager` to organise a collection of Signals
 
 Often you need to manage multiple signals in one place, disposing of them all together when cleaning up. Mr Manager comes in handy here.
 
@@ -199,7 +205,7 @@ const create = () => {
 }
 ```
 
-### `animated`
+### Creating animations from Signals with `animated`
 
 This is a helper function which provides the raw ingredients to create animated signal values.
 
@@ -210,10 +216,11 @@ Probably it could use the [Web Animations API](https://developer.mozilla.org/en-
 So the problem that solved for me was:
 
 - Complex app state
-- Very lightweight additional JS; ideally <1kb. (no need to do anything fancy with timelines). Bring your own easing curve and interpolation. Bring your own animation engine if you like.
+- Very lightweight additional JS; ideally <1kb. (no need to do anything fancy with timelines etc). Bring your own easing curve and interpolation. Bring your own animation engine if you like.
 - Wanting to produce derived animated values from that state
-- Fine-grained control over the animation loop
-- Wanting to animate a mix of HTML UI, Canvas, data visualisation elements and update them all from the same source animated value
+- Fine-grained control over a centralised animation loop
+- Wanting to animate a mix of HTML UI, Canvas, SVG elements for data vis and update them all from the same source values
+- As much as possible, not glued to one UI framework
 - Not wanting to have a load of animation code in the front-end
 - Not be bothered at all if its running on the server or in the browser
 
@@ -247,7 +254,7 @@ const s = signal(() => ({ x: 0, y: 0 }))
 
 // You can also supply an easing function if you want to control the curve
 // of the motion.
-const a = animated(s, {
+const a = engine.animated(s, {
   duration: 240,
   easing: easeInOut,
   interpolate: (f, t, a) => lerpVec2(f, f, t, a)
@@ -269,7 +276,7 @@ a.set({ x: 1, y: 1 })
 // the source signal changes.
 ```
 
-### `history`
+### Using `history` to track a Signal's values over time
 
 This is a dumb helper which maintains a log of past values of a `Subscribable`, alongside the timestamp when they were changed. It was mainly created as a tool for debugging.
 
@@ -300,7 +307,7 @@ h.restore()
 x.get() // 5
 ```
 
-### `State`
+### Using `State` to manage your state using ES6 Classes
 
 > This is likely going to be removed from future versions to reduce the footprint of this library.
 
@@ -361,6 +368,42 @@ class Pointer {
 const pointer = new Pointer()
 
 const x2 = signal((get) => get(pointer.state).x * 2)
+```
+
+### Notes on chaining
+
+You might have noticed that this library is very chainable, e.g. you might end up doing:
+
+```typescript
+const mynumber = use(
+  history(
+    persist(
+      engine.animated(
+        signal(() => 0),
+        animationOptions
+      ),
+      persistenceOptions
+    )
+  )
+)
+```
+
+Be careful though! Firstly my personal opinion is these dense chains of functions are quite hard to read. Also this example won't work because history doesn't return the original signal you provide as an argument, unlike the other methods. It's also best to think about the order of chaining as well. An opinionated alternative:
+
+```typescript
+const { use } = manager()
+const engine = use(loop(animation({ fps: 60 }), { autoStart: true }))
+
+const myNumber = use(signal(() => 0))
+const h = use(history(myNumber, { limit: 5 }))
+
+// You only want to persist the target values to LocalStorage, not the
+// intermediate tweened versions from its animated mirror.
+use(persist(myNumber, persistenceOptions))
+
+// Keep the animated value separate because it will produce a lot of
+// events so you want to use it selectively
+const a = use(engine.animated(myNumber, animationOptions))
 ```
 
 ## Scripts
