@@ -153,7 +153,8 @@ export const createAnimated = <V extends any>(
     mutate: raw.mutate,
     tick,
     dispose: m.dispose,
-    onDispose: clone.onDispose
+    onDispose: clone.onDispose,
+    onPrevious: clone.onPrevious
   }
 }
 
