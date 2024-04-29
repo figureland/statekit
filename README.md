@@ -227,31 +227,28 @@ This is a class-based extension of the `signalObject`. It's just a different pat
 ```typescript
 import { State } from '@figureland/statekit'
 
-export class Pointer extends State {
+type PointerState = {
+  x: number
+  y: number
+}
+
+export class Pointer extends State<PointerState> {
   constructor() {
     super({
       initial: () => ({ x: 0, y: 0 })
     })
+  }
+
+  // This is helpful for more complicated representations of state,
+  // for example if there is internal logic or you want to associate
+  // the state with additional methods
+  public transform = () => {
+    const { x, y } = this.state.get()
+    return `transform: translateX(${x}px, ${y}px);`
   }
 }
 
 const pointer = new Pointer()
-
-// This is helpful for more complicated representations of state,
-// for example if there is internal logic or you want to associate
-// the state with additional methods
-
-export class Pointer extends State {
-  constructor() {
-    super({
-      initial: () => ({ x: 0, y: 0 })
-    })
-  }
-  public transform = () => {
-    const { x, y } = this.state.get()
-    return `transform: translateX(${x}px, ${y}px)`
-  }
-}
 
 // You can also reset the state to initial arguments
 
@@ -263,7 +260,7 @@ pointer.reset()
 const x2 = signal((get) => get(pointer.key('x')) * 2)
 ```
 
-In practise, it's easier just to do this:
+In practise, I've found that extending the `State` class ends up making codebases harder to reason about and so it's better to do this just to do this:
 
 ```typescript
 import { signal } from '@figureland/statekit'
@@ -271,9 +268,9 @@ import { signal } from '@figureland/statekit'
 const initial = () => ({ x: 0, y: 0 })
 
 class Pointer {
-  public state = signal(initial)
+  public readonly state = signal(initial)
 
-  reset = () => {
+  public reset = () => {
     this.state.set(initial)
   }
   // and other methods
