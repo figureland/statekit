@@ -2,8 +2,8 @@ import type { Settable, SettableType } from '@figureland/statekit'
 import { isArray } from '@figureland/typekit'
 
 export type StorageAPI<T> = {
-  get: () => T
-  set: (data: T) => void
+  get: () => Promise<T>
+  set: (data: T) => Promise<void>
 }
 
 export type StorageAPIOptions<T> = {

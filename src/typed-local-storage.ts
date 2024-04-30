@@ -12,7 +12,7 @@ export const typedLocalStorage = <T>({
   let lastUpdate: number = performance.now()
 
   const target = getStorageName(name)
-  const set = (v: T) => {
+  const set = async (v: T) => {
     const now = performance.now()
 
     if (!interval || now - lastUpdate >= interval) {
@@ -20,7 +20,7 @@ export const typedLocalStorage = <T>({
       lastUpdate = now
     }
   }
-  const get = () => {
+  const get = async () => {
     try {
       const result = parse(localStorage.getItem(target) || '')
       if (validate(result)) {
