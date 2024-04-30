@@ -1,6 +1,6 @@
 ![statekit illustration](./docs/statekit-hero.svg)
 
-**statekit** is a simple toolkit of primitives for building apps and systems driven by data and events.
+**statekit** is a simple toolkit of primitives for building apps and systems driven by data and events. Written from scratch in Typescript with no dependencies, 
 
 ## Ways to use statekit
 

@@ -1,8 +1,9 @@
 import { type Merge, isFunction, isObject, isMap, isSet, simpleMerge } from '@figureland/typekit'
-import { createSubscriptions, type Subscription } from './utils/subscriptions'
-import { shallowEquals, type Equals } from './utils/equals'
+import { type Subscription } from './utils/subscriptions'
+import { shallowEquals, type Equals } from '@figureland/typekit/equals'
 import { createEvents } from './utils/events'
-import type { Disposable, Signal, SubscribableEvents, UseSignalDependency } from './api'
+import type { Signal, SubscribableEvents, UseSignalDependency } from './api'
+import { manager } from './utils/manager'
 
 const createSignalContext = () => {
   let id: number = 0
@@ -33,9 +34,10 @@ const createSignal = <V>(
   initial: (use: UseSignalDependency) => V,
   { merge = simpleMerge, equality = shallowEquals, throttle }: SignalOptions<V>
 ): Signal<V> => {
+  const { dispose, use } = manager()
   const dependencies = new Set<Signal<any>['on']>()
-  const subs = createSubscriptions()
-  const events = createEvents<SubscribableEvents<V>>()
+
+  const events = use(createEvents<SubscribableEvents<V>>())
   let loaded = false
   let lastSyncTime: number = 0
 
@@ -76,11 +78,6 @@ const createSignal = <V>(
 
   const on = (sub: Subscription<V>) => events.on('state', sub)
 
-  const use = <S extends Disposable | (() => void)>(s: S) => {
-    subs.add('dispose' in s ? s.dispose : s)
-    return s
-  }
-
   return {
     set,
     on,
@@ -89,9 +86,8 @@ const createSignal = <V>(
     events,
     dispose: () => {
       events.emit('dispose', true)
-      events.dispose()
-      subs.dispose()
       dependencies.clear()
+      dispose()
     },
     id,
     use
