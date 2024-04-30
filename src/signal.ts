@@ -2,7 +2,7 @@ import { type Merge, isFunction, isObject, isMap, isSet, simpleMerge } from '@fi
 import { createSubscriptions, type Subscription, type Unsubscribe } from './utils/subscriptions'
 import { shallowEquals, type Equals } from './utils/equals'
 import { createEvents } from './utils/events'
-import type { Signal, UseSignalDependency } from './api'
+import type { Signal, SubscribableHistoryEntry, UseSignalDependency } from './api'
 
 const createSignalContext = () => {
   let id: number = 0
@@ -17,13 +17,16 @@ const createSignalContext = () => {
 
 const context = createSignalContext()
 
+/**
+ * Creates new {@link Signal}
+ */
 export const signal = <R>(
   fn: (use: UseSignalDependency) => R,
   options: SignalOptions<R> = {}
 ): Signal<R> => createSignal<R>(context.register(), fn, options)
 
 /**
- * Creates a simple {@link Signal} for tracking a store.value
+ * Creates a simple {@link Signal} for tracking a value
  */
 const createSignal = <V>(
   id: string,
@@ -32,7 +35,11 @@ const createSignal = <V>(
 ): Signal<V> => {
   const dependencies = new Set<Signal<any>['on']>()
   const subs = createSubscriptions()
-  const e = createEvents<{ state: V; dispose: true; previous: [number, V] }>()
+  const e = createEvents<{
+    state: V
+    dispose: true
+    previous: SubscribableHistoryEntry<V>
+  }>()
   let loaded = false
   let lastSyncTime: number = 0
 

@@ -1,18 +1,6 @@
 ![statekit illustration](./docs/statekit-hero.svg)
 
-**statekit** is a simple toolkit of primitives for building apps and systems driven by data and events.
-
-### Prior art
-
-This codebase draws on a lot of previous ideas in other projects, like:
-
-- [Solid Signals](https://www.solidjs.com/tutorial/introduction_signals)
-- The brilliant [@thi.ng/rstream](https://github.com/thi-ng/umbrella/tree/develop/packages/rstream)
-- [RxJS](https://rxjs.dev/)
-- [Jotai](https://jotai.org/) and [Zustand](https://github.com/pmndrs/zustand)
-- And the [TC39 Signals proposal](https://github.com/tc39/proposal-signals)
-
-You should use those projects! They will make you happy and/or rich. This is a project for learning and building a specific sharp tool that manages state in an opinionated way.
+**statekit** is a simple toolkit of primitives for building apps and systems driven by data and events. This is a codebase which is intended as a foundation for
 
 ## Ways to use statekit
 
@@ -209,13 +197,15 @@ const create = () => {
 
 This is a helper function which provides the raw ingredients to create animated signal values.
 
-> Observation: There are lots of great UI libraries for motion like Svelte's [motion](https://svelte.dev/docs/svelte-motion) and of course [react-spring](https://www.react-spring.dev/). [Motion One](https://motion.dev/) is also amazing. But they are very much based on animating HTML UI, and the animation management tends to happen within UI/framework code. Particularly in the case of React Spring I always struggle with remembering the API which seems to be extremely powerful but (in my opinion) very complicated but which is constantly battling between React's internal rendering and more declarative style of animation. This solution allows you to hoist the animation loop/update logic into separate state, which you could then subscribe to efficiently within your UI code.
+<details><summary><strong>Rationale</strong></summary>
+
+There are lots of great UI libraries for motion like Svelte's [motion](https://svelte.dev/docs/svelte-motion) and of course [react-spring](https://www.react-spring.dev/). [Motion One](https://motion.dev/) is also amazing. But they are very much based on animating HTML UI, and the animation management tends to happen within UI/framework code. Particularly in the case of React Spring I always struggle with remembering the API which seems to be extremely powerful but (in my opinion) very complicated but which is constantly battling between React's internal rendering and more declarative style of animation. This solution allows you to hoist the animation loop/update logic into separate state, which you could then subscribe to efficiently within your UI code.
 
 Probably it could use the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API). But this part of the library is intended for a slightly different use case and I would suggest a battle-tested animation library like Motion or GSAP for that.
 
-So the problem that solved for me was:
+So the problem that this solved for me was:
 
-- Complex app state
+- Also logical, simple subscription to pieces of complex app state
 - Very lightweight additional JS; ideally <1kb. (no need to do anything fancy with timelines etc). Bring your own easing curve and interpolation. Bring your own animation engine if you like.
 - Wanting to produce derived animated values from that state
 - Fine-grained control over a centralised animation loop
@@ -224,9 +214,12 @@ So the problem that solved for me was:
 - Not wanting to have a load of animation code in the front-end
 - Not be bothered at all if its running on the server or in the browser
 
+> **Here's a practical scenario:**
+> I have a matrix that I'm using to transform a infinite canvas element. The canvas has some zoom controls. So the 'zoom level' is actually is actually hidden away inside the matrix [scale, 0, 0, scale, 0, 0]. If a user clicks the zoom in button, that should be an animated transition so it doesn't feel too jarring. But if a user directly pans the canvas, no animation should be applied as that would feel sluggish and unresponsive. So I want to keep my transform matrix as the source of truth, and then selectively animate or immediately change how the canvas is rendered in UI depending on user interaction.
+
 It doesn't even attempt to solve the same problems that Motion One, React Spring solve which is not hitting the UI framework's internal reactivity system with 60 (or more) updates a second. This is intended for directly animating specific DOM elements or declaratively updating a WebGL/2D canvas.
 
-Here's a breakdown of how it works. Bear in mind API is likely to change here.
+</details>
 
 ```typescript
 import { loop, animation } from '@figureland/statekit'
@@ -425,3 +418,15 @@ bun test
 ```bash
 bun run build
 ```
+
+### Prior art
+
+This codebase draws on a lot of previous ideas in other projects, like:
+
+- [Solid Signals](https://www.solidjs.com/tutorial/introduction_signals)
+- The brilliant [@thi.ng/rstream](https://github.com/thi-ng/umbrella/tree/develop/packages/rstream)
+- [RxJS](https://rxjs.dev/)
+- [Jotai](https://jotai.org/) and [Zustand](https://github.com/pmndrs/zustand)
+- And the [TC39 Signals proposal](https://github.com/tc39/proposal-signals)
+
+You should use those projects! They will make you happy and/or rich. This is a project for learning and building a specific sharp tool that manages state in an opinionated way.
