@@ -29,6 +29,8 @@ v.get() // returns 0
 The signal provides a `use()` method you want to attach other dependencies to the signal. This is useful for managing listeners or other external data sources that feed into the signal.
 
 ```typescript
+import { signal } from '@figureland/statekit'
+
 const pointer = signal(() => ({ x: 0, y: 0 }))
 
 const onMove = (e: PointerEvent) =>
@@ -47,7 +49,7 @@ pointer.dispose()
 
 ### Combining multiple signals to create a derived Signal
 
-You can create new signals derived from other signals or other sources that implement the `Subscribable` interface. You can use the first argument in the initialiser function. You can wrap this around any other signals, states or reactive objects from this library. It will pick up the dependencies and update automatically whenever they change.
+You can create new signals derived from other signals or any sources that implements the `Subscribable` interface. You can use the first argument in the initialiser function. You can wrap this around any other signals, states or reactive objects from this library. It will pick up the dependencies and update automatically whenever they change.
 
 ```typescript
 import { signal } from '@figureland/statekit'
@@ -204,7 +206,7 @@ Probably it could use the [Web Animations API](https://developer.mozilla.org/en-
 
 So the problem that this solved for me was:
 
-- Also logical, simple subscription to pieces of complex app state
+- Allows readable, simple subscriptions to pieces of complex app state and turning them into animated values that transition smoothy.
 - Very lightweight additional JS; ideally <1kb. (no need to do anything fancy with timelines etc). Bring your own easing curve and interpolation. Bring your own animation engine if you like.
 - Wanting to produce derived animated values from that state
 - Fine-grained control over a centralised animation loop
@@ -221,7 +223,8 @@ It doesn't even attempt to solve the same problems that Motion One, React Spring
 </details>
 
 ```typescript
-import { loop, animation } from '@figureland/statekit'
+import { loop, animation, signal } from '@figureland/statekit'
+import { easeInOut } from '@figureland/mathkit/easing'
 
 // We create an instance of animation which in simple terms manages a set
 // of signals that need to be updated based on a desired FPS
@@ -234,7 +237,7 @@ engine.tick(16)
 // the engine along with a requestAnimationFrame render loop. If there are no active
 // animations, the loop pauses.
 
-const engine = loop(animation({ fps: 60 }), { autoStart: true })
+const { animated } = loop(animation({ fps: 60 }), { autoStart: true })
 
 // Create a plain old signal here
 const s = signal(() => ({ x: 0, y: 0 }))
@@ -246,7 +249,7 @@ const s = signal(() => ({ x: 0, y: 0 }))
 
 // You can also supply an easing function if you want to control the curve
 // of the motion.
-const a = engine.animated(s, {
+const a = animated(s, {
   duration: 240,
   easing: easeInOut,
   interpolate: (f, t, a) => lerpVec2(f, f, t, a)
