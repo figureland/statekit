@@ -20,7 +20,7 @@ describe('Animation System', () => {
 
   test('Engine should start and emit start event', () => {
     let started = false
-    engine.on('start', () => {
+    engine.events.on('start', () => {
       started = true
     })
     engine.start()
@@ -29,7 +29,7 @@ describe('Animation System', () => {
 
   test('Engine should stop and emit stop event', () => {
     let stopped = false
-    engine.on('stop', () => {
+    engine.events.on('stop', () => {
       stopped = true
     })
     engine.start()

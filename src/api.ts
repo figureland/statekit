@@ -1,19 +1,30 @@
-import type { Subscription, Unsubscribe } from '.'
+import type { Events, Subscription, Unsubscribe } from '.'
 
 export type SubscribableHistoryEntry<V extends any> = [number, V]
 
-export type Subscribable<V extends any = any> = {
-  id: string
-  on: (sub: Subscription<V>) => Unsubscribe
-  get: () => V
-  use: (...sub: Unsubscribe[]) => void
-  onDispose: (fn: () => void) => Unsubscribe
-  onPrevious: (fn: (e: SubscribableHistoryEntry<V>) => void) => Unsubscribe
-} & Disposable
+export type Usable = {
+  use: <S extends Disposable | (() => void)>(s: S) => S
+}
 
 export type Disposable = {
   dispose: () => void
 }
+
+export type Subscribable<V extends any = any> = Usable &
+  Disposable & {
+    id: string
+    on: (sub: Subscription<V>) => Unsubscribe
+    get: () => V
+    events: Events<SubscribableEvents<V>>
+  }
+
+export type SubscribableEvents<V> = {
+  state: V
+  dispose: true
+  previous: SubscribableHistoryEntry<V>
+}
+
+export type ReadonlySignal<V> = Subscribable<V>
 
 export type Settable<V extends any = any> = Subscribable<V> & {
   set: (partial: V | Partial<V> | ((state: V) => V | Partial<V>), sync?: boolean) => void
@@ -72,11 +83,11 @@ export type AnimatedSignal<V extends any> = Signal<V> & {
   tick: (delta: number) => void
 }
 
-export type Manager = Disposable & {
-  unique: <S extends Subscribable>(key: string, s: () => S) => S
-  use: <S extends Disposable | (() => void)>(s: S) => S
-}
+export type Manager = Disposable &
+  Usable & {
+    unique: <S extends Subscribable>(key: string, s: () => S) => S
+  }
 
 export type SubscribableHistory<V> = Signal<V> & {
-  restore: () => void
+  restore: (n?: number) => void
 }

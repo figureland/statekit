@@ -271,13 +271,13 @@ a.set({ x: 1, y: 1 })
 
 ### Using `history` to track a Signal's values over time
 
-This is a dumb helper which maintains a log of past values of a `Subscribable`, alongside the timestamp when they were changed. It was mainly created as a tool for debugging.
+This is a very basic helper which maintains a log of past values of a `Subscribable`, alongside the timestamp when they were changed. It was mainly created as a tool for debugging. It could work for an undo/redo history if the value of signal is very basic.
 
 ```typescript
 import { history, signal } from '@figureland/statekit'
 
 const x = signal(() => 2)
-const h = history(x, { limit: 2 })
+const h = history(x, { limit: 3 })
 
 x.set(3)
 h.get() // [[1714414077814, 2]]
@@ -286,7 +286,7 @@ x.set(4)
 h.get() // [[1714414077814, 2], [1714414077815, 3]]
 
 x.set(5)
-h.get() // [[1714414077815, 3], [1714414077816, 4]]
+h.get() // [[1714414077814, 2], [1714414077815, 3], [1714414077816, 4]]
 
 // There's probably a much better way of managing all of this, but you
 // can revert to the previous version by calling restore() on the history
@@ -295,9 +295,11 @@ h.get() // [[1714414077815, 3], [1714414077816, 4]]
 x.get() // 5
 h.restore()
 x.get() // 4
+h.get() // [[1714414077815, 3], [1714414077816, 4], [1714414077817, 5]]
 
-h.restore()
-x.get() // 5
+h.restore(-2)
+x.get() // 3
+h.get() // [[1714414077816, 4], [1714414077817, 5], [1714414077817, 4]]
 ```
 
 ### Using `State` to manage your state using ES6 Classes

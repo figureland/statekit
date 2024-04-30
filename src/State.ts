@@ -1,5 +1,5 @@
 import { signalObject } from './signal-object'
-import { manager, type SignalObject, type SignalState, type StorageAPI } from '.'
+import { type SignalObject, type SignalState, type StorageAPI } from '.'
 import { persist } from './persist'
 
 export type StateOptions<S extends object = object> = {
@@ -11,58 +11,57 @@ export type StateOptions<S extends object = object> = {
 export class State<S extends object, K extends string & keyof S = string & keyof S>
   implements SignalState<S, K>
 {
-  private manager = manager()
-  public readonly id: string
   public signal: SignalObject<S>
   protected initial: () => S
 
   constructor({ initial, persistence }: StateOptions<S>) {
     this.initial = initial
-    this.signal = this.manager.use(signalObject(initial()))
-    this.id = this.signal.id
+    this.signal = signalObject(initial())
     if (persistence) {
       persist(this.signal, persistence)
     }
   }
 
-  public set: SignalState<S, K>['set'] = (u, sync) => {
-    this.signal.set(u, sync)
+  get set() {
+    return this.signal.set
   }
 
-  /*  Get the current state */
-  public get: SignalState<S, K>['get'] = () => this.signal.get()
+  get id() {
+    return this.signal.id
+  }
 
-  public key: SignalState<S, K>['key'] = (k) => this.signal.key(k)
+  get get() {
+    return this.signal.get
+  }
+
+  get key() {
+    return this.signal.key
+  }
 
   get keys() {
     return this.signal.keys as K[]
   }
 
-  /* Subscribe to all state changes */
-  public on: SignalState<S, K>['on'] = (sub) => this.signal.on(sub)
-
-  public dispose = () => {
-    this.signal.dispose()
-    this.manager.dispose()
+  get events() {
+    return this.signal.events
   }
 
-  public onDispose: SignalState<S, K>['onDispose'] = (fn) => this.signal.onDispose(fn)
+  get on() {
+    return this.signal.on
+  }
 
-  public onPrevious: SignalState<S, K>['onPrevious'] = (fn) => this.signal.onPrevious(fn)
+  get dispose() {
+    return this.signal.dispose
+  }
 
-  /*
-   *  Add a unsubscribe hook to be called when the state is disposed
-   *  @param subs - unsubscribe hooks
-   */
-  public use: SignalState<S, K>['use'] = (s) => this.manager.use(s)
+  get use() {
+    return this.signal.use
+  }
 
-  /* Reset the state to its initial provided value, initial() */
   public reset = () => {
-    this.set(this.initial())
+    this.signal.set(this.initial())
   }
 }
 
 /*  Check if a value is a State */
 export const isState = (s: any): s is State<any> => s instanceof State
-
-export type StateType<S> = S extends State<infer T> ? T : never

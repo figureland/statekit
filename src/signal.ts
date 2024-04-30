@@ -1,8 +1,8 @@
 import { type Merge, isFunction, isObject, isMap, isSet, simpleMerge } from '@figureland/typekit'
-import { createSubscriptions, type Subscription, type Unsubscribe } from './utils/subscriptions'
+import { createSubscriptions, type Subscription } from './utils/subscriptions'
 import { shallowEquals, type Equals } from './utils/equals'
 import { createEvents } from './utils/events'
-import type { Signal, SubscribableHistoryEntry, UseSignalDependency } from './api'
+import type { Disposable, Signal, SubscribableEvents, UseSignalDependency } from './api'
 
 const createSignalContext = () => {
   let id: number = 0
@@ -35,11 +35,7 @@ const createSignal = <V>(
 ): Signal<V> => {
   const dependencies = new Set<Signal<any>['on']>()
   const subs = createSubscriptions()
-  const e = createEvents<{
-    state: V
-    dispose: true
-    previous: SubscribableHistoryEntry<V>
-  }>()
+  const events = createEvents<SubscribableEvents<V>>()
   let loaded = false
   let lastSyncTime: number = 0
 
@@ -57,7 +53,7 @@ const createSignal = <V>(
   const mutate = (u: (value: V) => void, sync: boolean = true) => {
     if (shouldThrottle()) return
     u(value)
-    if (sync) e.emit('state', value)
+    if (sync) events.emit('state', value)
     lastSyncTime = performance.now()
   }
 
@@ -69,8 +65,8 @@ const createSignal = <V>(
     if (!equality || !equality(newValue, value) || sync) {
       lastSyncTime = performance.now()
       value = newValue
-      if (sync) e.emit('state', value)
-      e.emit('previous', [lastSyncTime, value])
+      if (sync) events.emit('state', value)
+      events.emit('previous', [lastSyncTime, value])
     }
   }
 
@@ -78,27 +74,27 @@ const createSignal = <V>(
     dep(() => set(initial(handleDependency)))
   }
 
-  const on = (sub: Subscription<V>) => e.on('state', sub)
+  const on = (sub: Subscription<V>) => events.on('state', sub)
 
-  const onDispose = (fn: () => void): Unsubscribe => e.on('dispose', fn)
-
-  const onPrevious = (fn: (p: [number, V]) => void): Unsubscribe => e.on('previous', fn)
+  const use = <S extends Disposable | (() => void)>(s: S) => {
+    subs.add('dispose' in s ? s.dispose : s)
+    return s
+  }
 
   return {
     set,
     on,
     mutate,
     get: () => value,
-    onPrevious,
-    onDispose,
+    events,
     dispose: () => {
-      e.emit('dispose', true)
-      e.dispose()
+      events.emit('dispose', true)
+      events.dispose()
       subs.dispose()
       dependencies.clear()
     },
     id,
-    use: subs.add
+    use
   }
 }
 

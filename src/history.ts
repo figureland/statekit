@@ -17,16 +17,16 @@ export const history = <S extends Subscribable | Signal<any>>(
 ): SubscribableHistory<SubscribableHistoryEntry<SubscribableType<S>>[]> => {
   const state = signal<SubscribableHistoryEntry<SubscribableType<S>>[]>(() => [])
 
-  s.onPrevious((e) => {
+  s.events.on('previous', (e) => {
     state.mutate((s) => {
       s.push(e)
       if (s.length > limit) s.shift()
     })
   })
 
-  const restore = () => {
+  const restore = (n: number = -1) => {
     if ('set' in s) {
-      const last = state.get()[state.get().length - 1]
+      const last = state.get()[state.get().length + n]
       if (last) s.set(last[1])
     }
   }

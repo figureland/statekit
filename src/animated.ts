@@ -1,11 +1,10 @@
 import {
-  createEvents,
-  manager,
-  signal,
   type AnimatedSignal,
   type Events,
   type Signal,
-  type Unsubscribe
+  createEvents,
+  manager,
+  signal
 } from '@figureland/statekit'
 import { clamp, mapRange } from '@figureland/mathkit/number'
 import { isObject } from '@figureland/typekit'
@@ -68,12 +67,11 @@ export const animation = ({ fps = 60 }: { fps?: number; epsilon?: number } = {})
     stop,
     dispose,
     tick,
-    onDispose: (fn) => events.on('dispose', fn),
-    on: events.on,
+    events,
     animated: <V>(s: Signal<V>, options: AnimatedSignalOptions<V>): AnimatedSignal<V> => {
       const a = m.use(createAnimated(s, options))
       animations.add(a)
-      a.onDispose(() => animations.delete(a))
+      a.events.on('dispose', () => animations.delete(a))
       if (!active.get()) start()
       return a
     }
@@ -86,8 +84,7 @@ export type Animated = {
   start: () => void
   stop: () => void
   dispose: () => void
-  on: Events<EngineEvents>['on']
-  onDispose: (fn: () => void) => Unsubscribe
+  events: Events<EngineEvents>
   animated: <V>(s: Signal<V>, options: AnimatedSignalOptions<V>) => AnimatedSignal<V>
 }
 
@@ -102,7 +99,7 @@ export const createAnimated = <V extends any>(
     })
   )
   m.use(
-    raw.onDispose(() => {
+    raw.events.on('dispose', () => {
       m.dispose()
     })
   )
@@ -152,9 +149,8 @@ export const createAnimated = <V extends any>(
     set,
     mutate: raw.mutate,
     tick,
-    dispose: m.dispose,
-    onDispose: clone.onDispose,
-    onPrevious: clone.onPrevious
+    events: clone.events,
+    dispose: m.dispose
   }
 }
 
@@ -181,9 +177,9 @@ export const loop = (e: Animated, { autoStart = true }: { autoStart?: boolean } 
     run()
   }
 
-  e.on('start', run)
-  e.on('stop', stop)
-  e.on('dispose', stop)
+  e.events.on('start', run)
+  e.events.on('stop', stop)
+  e.events.on('dispose', stop)
   if (autoStart) e.start()
   return e
 }

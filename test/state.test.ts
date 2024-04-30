@@ -31,11 +31,12 @@ describe('State', () => {
   it('disposes of subscriptions and signals', () => {
     const initialState = { count: 0 }
     const state = new State({ initial: () => initialState })
-    state.dispose = mock(state.dispose)
-    state.signal.dispose = mock(state.signal.dispose)
+    const sub = mock(() => {})
+
+    state.signal.events.on('dispose', sub)
 
     state.dispose()
-    expect(state.signal.dispose).toHaveBeenCalled()
+    expect(sub).toHaveBeenCalled()
   })
 
   it('resets to initial state', () => {

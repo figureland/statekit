@@ -37,11 +37,10 @@ export const signalObject = <R extends Record<string, any>>(
     keys: keys(signals),
     key,
     set,
+    events: parent.events,
     on: parent.on,
     get: parent.get,
     dispose: parent.dispose,
-    onDispose: parent.onDispose,
-    onPrevious: parent.onPrevious,
     use: parent.use
   }
 }
