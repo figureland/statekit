@@ -1,4 +1,16 @@
 # 
+## v0.0.66
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.65...v0.0.66)
+
+### 🤖 CI
+
+- Removed prepublish step ([e1c332a](https://github.com/figureland/statekit/commit/e1c332a))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.65
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.64...v0.0.65)
