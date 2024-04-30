@@ -1,4 +1,29 @@
 # 
+## v0.0.63
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.62...v0.0.63)
+
+### 🚀 Enhancements
+
+- Simplified api across all types, removed onDipose and onPrevious events ([e04b78d](https://github.com/figureland/statekit/commit/e04b78d))
+
+### 📖 Documentation
+
+- Updated State in readme ([8c20072](https://github.com/figureland/statekit/commit/8c20072))
+- Added animated documentation ([a81ed7a](https://github.com/figureland/statekit/commit/a81ed7a))
+- More documentation of animated() ([111dd19](https://github.com/figureland/statekit/commit/111dd19))
+- More documentation of animated() ([a6497e4](https://github.com/figureland/statekit/commit/a6497e4))
+- More documentation of animated() ([ca2f7b3](https://github.com/figureland/statekit/commit/ca2f7b3))
+
+### 🏡 Chore
+
+- Tweaks to documentation on State ([c3ab048](https://github.com/figureland/statekit/commit/c3ab048))
+- Tidied up types and readme ([192b754](https://github.com/figureland/statekit/commit/192b754))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.62
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.61...v0.0.62)
