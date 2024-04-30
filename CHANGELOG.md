@@ -1,4 +1,16 @@
 # 
+## v0.0.64
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.63...v0.0.64)
+
+### 📖 Documentation
+
+- Remove typo ([f9b0136](https://github.com/figureland/statekit/commit/f9b0136))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.63
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.62...v0.0.63)
