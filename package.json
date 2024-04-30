@@ -40,7 +40,6 @@
   "scripts": {
     "build": "bun run scripts/build.ts",
     "dev": "bun --watch scripts/dev.ts",
-    "prepublishOnly": "bun run build",
     "prepare": "husky",
     "lint": "eslint src/",
     "format": "prettier --write src/",
