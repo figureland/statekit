@@ -1,4 +1,20 @@
 # 
+## v0.0.67
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.66...v0.0.67)
+
+### 🚀 Enhancements
+
+- Use async storage api methods ([54683c4](https://github.com/figureland/statekit/commit/54683c4))
+
+### 📖 Documentation
+
+- Update storage information in readme ([120a457](https://github.com/figureland/statekit/commit/120a457))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.66
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.65...v0.0.66)
