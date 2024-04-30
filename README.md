@@ -233,11 +233,11 @@ const engine = animation({ fps: 90 })
 // You can manually update the engine tick by tick if you like
 engine.tick(16)
 
-// The best solution is to use the loop() wrapped which automatically ticks
+// A nice lightweight solution is to wrap your engine in a loop() which automatically ticks
 // the engine along with a requestAnimationFrame render loop. If there are no active
 // animations, the loop pauses.
 
-const { animated } = loop(animation({ fps: 60 }), { autoStart: true })
+const { animated, events } = loop(animation({ fps: 60 }), { autoStart: true })
 
 // Create a plain old signal here
 const s = signal(() => ({ x: 0, y: 0 }))
@@ -269,6 +269,15 @@ s.set({ x: 10, y: -10 })
 a.set({ x: 1, y: 1 })
 // Bear in mind it will start animating again if it detects that
 // the source signal changes.
+
+// You can also use the animation engine wherever else you might
+// need it. One use case is if you have an animated engine which
+// is rendering a canvas.
+
+events.on('tick', (f: number) => {
+  // f is the delta since the last tick
+  renderSomething()
+})
 ```
 
 ### Using `history` to track a Signal's values over time
