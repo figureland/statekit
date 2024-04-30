@@ -1,4 +1,16 @@
 # 
+## v0.0.65
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.64...v0.0.65)
+
+### 🚀 Enhancements
+
+- Removed equals (transferred to @figureland/typekit ([adb5de3](https://github.com/figureland/statekit/commit/adb5de3))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.64
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.63...v0.0.64)
