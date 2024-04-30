@@ -26,17 +26,16 @@ v.get() // returns 0
 
 ### Managing incoming events and updating a `signal`
 
-The signal provides a `use()` method you want to attach other dependencies to the signal. This is useful for attaching derived or related signals or event listeners
+The signal provides a `use()` method you want to attach other dependencies to the signal. This is useful for managing listeners or other external data sources that feed into the signal.
 
 ```typescript
 const pointer = signal(() => ({ x: 0, y: 0 }))
 
-const onMove = (e: PointerEvent) => {
+const onMove = (e: PointerEvent) =>
   pointer.set({
     x: e.clientX,
-    y: clientY
+    y: e.clientY
   })
-}
 
 const listener = window.addEventListener('pointermove', onMove)
 
