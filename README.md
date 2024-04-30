@@ -1,6 +1,6 @@
 ![statekit illustration](./docs/statekit-hero.svg)
 
-**statekit** is a simple toolkit of primitives for building apps and systems driven by data and events. This is a codebase which is intended as a foundation for
+**statekit** is a simple toolkit of primitives for building apps and systems driven by data and events.
 
 ## Ways to use statekit
 
@@ -288,8 +288,7 @@ h.get() // [[1714414077814, 2], [1714414077815, 3]]
 x.set(5)
 h.get() // [[1714414077814, 2], [1714414077815, 3], [1714414077816, 4]]
 
-// There's probably a much better way of managing all of this, but you
-// can revert to the previous version by calling restore() on the history
+// You can revert to the previous version by calling restore() on the history
 // with the associated timestamp.
 
 x.get() // 5
@@ -299,7 +298,7 @@ h.get() // [[1714414077815, 3], [1714414077816, 4], [1714414077817, 5]]
 
 h.restore(-2)
 x.get() // 3
-h.get() // [[1714414077816, 4], [1714414077817, 5], [1714414077817, 4]]
+h.get() // [[1714414077816, 4], [1714414077817, 5], [1714414077818, 4]]
 ```
 
 ### Using `State` to manage your state using ES6 Classes
