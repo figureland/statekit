@@ -1,4 +1,16 @@
 # 
+## v0.0.69
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.68...v0.0.69)
+
+### 🩹 Fixes
+
+- Making persistence methods async ([c7314e2](https://github.com/figureland/statekit/commit/c7314e2))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.68
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.67...v0.0.68)
