@@ -17,8 +17,7 @@ export const getStorageName = (n: string | PersistenceName) => (isArray(n) ? n.j
 export type PersistenceName = string[]
 
 export const persist = <S extends Settable<any>>(s: S, storage: StorageAPI<SettableType<S>>) => {
-  const existing = storage.get()
-  if (existing) s.set(existing)
-  s.on(storage.set)
+  storage.get().then(s.set)
+  s.on((v) => storage.set(v))
   return s
 }

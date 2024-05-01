@@ -29,7 +29,7 @@ export const typedLocalStorage = <T>({
       throw new Error(`Invalid value in ${target}`)
     } catch (e) {
       const v = fallback()
-      set(v)
+      await set(v)
       return v
     }
   }
