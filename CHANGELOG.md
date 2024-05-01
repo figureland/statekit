@@ -1,4 +1,22 @@
 # 
+## v0.0.68
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.67...v0.0.68)
+
+### 🩹 Fixes
+
+- Added missing readonly export ([9a983bf](https://github.com/figureland/statekit/commit/9a983bf))
+
+### 📖 Documentation
+
+- Make signal documentation more clear ([e4bc02b](https://github.com/figureland/statekit/commit/e4bc02b))
+- Making language clearer and improving usage examples ([1a71f17](https://github.com/figureland/statekit/commit/1a71f17))
+- Making language clearer and improving usage examples ([cb6f585](https://github.com/figureland/statekit/commit/cb6f585))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.67
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.66...v0.0.67)
