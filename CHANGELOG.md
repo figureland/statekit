@@ -1,4 +1,16 @@
 # 
+## v0.0.70
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.69...v0.0.70)
+
+### 🚀 Enhancements
+
+- Added onScopeDispose callback for vue ([e08cb67](https://github.com/figureland/statekit/commit/e08cb67))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.69
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.68...v0.0.69)
