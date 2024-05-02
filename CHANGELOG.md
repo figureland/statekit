@@ -1,4 +1,20 @@
 # 
+## v0.0.71
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.70...v0.0.71)
+
+### 📖 Documentation
+
+- Update typo in example ([21e38b7](https://github.com/figureland/statekit/commit/21e38b7))
+
+### 🏡 Chore
+
+- Bump dependency ([82912e7](https://github.com/figureland/statekit/commit/82912e7))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.70
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.69...v0.0.70)
