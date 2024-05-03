@@ -1,8 +1,8 @@
 import { NiceMap } from '@figureland/typekit'
-import type { Disposable, Manager, Subscribable } from '..'
-import { createSubscriptions } from './subscriptions'
+import type { Disposable, System, Subscribable } from '.'
+import { createSubscriptions } from './utils/subscriptions'
 
-export const manager = (): Manager => {
+export const system = (): System => {
   const keyedSubs = new NiceMap()
   const subs = createSubscriptions()
 

@@ -369,7 +369,7 @@
 
 ### 🚀 Enhancements
 
-- Added unique method to manager ([c1cf94f](https://github.com/figureland/statekit/commit/c1cf94f))
+- Added unique method to system ([c1cf94f](https://github.com/figureland/statekit/commit/c1cf94f))
 
 ### ❤️ Contributors
 
@@ -485,7 +485,7 @@
 
 ### 🚀 Enhancements
 
-- Added disposable helper to make manager more flexible ([3857a89](https://github.com/figureland/statekit/commit/3857a89))
+- Added disposable helper to make system more flexible ([3857a89](https://github.com/figureland/statekit/commit/3857a89))
 
 ### ❤️ Contributors
 
@@ -501,7 +501,7 @@
 
 ### ✅ Tests
 
-- Added updated manager tests ([443eb13](https://github.com/figureland/statekit/commit/443eb13))
+- Added updated system tests ([443eb13](https://github.com/figureland/statekit/commit/443eb13))
 
 ### ❤️ Contributors
 
@@ -513,7 +513,7 @@
 
 ### 🚀 Enhancements
 
-- Update to manager.use() to revert to previous api ([3fc8fe1](https://github.com/figureland/statekit/commit/3fc8fe1))
+- Update to system.use() to revert to previous api ([3fc8fe1](https://github.com/figureland/statekit/commit/3fc8fe1))
 
 ### ❤️ Contributors
 
@@ -525,7 +525,7 @@
 
 ### 🚀 Enhancements
 
-- Allowed multiple arguments for manager.use() ([4a271cd](https://github.com/figureland/statekit/commit/4a271cd))
+- Allowed multiple arguments for system.use() ([4a271cd](https://github.com/figureland/statekit/commit/4a271cd))
 
 ### ❤️ Contributors
 
@@ -537,7 +537,7 @@
 
 ### 🚀 Enhancements
 
-- Minor tweak to manager and subscriptions ([3986b43](https://github.com/figureland/statekit/commit/3986b43))
+- Minor tweak to system and subscriptions ([3986b43](https://github.com/figureland/statekit/commit/3986b43))
 
 ### 🏡 Chore
 
@@ -553,7 +553,7 @@
 
 ### ✅ Tests
 
-- Added simple tests for manager ([ad75caa](https://github.com/figureland/statekit/commit/ad75caa))
+- Added simple tests for system ([ad75caa](https://github.com/figureland/statekit/commit/ad75caa))
 
 ### ❤️ Contributors
 
@@ -565,7 +565,7 @@
 
 ### 🚀 Enhancements
 
-- Updated manager to be more generic, allowing any type of disposable signal ([e8d4955](https://github.com/figureland/statekit/commit/e8d4955))
+- Updated system to be more generic, allowing any type of disposable signal ([e8d4955](https://github.com/figureland/statekit/commit/e8d4955))
 
 ### ❤️ Contributors
 
@@ -577,7 +577,7 @@
 
 ### 🚀 Enhancements
 
-- Added manager ([01d9fa2](https://github.com/figureland/statekit/commit/01d9fa2))
+- Added system ([01d9fa2](https://github.com/figureland/statekit/commit/01d9fa2))
 
 ### ❤️ Contributors
 

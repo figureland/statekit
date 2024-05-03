@@ -83,7 +83,7 @@ export type AnimatedSignal<V extends any> = Signal<V> & {
   tick: (delta: number) => void
 }
 
-export type Manager = Disposable &
+export type System = Disposable &
   Usable & {
     unique: <S extends Subscribable>(key: string, s: () => S) => S
   }

@@ -3,7 +3,7 @@ import {
   type Events,
   type Signal,
   createEvents,
-  manager,
+  system,
   signal
 } from '@figureland/statekit'
 import { clamp, mapRange } from '@figureland/mathkit/number'
@@ -18,7 +18,7 @@ type EngineEvents = {
 }
 
 export const animation = ({ fps = 60 }: { fps?: number; epsilon?: number } = {}): Animated => {
-  const m = manager()
+  const m = system()
   const active = m.use(signal(() => false))
   const events = m.use(createEvents<EngineEvents>())
   const animations: Set<AnimatedSignal<any>> = new Set()
@@ -92,7 +92,7 @@ export const createAnimated = <V extends any>(
   raw: Signal<V>,
   { duration = 500, easing = (v) => v, interpolate, epsilon = 16 }: AnimatedSignalOptions<V>
 ): AnimatedSignal<V> => {
-  const m = manager()
+  const m = system()
   const clone = m.use(
     signal(raw.get, {
       equality: () => false

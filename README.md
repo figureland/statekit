@@ -156,15 +156,15 @@ persist(
 )
 ```
 
-### Using `manager` to organise a collection of Signals
+### Using `system` to organise a collection of Signals
 
-Often you need to manage multiple signals in one place, disposing of them all together when cleaning up. Mr Manager comes in handy here.
+Often you need to manage multiple signals in one place, disposing of them all together when cleaning up. Mr System comes in handy here.
 
 ```typescript
-import { manager, signal } from '@figureland/statekit'
+import { system, signal } from '@figureland/statekit'
 
 const create = () => {
-  const { use, dispose } = manager()
+  const { use, dispose } = system()
   const one = use(signal(() => 0))
   const two = use(signal(() => [2]))
   const three = use(signal((get) => ({ v: get(one) })))
@@ -178,13 +178,13 @@ const create = () => {
 }
 ```
 
-The manager also provides a `unique` method. This is a basic utility that you can use to generate idempotent signals based on a key. So rather than creating multiple signals that compute the same value, you allow multiple subscriptions to the same source.
+The system also provides a `unique` method. This is a basic utility that you can use to generate idempotent signals based on a key. So rather than creating multiple signals that compute the same value, you allow multiple subscriptions to the same source.
 
 ```typescript
-import { manager, signal } from '@figureland/statekit'
+import { system, signal } from '@figureland/statekit'
 
 const create = () => {
-  const { unique, dispose } = manager()
+  const { unique, dispose } = system()
   const subscribe = (id: string) => unique(id, () => signal(() => getSomething(id)))
 
   return {
@@ -396,7 +396,7 @@ const mynumber = use(
 Be careful though! Firstly my personal opinion is these dense chains of functions are quite hard to read. Also this example won't work because history doesn't return the original signal you provide as an argument, unlike the other methods. It's also best to think about the order of chaining as well. An opinionated alternative:
 
 ```typescript
-const { use } = manager()
+const { use } = system()
 const engine = use(loop(animation({ fps: 60 }), { autoStart: true }))
 
 const myNumber = use(signal(() => 0))

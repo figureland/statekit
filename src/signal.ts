@@ -3,7 +3,7 @@ import { type Subscription } from './utils/subscriptions'
 import { shallowEquals, type Equals } from '@figureland/typekit/equals'
 import { createEvents } from './utils/events'
 import type { Signal, SubscribableEvents, UseSignalDependency } from './api'
-import { manager } from './utils/manager'
+import { system } from './system'
 
 const createSignalContext = () => {
   let id: number = 0
@@ -34,7 +34,7 @@ const createSignal = <V>(
   initial: (use: UseSignalDependency) => V,
   { merge = simpleMerge, equality = shallowEquals, throttle }: SignalOptions<V>
 ): Signal<V> => {
-  const { dispose, use } = manager()
+  const { dispose, use } = system()
   const dependencies = new Set<Signal<any>['on']>()
 
   const events = use(createEvents<SubscribableEvents<V>>())
