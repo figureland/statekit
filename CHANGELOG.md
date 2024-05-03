@@ -1,4 +1,16 @@
 # 
+## v0.0.72
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.71...v0.0.72)
+
+### 🚀 Enhancements
+
+- Renamed manager to system ([961f03b](https://github.com/figureland/statekit/commit/961f03b))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.71
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.70...v0.0.71)
