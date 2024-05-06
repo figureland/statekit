@@ -17,6 +17,7 @@ export const system = (): System => {
   const dispose = () => {
     subs.each()
     subs.dispose()
+    keyedSubs.clear()
   }
 
   return {

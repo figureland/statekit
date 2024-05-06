@@ -32,10 +32,6 @@ export type Settable<V extends any = any> = Subscribable<V> & {
 
 export type SettableType<S> = S extends Settable<infer T> ? T : never
 
-export type SignalLike<T extends any = any, S extends Signal<T> = Signal<T>> = S
-
-export type SignalLikeType<S> = S extends SignalLike<infer T> ? T : never
-
 export type SubscribableType<S> = S extends Subscribable<infer T> ? T : never
 
 export type UseSignalDependency = <S extends Subscribable>(u: S) => SubscribableType<S>
