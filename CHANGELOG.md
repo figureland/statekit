@@ -1,4 +1,16 @@
 # 
+## v0.0.74
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.73...v0.0.74)
+
+### 🩹 Fixes
+
+- Cleared up map subscriptions for system ([0b1c206](https://github.com/figureland/statekit/commit/0b1c206))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.73
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.72...v0.0.73)
