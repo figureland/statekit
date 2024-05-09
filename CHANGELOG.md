@@ -1,4 +1,16 @@
 # 
+## v0.0.77
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.76...v0.0.77)
+
+### 🚀 Enhancements
+
+- Tweak to make async validation less painful to work with ([1905bfc](https://github.com/figureland/statekit/commit/1905bfc))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.76
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.75...v0.0.76)
