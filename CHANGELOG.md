@@ -1,4 +1,16 @@
 # 
+## v0.0.79
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.78...v0.0.79)
+
+### 🏡 Chore
+
+- Fixed tiny ts typo : ) ([de87be7](https://github.com/figureland/statekit/commit/de87be7))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.78
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.77...v0.0.78)
