@@ -26,7 +26,7 @@ export const typedLocalStorage = <T>({
       const result = parse(localStorage.getItem(target) || '')
       const v = refine ? await refine.get(result) : result
       if ((await validate)(v)) {
-        return v
+        return v as T
       }
       throw new Error(`Invalid value in ${target}`)
     } catch (e) {

@@ -8,7 +8,7 @@ export type StorageAPI<T> = {
 
 export type StorageAPIOptions<T> = {
   name: PersistenceName
-  validate: Promise<(v: unknown) => v is T> | ((v: unknown) => v is T)
+  validate: Promise<(v: unknown) => boolean> | ((v: unknown) => v is T)
   refine?: {
     get: (v: unknown) => Promise<T> | ((v: unknown) => T)
     set: (v: T) => Promise<string> | ((v: T) => string)
