@@ -1,18 +1,17 @@
-import type { Settable, SettableType } from '@figureland/statekit'
-import { isArray } from '@figureland/typekit'
+import { type Settable, type SettableType } from '@figureland/statekit'
+import { isArray } from '@figureland/typekit/guards'
 
 export type StorageAPI<T> = {
-  get: () => Promise<T>
+  get: (fallback: () => T) => Promise<T>
   set: (data: T) => Promise<void>
 }
 
 export type StorageAPIOptions<T> = {
   name: PersistenceName
-  validate: (v: unknown) => v is T
-  fallback: () => T
+  validate: Promise<(v: unknown) => v is T> | ((v: unknown) => v is T)
   refine?: {
-    get: (v: unknown) => Promise<T>
-    set: (v: T) => Promise<string>
+    get: (v: unknown) => Promise<T> | ((v: unknown) => T)
+    set: (v: T) => Promise<string> | ((v: T) => string)
   }
 }
 
@@ -21,7 +20,7 @@ export const getStorageName = (n: string | PersistenceName) => (isArray(n) ? n.j
 export type PersistenceName = string[]
 
 export const persist = <S extends Settable<any>>(s: S, storage: StorageAPI<SettableType<S>>) => {
-  storage.get().then(s.set)
+  storage.get(s.get).then(s.set).catch()
   s.on((v) => storage.set(v))
   return s
 }

@@ -6,7 +6,6 @@ declare var localStorage: Storage
 export const typedLocalStorage = <T>({
   name,
   validate,
-  fallback,
   interval,
   refine
 }: StorageAPIOptions<T> & { interval?: number }): StorageAPI<T> => {
@@ -22,17 +21,18 @@ export const typedLocalStorage = <T>({
       lastUpdate = now
     }
   }
-  const get = async () => {
+  const get = async (fallback: () => T) => {
     try {
       const result = parse(localStorage.getItem(target) || '')
-      if (validate(result)) {
-        return refine ? await refine.get(result) : result
+      const v = refine ? await refine.get(result) : result
+      if ((await validate)(v)) {
+        return v
       }
       throw new Error(`Invalid value in ${target}`)
     } catch (e) {
-      const v = fallback()
-      await set(v)
-      return v
+      const fb = fallback()
+      await set(fb)
+      throw e
     }
   }
   return {

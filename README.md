@@ -136,7 +136,6 @@ The persist will wrap a signal and persist its value to a storage API. The stora
 
 - `name` provides the path for the storage key. So, for example `['my','example','1']` would produce the key `my/example/1`.
 - `validate` returns a boolean checking that the value in storage is of the same type as the signal.
-- `fallback` is a value to immediately set in storage if nothing valid is found.
 - `interval` is a way of throttling the storage of values; useful if you are sending many updates to a signal and don't need to guarantee they are always up to date.
 
 ```typescript
@@ -150,7 +149,6 @@ persist(
   typedLocalStorage({
     name: ['example', 'signal'],
     validate: isNumber,
-    fallback: exampleSignal.get,
     interval: 1000
   })
 )
