@@ -1,4 +1,16 @@
 # 
+## v0.0.76
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.75...v0.0.76)
+
+### 🚀 Enhancements
+
+- Simplified storage api and persistence ([c2ad83f](https://github.com/figureland/statekit/commit/c2ad83f))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.75
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.74...v0.0.75)
