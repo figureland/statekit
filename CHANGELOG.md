@@ -1,4 +1,16 @@
 # 
+## v0.0.75
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.74...v0.0.75)
+
+### 🚀 Enhancements
+
+- Added refine option to storage api ([145c8fc](https://github.com/figureland/statekit/commit/145c8fc))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.74
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.73...v0.0.74)
