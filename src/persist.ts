@@ -8,8 +8,12 @@ export type StorageAPI<T> = {
 
 export type StorageAPIOptions<T> = {
   name: PersistenceName
-  validate: (v: unknown) => boolean
+  validate: (v: unknown) => v is T
   fallback: () => T
+  refine?: {
+    get: (v: unknown) => Promise<T>
+    set: (v: T) => Promise<string>
+  }
 }
 
 export const getStorageName = (n: string | PersistenceName) => (isArray(n) ? n.join('/') : n)
