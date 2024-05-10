@@ -32,7 +32,7 @@ export const typedLocalStorage = <T>({
     } catch (e) {
       const fb = fallback()
       await set(fb)
-      throw e
+      return fb
     }
   }
   return {

@@ -10,8 +10,8 @@ export type StorageAPIOptions<T> = {
   name: PersistenceName
   validate: ((v: unknown) => Promise<boolean>) | ((v: unknown) => v is T)
   refine?: {
-    get: (v: unknown) => Promise<T> | ((v: unknown) => T)
-    set: (v: T) => Promise<string> | ((v: T) => string)
+    get: ((v: unknown) => Promise<T>) | ((v: unknown) => T)
+    set: ((v: T) => Promise<any>) | ((v: T) => any)
   }
 }
 
@@ -20,7 +20,7 @@ export const getStorageName = (n: string | PersistenceName) => (isArray(n) ? n.j
 export type PersistenceName = string[]
 
 export const persist = <S extends Settable<any>>(s: S, storage: StorageAPI<SettableType<S>>) => {
-  storage.get(s.get).then(s.set).catch()
+  storage.get(s.get).then(s.set)
   s.on((v) => storage.set(v))
   return s
 }
