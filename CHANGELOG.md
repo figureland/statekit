@@ -1,4 +1,16 @@
 # 
+## v0.0.80
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.79...v0.0.80)
+
+### 🏡 Chore
+
+- Fix to handle errors in parsing ([a1a6e96](https://github.com/figureland/statekit/commit/a1a6e96))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.79
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.78...v0.0.79)
