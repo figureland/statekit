@@ -68,7 +68,7 @@
   },
   "peerDependencies": {
     "@figureland/typekit": ">=0.0.23",
-    "@figureland/mathkit": ">=0.0.28",
+    "@figureland/mathkit": ">=0.0.29",
     "react": ">=16.8",
     "superjson": ">=2.0.0",
     "svelte": "^4.0.0",
@@ -104,7 +104,7 @@
   },
   "homepage": "https://github.com/figureland/statekit#readme",
   "dependencies": {
-    "@figureland/mathkit": "^0.0.28",
+    "@figureland/mathkit": "^0.0.29",
     "@figureland/typekit": "^0.0.23"
   }
 }
