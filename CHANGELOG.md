@@ -1,4 +1,16 @@
 # 
+## v0.0.84
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.83...v0.0.84)
+
+### 🏡 Chore
+
+- Adding provenance ([34b27d6](https://github.com/figureland/statekit/commit/34b27d6))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.83
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.82...v0.0.83)
