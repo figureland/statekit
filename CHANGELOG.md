@@ -1,4 +1,16 @@
 # 
+## v0.0.87
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.86...v0.0.87)
+
+### 🚀 Enhancements
+
+- Split manager into separate file and renamed ([82566f9](https://github.com/figureland/statekit/commit/82566f9))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.86
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.85...v0.0.86)
