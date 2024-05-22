@@ -1,4 +1,16 @@
 # 
+## v0.0.90
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.89...v0.0.90)
+
+### 🩹 Fixes
+
+- Equality check ([fb74a41](https://github.com/figureland/statekit/commit/fb74a41))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.89
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.88...v0.0.89)
