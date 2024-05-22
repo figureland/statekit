@@ -1,4 +1,16 @@
 # 
+## v0.0.88
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.87...v0.0.88)
+
+### 🏡 Chore
+
+- Tidied up and added new test ([5bc6fac](https://github.com/figureland/statekit/commit/5bc6fac))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.87
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.86...v0.0.87)
