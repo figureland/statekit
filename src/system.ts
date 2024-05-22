@@ -29,7 +29,7 @@ export const system = (): System => {
 
 export const disposable = (fn: () => void): Disposable => ({ dispose: fn })
 
-export class SystemInstance {
+export class SystemManager {
   protected readonly system = system()
   public readonly use = this.system.use
   public readonly unique = this.system.unique

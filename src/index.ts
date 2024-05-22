@@ -13,6 +13,6 @@ export {
 export { signalObject } from './signal-object'
 export { machine } from './machine'
 export * from './api'
-export { system, disposable, SystemInstance } from './system'
+export { system, disposable, SystemManager } from './system'
 export { history, type HistoryOptions } from './history'
 export { readonly } from './readonly'
