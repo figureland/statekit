@@ -14,6 +14,7 @@ export type Events<S extends Record<string, any>, K extends string & keyof S = s
   ) => Unsubscribe
   emit: <Key extends K = K>(key: Key, value: S[Key]) => void
   dispose: () => void
+  size: () => number
 }
 
 /**
@@ -52,6 +53,9 @@ export const createEvents = <
     dispose: () => {
       all.dispose()
       subs.dispose()
+    },
+    size: () => {
+      return all.size() + subs.size()
     }
   }
 }

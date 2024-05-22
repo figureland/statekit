@@ -35,7 +35,8 @@ export const createSubscriptions = <S extends Subscription = Subscription>(): Su
     add,
     dispose,
     delete: deleteSub,
-    each
+    each,
+    size: () => listeners.size
   }
 }
 
@@ -44,6 +45,7 @@ export type Subscriptions<S extends Subscription = Subscription> = {
   dispose: () => void
   delete: (...sub: S[]) => void
   each: (value?: any) => void
+  size: () => number
 }
 
 /**
@@ -81,7 +83,8 @@ export const createTopicSubscriptions = <T extends string = string>(): TopicSubs
   return {
     add,
     dispose,
-    each
+    each,
+    size: () => subs.size
   }
 }
 
@@ -89,4 +92,5 @@ export type TopicSubscriptions<T extends string> = {
   add: (topic: T, ...sub: Subscription[]) => Unsubscribe
   dispose: () => void
   each: (topic: T, value: any) => void
+  size: () => number
 }

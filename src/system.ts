@@ -28,4 +28,3 @@ export const system = (): System => {
 }
 
 export const disposable = (fn: () => void): Disposable => ({ dispose: fn })
-

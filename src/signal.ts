@@ -79,6 +79,7 @@ const createSignal = <V>(
   const on = (sub: Subscription<V>) => events.on('state', sub)
 
   return {
+    id,
     set,
     on,
     mutate,
@@ -89,7 +90,6 @@ const createSignal = <V>(
       dependencies.clear()
       dispose()
     },
-    id,
     use
   }
 }
