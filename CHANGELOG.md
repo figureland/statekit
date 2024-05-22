@@ -1,4 +1,17 @@
 # 
+## v0.0.86
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.85...v0.0.86)
+
+### 🚀 Enhancements
+
+- Added SystemInstance helper class ([ca9d79d](https://github.com/figureland/statekit/commit/ca9d79d))
+- Changed to SystemManager ([2875348](https://github.com/figureland/statekit/commit/2875348))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.85
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.84...v0.0.85)
