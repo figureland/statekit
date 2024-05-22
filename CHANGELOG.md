@@ -1,4 +1,16 @@
 # 
+## v0.0.89
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.88...v0.0.89)
+
+### 🩹 Fixes
+
+- Correct sync behaviour ([2e9f01b](https://github.com/figureland/statekit/commit/2e9f01b))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.88
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.87...v0.0.88)
