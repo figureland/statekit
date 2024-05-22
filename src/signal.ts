@@ -64,7 +64,7 @@ const createSignal = <V>(
     const next = isFunction(v) ? (v as (v: V) => V)(value) : v
     const shouldMerge = isObject(next) && !isMap(next) && !isSet(next)
     const newValue = shouldMerge && isObject(value) ? (merge(value, next) as V) : (next as V)
-    if (!equality || !equality(newValue, value) || forceSync) {
+    if (!equality || !equality(value, newValue) || forceSync) {
       lastSyncTime = performance.now()
       value = newValue
       events.emit('state', value)
