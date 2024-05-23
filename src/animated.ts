@@ -18,9 +18,9 @@ type EngineEvents = {
 }
 
 export const animation = ({ fps = 60 }: { fps?: number; epsilon?: number } = {}): Animated => {
-  const m = system()
-  const active = m.use(signal(() => false))
-  const events = m.use(createEvents<EngineEvents>())
+  const { use, dispose } = system()
+  const active = use(signal(() => false))
+  const events = use(createEvents<EngineEvents>())
   const animations: Set<AnimatedSignal<any>> = new Set()
 
   const timestep: number = 1000 / fps
@@ -54,22 +54,20 @@ export const animation = ({ fps = 60 }: { fps?: number; epsilon?: number } = {})
     events.emit('tick', delta)
   }
 
-  const dispose = () => {
-    active.set(false)
-    m.dispose()
-    animations.clear()
-    events.emit('dispose', undefined)
-  }
-
   return {
     active,
     start,
     stop,
-    dispose,
+    dispose: () => {
+      active.set(false)
+      dispose()
+      animations.clear()
+      events.emit('dispose', undefined)
+    },
     tick,
     events,
     animated: <V>(s: Signal<V>, options: AnimatedSignalOptions<V>): AnimatedSignal<V> => {
-      const a = m.use(createAnimated(s, options))
+      const a = use(createAnimated(s, options))
       animations.add(a)
       a.events.on('dispose', () => animations.delete(a))
       if (!active.get()) start()
