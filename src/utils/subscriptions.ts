@@ -84,7 +84,13 @@ export const createTopicSubscriptions = <T extends string = string>(): TopicSubs
     add,
     dispose,
     each,
-    size: () => subs.size
+    size: () => {
+      let count = 0
+      for (const [, sub] of subs) {
+        count += sub.size()
+      }
+      return count
+    }
   }
 }
 

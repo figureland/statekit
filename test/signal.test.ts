@@ -28,6 +28,21 @@ describe('signal', () => {
     numSignal.set(20)
     expect(receivedValue).toBe(20)
   })
+  it('adds and removes subscriptions, and size() works correctly', () => {
+    const numSignal = signal(() => 10)
+    const unsub0 = numSignal.on(() => {})
+    expect(numSignal.events.size()).toBe(1)
+    const unsub1 = numSignal.on(() => {})
+    expect(numSignal.events.size()).toBe(2)
+    const unsub3 = numSignal.on(() => {})
+    expect(numSignal.events.size()).toBe(3)
+    unsub3()
+    expect(numSignal.events.size()).toBe(2)
+    unsub0()
+    unsub1()
+    expect(numSignal.events.size()).toBe(0)
+  })
+
   it('stops notifying after unsubscribe', () => {
     const numSignal = signal(() => 10)
     let calls = 0
