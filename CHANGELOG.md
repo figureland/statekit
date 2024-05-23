@@ -1,4 +1,25 @@
 # 
+## v0.0.91
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.90...v0.0.91)
+
+### 🚀 Enhancements
+
+- Added size for events and subscriptions ([7832187](https://github.com/figureland/statekit/commit/7832187))
+- Added size() utility ([81713b7](https://github.com/figureland/statekit/commit/81713b7))
+
+### 🩹 Fixes
+
+- Updated vue subscription disposal ([9c17f92](https://github.com/figureland/statekit/commit/9c17f92))
+
+### 🏡 Chore
+
+- Tidied up animation system ([fb80dcf](https://github.com/figureland/statekit/commit/fb80dcf))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.90
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.89...v0.0.90)
