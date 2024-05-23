@@ -3,16 +3,16 @@ import { signal, type UseSignalDependency, type Subscribable } from '@figureland
 
 export const useSubscribable = <S>(subscribable: Subscribable<S>) =>
   customRef<S>((track, set) => {
-    onScopeDispose(subscribable.on(set))
+    const unsubscribe = subscribable.on(set)
+    onScopeDispose(unsubscribe)
     return {
       get: () => {
         track()
         return subscribable.get()
       },
       set,
-      dispose: subscribable.on(set)
+      dispose: unsubscribe
     }
   })
-
 
 export const useDerived = <R>(fn: (use: UseSignalDependency) => R) => useSubscribable(signal(fn))
