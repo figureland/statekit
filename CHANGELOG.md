@@ -1,4 +1,16 @@
 # 
+## v0.0.92
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.91...v0.0.92)
+
+### 🚀 Enhancements
+
+- Enhanced types for events ([5851a85](https://github.com/figureland/statekit/commit/5851a85))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.91
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.90...v0.0.91)
