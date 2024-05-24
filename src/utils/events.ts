@@ -8,10 +8,8 @@ import {
 
 export type Events<S extends Record<string, any>, K extends string & keyof S = string & keyof S> = {
   on: <Key extends K = K>(key: Key, sub: Subscription<S[Key]>) => Unsubscribe
-  onAll: (sub: Subscription<S>) => Unsubscribe
-  onMany: <TEventName extends K>(
-    listeners: Record<TEventName, (eventArg: S[TEventName]) => void>
-  ) => Unsubscribe
+  onAll: (sub: Subscription<{ [Key in K]: [Key, S[Key]] }[K]>) => Unsubscribe
+  onMany: (listeners: { [Key in K]: (eventArg: S[Key]) => void }) => Unsubscribe
   emit: <Key extends K = K>(key: Key, value: S[Key]) => void
   dispose: () => void
   size: () => number
@@ -34,8 +32,8 @@ export const createEvents = <
 
   return {
     on,
-    onMany: <Key extends K>(listeners: Record<Key, (eventArg: S[Key]) => void>): Unsubscribe => {
-      const unsubscribes = (entries(listeners) as [Key, S[Key]][]).map((listener) =>
+    onMany: (listeners: { [Key in K]: (eventArg: S[Key]) => void }): Unsubscribe => {
+      const unsubscribes = (entries(listeners) as [K, (eventArg: S[K]) => void][]).map((listener) =>
         on(...listener)
       )
 
@@ -45,10 +43,10 @@ export const createEvents = <
         }
       }
     },
-    onAll: (sub: Subscription<S>) => all.add(sub),
+    onAll: (sub: Subscription<{ [Key in K]: [Key, S[Key]] }[K]>) => all.add(sub),
     emit: <Key extends K = K>(key: Key, value: S[Key]) => {
       subs.each(key, value)
-      all.each(value)
+      all.each([key, value])
     },
     dispose: () => {
       all.dispose()
