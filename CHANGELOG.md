@@ -1,4 +1,16 @@
 # 
+## v0.0.97
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.96...v0.0.97)
+
+### 🩹 Fixes
+
+- Updated incorrect type in api ([1d8adb4](https://github.com/figureland/statekit/commit/1d8adb4))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.96
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.95...v0.0.96)
