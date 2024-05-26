@@ -1,4 +1,16 @@
 # 
+## v0.0.98
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.97...v0.0.98)
+
+### 🏡 Chore
+
+- Bump dependency ([fa46ecf](https://github.com/figureland/statekit/commit/fa46ecf))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.97
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.96...v0.0.97)
