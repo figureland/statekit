@@ -1,4 +1,16 @@
 # 
+## v0.0.95
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.94...v0.0.95)
+
+### 🚀 Enhancements
+
+- Cut back the events API ([7c11928](https://github.com/figureland/statekit/commit/7c11928))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.94
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.93...v0.0.94)
