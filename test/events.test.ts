@@ -23,15 +23,18 @@ describe('createEvents', () => {
     const events = createEvents<EventMap>()
     let receivedEvent = ''
     let receivedValue: any = null
-
+    let count = 0
     events.on('*', ([key, value]) => {
       receivedEvent = key
       receivedValue = value
+      count++
     })
 
+    events.emit('event1', 0)
     events.emit('event2', 'hello')
     expect(receivedEvent).toBe('event2')
     expect(receivedValue).toBe('hello')
+    expect(count).toBe(2)
   })
 
   it('should subscribe to multiple events using object', () => {
