@@ -1,4 +1,20 @@
 # 
+## v0.0.96
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.95...v0.0.96)
+
+### 🚀 Enhancements
+
+- Simplified system use to allow a wider range of reactive types ([70f5795](https://github.com/figureland/statekit/commit/70f5795))
+
+### ✅ Tests
+
+- Tweak to events test ([eb3a215](https://github.com/figureland/statekit/commit/eb3a215))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.95
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.94...v0.0.95)
