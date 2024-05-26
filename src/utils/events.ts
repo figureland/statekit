@@ -7,9 +7,10 @@ import {
 } from './subscriptions'
 
 export type Events<S extends Record<string, any>, K extends string & keyof S = string & keyof S> = {
-  on: <Key extends K = K>(key: Key, sub: Subscription<S[Key]>) => Unsubscribe
-  onAll: (sub: Subscription<{ [Key in K]: [Key, S[Key]] }[K]>) => Unsubscribe
-  onMany: (listeners: { [Key in K]: (eventArg: S[Key]) => void }) => Unsubscribe
+  on: (
+    key: K | '*' | Partial<{ [Key in K]: (eventArg: S[Key]) => void }>,
+    sub?: Subscription<any>
+  ) => Unsubscribe
   emit: <Key extends K = K>(key: Key, value: S[Key]) => void
   dispose: () => void
   size: () => number
@@ -26,15 +27,21 @@ export const createEvents = <
   const all = createSubscriptions()
 
   /**
-   * Subscribe to a specific event
+   * Subscribe to a specific event, to all events using '*', or to multiple events
    */
-  const on = <Key extends K = K>(key: Key, sub: Subscription<S[Key]>) => subs.add(key, sub)
-
-  return {
-    on,
-    onMany: (listeners: { [Key in K]: (eventArg: S[Key]) => void }): Unsubscribe => {
+  const on = (
+    key: K | '*' | Partial<{ [Key in K]: (eventArg: S[Key]) => void }>,
+    sub?: Subscription<any>
+  ): Unsubscribe => {
+    if (typeof key === 'string') {
+      if (key === '*') {
+        return all.add(sub!)
+      }
+      return subs.add(key, sub!)
+    } else {
+      const listeners = key as Partial<{ [Key in K]: (eventArg: S[Key]) => void }>
       const unsubscribes = (entries(listeners) as [K, (eventArg: S[K]) => void][]).map((listener) =>
-        on(...listener)
+        subs.add(listener[0], listener[1])
       )
 
       return () => {
@@ -42,8 +49,11 @@ export const createEvents = <
           unsubscribe()
         }
       }
-    },
-    onAll: (sub: Subscription<{ [Key in K]: [Key, S[Key]] }[K]>) => all.add(sub),
+    }
+  }
+
+  return {
+    on,
     emit: <Key extends K = K>(key: Key, value: S[Key]) => {
       subs.each(key, value)
       all.each([key, value])

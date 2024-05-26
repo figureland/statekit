@@ -107,7 +107,7 @@ describe('signal with throttle', () => {
       receivedValue = value
     })
 
-    testSignal.set(15) // Should emit immediately
+    testSignal.set(15)
     expect(receivedValue).toBe(15)
   })
 
@@ -121,9 +121,9 @@ describe('signal with throttle', () => {
       latestValue = value
     })
 
-    testSignal.set(200) // Should emit immediately
+    testSignal.set(200)
     await delay(throttleDuration + 10)
-    testSignal.set(300) // Should emit after throttle duration
+    testSignal.set(300)
 
     expect(latestValue).toBe(300)
   })
