@@ -1,5 +1,5 @@
 import { NiceMap } from '@figureland/typekit'
-import type { Disposable, System, Subscribable } from '.'
+import type { Disposable, System } from '.'
 import { createSubscriptions } from './utils/subscriptions'
 
 export const system = (): System => {
@@ -11,8 +11,7 @@ export const system = (): System => {
     return s
   }
 
-  const unique = <S extends Subscribable>(key: string, s: () => S) =>
-    use(keyedSubs.getOrSet(key, s))
+  const unique = <S extends Disposable>(key: string, s: () => S) => use(keyedSubs.getOrSet(key, s))
 
   const dispose = () => {
     subs.each()
