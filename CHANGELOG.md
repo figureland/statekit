@@ -1,4 +1,16 @@
 # 
+## v0.0.99
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.98...v0.0.99)
+
+### 🩹 Fixes
+
+- Type issues with events ([9247404](https://github.com/figureland/statekit/commit/9247404))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.98
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.97...v0.0.98)
