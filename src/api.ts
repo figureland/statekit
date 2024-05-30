@@ -1,4 +1,5 @@
-import type { Events, Subscription, Unsubscribe } from '.'
+import type { Events } from './utils/events'
+import type { Subscription, Unsubscribe } from './utils/subscriptions'
 
 export type SubscribableHistoryEntry<V extends any> = [number, V]
 
@@ -12,10 +13,15 @@ export type Disposable = {
 
 export type Subscribable<V extends any = any> = Usable &
   Disposable & {
-    id: string
-    on: (sub: Subscription<V>) => Unsubscribe
-    get: () => V
     events: Events<SubscribableEvents<V>>
+    on: (sub: Subscription<V>) => Unsubscribe
+  }
+
+export type Gettable<V extends any = any> = Usable &
+  Disposable &
+  Subscribable<V> & {
+    id: string
+    get: () => V
   }
 
 export type SubscribableEvents<V> = {
@@ -24,24 +30,30 @@ export type SubscribableEvents<V> = {
   previous: SubscribableHistoryEntry<V>
 }
 
-export type ReadonlySignal<V> = Subscribable<V>
+export type ReadonlySignal<V> = Subscribable<V> & Gettable<V>
 
-export type Settable<V extends any = any> = Subscribable<V> & {
+export type Settable<V extends any = any> = {
   set: (partial: V | Partial<V> | ((state: V) => V | Partial<V>), sync?: boolean) => void
 }
+
+export type SettableGettable<V extends any = any> = Settable<V> & Gettable<V>
 
 export type SettableType<S> = S extends Settable<infer T> ? T : never
 
 export type SubscribableType<S> = S extends Subscribable<infer T> ? T : never
 
-export type UseSignalDependency = <S extends Subscribable>(u: S) => SubscribableType<S>
+export type UseSignalDependency = <S extends Subscribable & Gettable>(u: S) => SubscribableType<S>
 
-export type Signal<V> = Settable<V> & {
+export type UseEffectDependency = <S extends Subscribable>(u: S) => void
+
+export type Signal<V> = SettableGettable<V> & {
   mutate: (u: (val: V) => void, sync?: boolean) => void
 }
 
-export interface SignalObject<R extends Record<string, any>, K extends keyof R = keyof R>
-  extends Settable<R> {
+export type SignalObject<
+  R extends Record<string, any>,
+  K extends keyof R = keyof R
+> = SettableGettable<R> & {
   key: <K extends keyof R>(key: K) => Signal<R[K]>
   keys: K[]
 }
@@ -64,7 +76,7 @@ export type SignalMachine<
   States extends string,
   Events extends string,
   D extends object
-> = Settable<States> & {
+> = SettableGettable<States> & {
   is: (...states: States[]) => boolean
   send: (event: Events, d?: Partial<D>) => void
   data: Signal<D>
@@ -87,3 +99,5 @@ export type System = Disposable &
 export type SubscribableHistory<V> = Signal<V> & {
   restore: (n?: number) => void
 }
+
+export type Effect = Disposable & Usable

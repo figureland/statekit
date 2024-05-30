@@ -1,6 +1,6 @@
-import { type Signal, signal, type Subscribable } from '@figureland/statekit'
+import { type Signal, signal, type Gettable } from '@figureland/statekit'
 
-export const useSubscribable = <S>(subscribable: Subscribable<S>) => ({
+export const useSubscribable = <S>(subscribable: Gettable<S>) => ({
   subscribe: (run: (value: S) => void) => {
     const unsub = subscribable.on(run)
     run(subscribable.get())
