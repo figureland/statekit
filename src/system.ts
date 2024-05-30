@@ -1,4 +1,4 @@
-import { NiceMap } from '@figureland/typekit'
+import { NiceMap } from '@figureland/typekit/map'
 import type { Disposable, System } from '.'
 import { createSubscriptions } from './utils/subscriptions'
 

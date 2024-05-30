@@ -1,4 +1,5 @@
-import { isFunction, keys } from '@figureland/typekit'
+import { isFunction } from '@figureland/typekit/guards'
+import { keys } from '@figureland/typekit/object'
 import { type SignalOptions, signal } from './signal'
 import type { Signal, SignalObject } from './api'
 

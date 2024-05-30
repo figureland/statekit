@@ -7,7 +7,7 @@ import {
   signal
 } from '@figureland/statekit'
 import { clamp, mapRange } from '@figureland/mathkit/number'
-import { isObject } from '@figureland/typekit'
+import { isObject } from '@figureland/typekit/guards'
 import { isBrowser } from './utils'
 
 type EngineEvents = {
