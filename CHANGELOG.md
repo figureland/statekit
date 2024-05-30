@@ -1,4 +1,16 @@
 # 
+## v0.0.101
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.100...v0.0.101)
+
+### 🚀 Enhancements
+
+- Added number and symbol keys to events ([29515bb](https://github.com/figureland/statekit/commit/29515bb))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.100
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.99...v0.0.100)
