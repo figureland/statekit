@@ -1,4 +1,16 @@
 # 
+## v0.0.100
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.99...v0.0.100)
+
+### 🚀 Enhancements
+
+- Added effect, and refined api ([f0bc0bd](https://github.com/figureland/statekit/commit/f0bc0bd))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.99
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.98...v0.0.99)
