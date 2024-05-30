@@ -140,6 +140,43 @@ describe('createEvents', () => {
 
     expect(latestValue).toBe(300)
   })
+
+  it('should allow number and symbol event names', () => {
+    const events = createEvents<{ [key: symbol]: number; [key: number]: string }>()
+    let receivedValue: any = null
+    let count = 0
+
+    const instance = Symbol.for('instance')
+    events.on(instance, (value) => {
+      receivedValue = value
+      count++
+    })
+
+    events.emit(instance, 10)
+    expect(receivedValue).toBe(10)
+    expect(count).toBe(1)
+
+    const exampleSymbol = Symbol()
+    events.on(exampleSymbol, (value) => {
+      receivedValue = value
+      count++
+    })
+
+    events.emit(exampleSymbol, 20)
+    expect(receivedValue).toBe(20)
+    expect(count).toBe(2)
+
+    let receivedStringValue = ''
+
+    events.on(1, (value) => {
+      receivedStringValue = value
+      count++
+    })
+
+    events.emit(1, 'hello')
+    expect(receivedStringValue).toBe('hello')
+    expect(count).toBe(3)
+  })
 })
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))

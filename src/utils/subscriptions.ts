@@ -51,7 +51,9 @@ export type Subscriptions<S extends Subscription = Subscription> = {
 /**
  * Creates a managed list of subscriptions grouped by topic
  */
-export const createTopicSubscriptions = <T extends string = string>(): TopicSubscriptions<T> => {
+export const createTopicSubscriptions = <
+  T extends string | number | symbol = string | number | symbol
+>(): TopicSubscriptions<T> => {
   const subs = new Map<T, Subscriptions>()
 
   const add = (topic: T, ...sub: Subscription[]): Unsubscribe => {
@@ -94,7 +96,7 @@ export const createTopicSubscriptions = <T extends string = string>(): TopicSubs
   }
 }
 
-export type TopicSubscriptions<T extends string> = {
+export type TopicSubscriptions<T extends string | number | symbol> = {
   add: (topic: T, ...sub: Subscription[]) => Unsubscribe
   dispose: () => void
   each: (topic: T, value: any) => void

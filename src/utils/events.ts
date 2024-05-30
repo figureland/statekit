@@ -1,4 +1,5 @@
-import { entries } from '@figureland/typekit'
+import { entries } from '@figureland/typekit/object'
+import { isString, isNumber, isSymbol } from '@figureland/typekit/guards'
 import {
   createSubscriptions,
   createTopicSubscriptions,
@@ -6,7 +7,9 @@ import {
   type Unsubscribe
 } from './subscriptions'
 
-export type Events<S extends Record<string, any>, K extends string & keyof S = string & keyof S> = {
+type EventKey = string | number | symbol
+
+export type Events<S extends Record<EventKey, any>, K extends keyof S = EventKey & keyof S> = {
   on: <Key extends K | '*'>(
     key: Key | Partial<{ [Key in K]: (eventArg: S[Key]) => void }>,
     sub?: Key extends '*' ? Subscription<[K, S[K]]> : Subscription<S[Extract<Key, K>]>
@@ -20,8 +23,8 @@ export type Events<S extends Record<string, any>, K extends string & keyof S = s
  * Creates a new event emitter
  */
 export const createEvents = <
-  S extends Record<string, any>,
-  K extends string & keyof S = string & keyof S
+  S extends Record<EventKey, any>,
+  K extends EventKey & keyof S = EventKey & keyof S
 >(): Events<S, K> => {
   const subs = createTopicSubscriptions<K>()
   const all = createSubscriptions<Subscription<[K, S[K]]>>()
@@ -30,7 +33,7 @@ export const createEvents = <
    * Subscribe to a specific event, to all events using '*', or to multiple events
    */
   const on: Events<S, K>['on'] = (key, sub?) => {
-    if (typeof key === 'string') {
+    if (isString(key) || isSymbol(key) || isNumber(key)) {
       if (key === '*') {
         return all.add(sub as Subscription<[K, S[K]]>)
       }
