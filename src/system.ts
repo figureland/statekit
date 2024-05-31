@@ -11,7 +11,8 @@ export const system = (): System => {
     return s
   }
 
-  const unique = <S extends Disposable>(key: string, s: () => S) => use(keyedSubs.getOrSet(key, s))
+  const unique = <S extends Disposable>(key: string | number | symbol, s: () => S) =>
+    use(keyedSubs.getOrSet(key, s))
 
   const dispose = () => {
     subs.each()

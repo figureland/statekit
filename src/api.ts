@@ -93,7 +93,7 @@ export type AnimatedSignal<V extends any> = Signal<V> & {
 
 export type System = Disposable &
   Usable & {
-    unique: <S extends Disposable>(key: string, s: () => S) => S
+    unique: <S extends Disposable>(key: string | number | symbol, s: () => S) => S
   }
 
 export type SubscribableHistory<V> = Signal<V> & {
