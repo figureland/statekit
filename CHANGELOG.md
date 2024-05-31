@@ -1,4 +1,16 @@
 # 
+## v0.0.103
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.102...v0.0.103)
+
+### 🚀 Enhancements
+
+- Added more types to unique method ([fd53e17](https://github.com/figureland/statekit/commit/fd53e17))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.102
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.101...v0.0.102)
