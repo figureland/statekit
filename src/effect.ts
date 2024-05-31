@@ -9,7 +9,8 @@ type SourceValue<S> =
 
 export const effect = <S extends (Signal<any> | Events<any>)[]>(
   sources: [...S],
-  callback: (values: { [K in keyof S]: SourceValue<S[K]> }) => void
+  callback: (values: { [K in keyof S]: SourceValue<S[K]> }) => void,
+  { trigger }: { trigger?: boolean } = {}
 ): Effect => {
   const { use, dispose } = system()
 
@@ -41,6 +42,10 @@ export const effect = <S extends (Signal<any> | Events<any>)[]>(
       )
     }
   })
+
+  if (trigger) {
+    updateValues()
+  }
 
   return {
     use,

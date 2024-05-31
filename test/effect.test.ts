@@ -63,4 +63,14 @@ describe('effect', () => {
     expect(mockSub).toHaveBeenCalledTimes(2)
     expect(mockDispose).toHaveBeenCalledTimes(1)
   })
+  it('triggers as expected', () => {
+    const exampleEvents = createEvents<{ something: number; else: string[] }>()
+    const exampleSignal = signal(() => 10)
+
+    const mockSub = mock(() => ({}))
+
+    effect([exampleEvents, exampleSignal], mockSub, { trigger: true })
+
+    expect(mockSub).toHaveBeenCalledTimes(1)
+  })
 })
