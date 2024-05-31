@@ -1,4 +1,20 @@
 # 
+## v0.0.102
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.101...v0.0.102)
+
+### 🚀 Enhancements
+
+- Removed wildcard '*' listener and replaced with all method ([e502cc6](https://github.com/figureland/statekit/commit/e502cc6))
+
+### 🏡 Chore
+
+- Tidied up imports ([8005d81](https://github.com/figureland/statekit/commit/8005d81))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.101
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.100...v0.0.101)
