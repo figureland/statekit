@@ -1,4 +1,16 @@
 # 
+## v0.0.104
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.103...v0.0.104)
+
+### 🚀 Enhancements
+
+- Added trigger option to effect ([7f72977](https://github.com/figureland/statekit/commit/7f72977))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.103
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.102...v0.0.103)
