@@ -24,7 +24,7 @@ describe('createEvents', () => {
     let receivedEvent = ''
     let receivedValue: any = null
     let count = 0
-    events.on('*', ([key, value]) => {
+    events.all(([key, value]) => {
       receivedEvent = key
       receivedValue = value
       count++
@@ -76,7 +76,7 @@ describe('createEvents', () => {
     const events = createEvents<EventMap>()
     let receivedValue: any = null
 
-    const unsubscribe = events.on('*', ([, value]) => {
+    const unsubscribe = events.all(([, value]) => {
       receivedValue = value
     })
 

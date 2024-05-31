@@ -33,9 +33,9 @@ export const effect = <S extends (Signal<any> | Events<any>)[]>(
           updateValues()
         })
       )
-    } else if ('on' in source) {
+    } else if ('all' in source) {
       use(
-        source.on('*', (event) => {
+        source.all((event) => {
           updateValues(event)
         })
       )
