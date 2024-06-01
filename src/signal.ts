@@ -6,7 +6,7 @@ import { createEvents } from './utils/events'
 import type { Signal, SubscribableEvents, UseSignalDependency } from './api'
 import { system } from './system'
 
-const createSignalContext = () => {
+export const createSignalContext = () => {
   let id: number = 0
 
   return {
