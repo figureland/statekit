@@ -1,4 +1,16 @@
 # 
+## v0.0.106
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.105...v0.0.106)
+
+### 🚀 Enhancements
+
+- Exported signal context function ([2077196](https://github.com/figureland/statekit/commit/2077196))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.105
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.104...v0.0.105)
