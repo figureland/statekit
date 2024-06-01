@@ -1,4 +1,16 @@
 # 
+## v0.0.110
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.109...v0.0.110)
+
+### 🩹 Fixes
+
+- Broken fallback type behaviour ([827f1a8](https://github.com/figureland/statekit/commit/827f1a8))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.109
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.108...v0.0.109)
