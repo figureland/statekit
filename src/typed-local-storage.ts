@@ -32,7 +32,7 @@ export const typedLocalStorage = <T>({
       }
       throw new Error(`Invalid value in ${target}`)
     } catch (e) {
-      const fb = await fallback()
+      const fb = (await fallback()) as T
       await set(fb)
       return fb
     }
