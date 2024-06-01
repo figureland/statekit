@@ -1,4 +1,16 @@
 # 
+## v0.0.109
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.108...v0.0.109)
+
+### 🩹 Fixes
+
+- Type API error ([b0dae22](https://github.com/figureland/statekit/commit/b0dae22))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.108
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.107...v0.0.108)
