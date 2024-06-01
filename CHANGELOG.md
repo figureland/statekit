@@ -1,4 +1,16 @@
 # 
+## v0.0.108
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.107...v0.0.108)
+
+### 🚀 Enhancements
+
+- Adding fallback to storage api ([470687d](https://github.com/figureland/statekit/commit/470687d))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.107
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.106...v0.0.107)
