@@ -13,7 +13,7 @@ export type StorageAPIOptions<T> = {
     get: ((v: unknown) => Promise<T>) | ((v: unknown) => T)
     set: ((v: T) => Promise<any>) | ((v: T) => any)
   }
-  fallback: (() => T) | (() => Promise<T>)
+  fallback: () => T | Promise<T>
 }
 
 export const getStorageName = (n: string | PersistenceName) => (isArray(n) ? n.join('/') : n)
