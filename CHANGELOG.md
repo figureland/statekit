@@ -1,4 +1,16 @@
 # 
+## v0.0.111
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.110...v0.0.111)
+
+### 🩹 Fixes
+
+- Fallback type for storage ([6327960](https://github.com/figureland/statekit/commit/6327960))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.110
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.109...v0.0.110)
