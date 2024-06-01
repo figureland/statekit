@@ -3,7 +3,7 @@ import { isArray } from '@figureland/typekit/guards'
 
 export type StorageAPI<T> = {
   get: () => Promise<T>
-  set: (data: T) => Promise<string>
+  set: (data: T) => Promise<void>
 }
 
 export type StorageAPIOptions<T> = {
