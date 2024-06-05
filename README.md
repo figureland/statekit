@@ -272,7 +272,7 @@ a.set({ x: 1, y: 1 })
 // need it. One use case is if you have an animated engine which
 // is rendering a canvas.
 
-events.on('tick', (f: number) => {
+engine.on('tick', (f: number) => {
   // f is the delta since the last tick
   renderSomething()
 })
