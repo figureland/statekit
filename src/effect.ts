@@ -29,17 +29,9 @@ export const effect = <S extends (Signal<any> | Events<any>)[]>(
 
   sources.forEach((source) => {
     if ('get' in source) {
-      use(
-        source.on(() => {
-          updateValues()
-        })
-      )
+      use(source.on(() => updateValues()))
     } else if ('all' in source) {
-      use(
-        source.all((event) => {
-          updateValues(event)
-        })
-      )
+      use(source.all(updateValues))
     }
   })
 
