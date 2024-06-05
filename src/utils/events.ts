@@ -70,25 +70,3 @@ export const createEvents = <
     }
   }
 }
-
-export async function* iterate<
-  S extends Record<string, any>,
-  K extends keyof S = EventKey & keyof S,
-  Key extends K = K
->(events: Events<S, K>, name: Key): AsyncIterableIterator<S[Extract<Key, K>]> {
-  let resolve: (value: S[Extract<Key, K>]) => void
-  let promise = new Promise<S[Extract<Key, K>]>((r) => (resolve = r))
-
-  const unsubscribe = events.on(name, (value) => {
-    resolve(value)
-    promise = new Promise<S[Extract<Key, K>]>((r) => (resolve = r))
-  })
-
-  try {
-    while (true) {
-      yield await promise
-    }
-  } finally {
-    unsubscribe()
-  }
-}
