@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'bun:test'
 import { createEvents } from '../src'
+import { iterate } from '../src/utils/events'
 
 describe('createEvents', () => {
   type EventMap = {
@@ -180,3 +181,76 @@ describe('createEvents', () => {
 })
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
+// describe('iterate', () => {
+//   type EventMap = {
+//     event1: number
+//     event2: string
+//   }
+
+//   it('should turn event subscription into an async iterator', async () => {
+//     const events = createEvents<EventMap>()
+//     const receivedValues: number[] = []
+
+//     for await (const value of iterate(events, 'event1')) {
+//       console.log(value)
+//       receivedValues.push(value)
+//       if (receivedValues.length === 3) break
+//     }
+
+//     expect(receivedValues).toEqual([1, 2, 3])
+//   })
+
+// it('should handle unsubscribing correctly', async () => {
+//   const events = createEvents<EventMap>()
+//   const receivedValues: number[] = []
+
+//   const iterator = iterate(events, 'event1')
+//   const subscription = (async () => {
+//     for await (const value of iterator) {
+//       receivedValues.push(value)
+//       if (receivedValues.length === 2) break
+//     }
+//   })()
+
+//   events.emit('event1', 1)
+//   events.emit('event1', 2)
+//   await subscription
+//   events.emit('event1', 3)
+
+//   expect(receivedValues).toEqual([1, 2])
+// })
+
+// it('should handle multiple events correctly', async () => {
+//   const events = createEvents<EventMap>()
+//   const receivedValues: (number | string)[] = []
+
+//   setTimeout(() => {
+//     events.emit('event1', 1)
+//     events.emit('event2', 'hello')
+//     events.emit('event1', 2)
+//     events.emit('event2', 'world')
+//   }, 10)
+
+//   const iterator1 = iterate(events, 'event1')
+//   const iterator2 = iterate(events, 'event2')
+
+//   const subscription1 = (async () => {
+//     for await (const value of iterator1) {
+//       receivedValues.push(value)
+//       if (receivedValues.length === 3) break
+//     }
+//   })()
+
+//   const subscription2 = (async () => {
+//     for await (const value of iterator2) {
+//       receivedValues.push(value)
+//       if (receivedValues.length === 4) break
+//     }
+//   })()
+
+//   await Promise.all([subscription1, subscription2])
+
+//   expect(receivedValues).toEqual([1, 'hello', 2, 'world'])
+// })
+// })

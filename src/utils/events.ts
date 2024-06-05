@@ -8,8 +8,9 @@ import {
 } from './subscriptions'
 
 type EventKey = string | number | symbol
+type EventMap = Record<EventKey, any>
 
-export type Events<S extends Record<EventKey, any>, K extends keyof S = EventKey & keyof S> = {
+export type Events<S extends EventMap, K extends keyof S = EventKey & keyof S> = {
   on: <Key extends K>(
     key: Key | Partial<{ [Key in K]: (eventArg: S[Key]) => void }>,
     sub?: Subscription<S[Extract<Key, K>]>
@@ -24,7 +25,7 @@ export type Events<S extends Record<EventKey, any>, K extends keyof S = EventKey
  * Creates a new event emitter
  */
 export const createEvents = <
-  S extends Record<EventKey, any>,
+  S extends EventMap,
   K extends EventKey & keyof S = EventKey & keyof S
 >(): Events<S, K> => {
   const subs = createTopicSubscriptions<K>()
@@ -67,5 +68,27 @@ export const createEvents = <
     size: () => {
       return allSubs.size() + subs.size()
     }
+  }
+}
+
+export async function* iterate<
+  S extends Record<string, any>,
+  K extends keyof S = EventKey & keyof S,
+  Key extends K = K
+>(events: Events<S, K>, name: Key): AsyncIterableIterator<S[Extract<Key, K>]> {
+  let resolve: (value: S[Extract<Key, K>]) => void
+  let promise = new Promise<S[Extract<Key, K>]>((r) => (resolve = r))
+
+  const unsubscribe = events.on(name, (value) => {
+    resolve(value)
+    promise = new Promise<S[Extract<Key, K>]>((r) => (resolve = r))
+  })
+
+  try {
+    while (true) {
+      yield await promise
+    }
+  } finally {
+    unsubscribe()
   }
 }
