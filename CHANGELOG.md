@@ -1,4 +1,27 @@
 # 
+## v0.0.112
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.111...v0.0.112)
+
+### 🚀 Enhancements
+
+- Adding support for JSR ([ae7c176](https://github.com/figureland/statekit/commit/ae7c176))
+- Added stub iterate method ([fbed59d](https://github.com/figureland/statekit/commit/fbed59d))
+- Removed iterate for now ([2030936](https://github.com/figureland/statekit/commit/2030936))
+
+### 🩹 Fixes
+
+- Typo in readme ([417b811](https://github.com/figureland/statekit/commit/417b811))
+- Small tweak to effect ([72c2dd3](https://github.com/figureland/statekit/commit/72c2dd3))
+
+### 🏡 Chore
+
+- Bump dependency ([6afd1a0](https://github.com/figureland/statekit/commit/6afd1a0))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.111
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.110...v0.0.111)
