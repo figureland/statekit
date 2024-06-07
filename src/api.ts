@@ -50,7 +50,7 @@ export type Signal<V> = SettableGettable<V> & {
   mutate: (u: (val: V) => void, sync?: boolean) => void
 }
 
-export type SignalObject<
+export type SignalRecord<
   R extends Record<string, any>,
   K extends keyof R = keyof R
 > = SettableGettable<R> & {
@@ -83,7 +83,7 @@ export type SignalMachine<
 }
 
 export interface SignalState<R extends Record<string, any>, K extends keyof R = keyof R>
-  extends SignalObject<R, K> {
+  extends SignalRecord<R, K> {
   reset: () => void
 }
 

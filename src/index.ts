@@ -10,7 +10,7 @@ export {
   createTopicSubscriptions,
   type TopicSubscriptions
 } from './utils/subscriptions'
-export { signalObject } from './signal-object'
+export { record } from './record'
 export { machine } from './machine'
 export * from './api'
 export { system, disposable } from './system'

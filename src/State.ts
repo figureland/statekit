@@ -1,5 +1,5 @@
-import { signalObject } from './signal-object'
-import { type SignalObject, type SignalState, type StorageAPI } from '.'
+import { record } from './record'
+import { type SignalRecord, type SignalState, type StorageAPI } from '.'
 import { persist } from './persist'
 
 export type StateOptions<S extends object = object> = {
@@ -11,12 +11,12 @@ export type StateOptions<S extends object = object> = {
 export class State<S extends object, K extends string & keyof S = string & keyof S>
   implements SignalState<S, K>
 {
-  public signal: SignalObject<S>
+  public signal: SignalRecord<S>
   protected initial: () => S
 
   constructor({ initial, persistence }: StateOptions<S>) {
     this.initial = initial
-    this.signal = signalObject(initial())
+    this.signal = record(initial())
     if (persistence) {
       persist(this.signal, persistence)
     }

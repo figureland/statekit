@@ -1,12 +1,12 @@
 import { isFunction } from '@figureland/typekit/guards'
 import { keys } from '@figureland/typekit/object'
 import { type SignalOptions, signal } from './signal'
-import type { Signal, SignalObject } from './api'
+import type { Signal, SignalRecord } from './api'
 
-export const signalObject = <R extends Record<string, any>>(
+export const record = <R extends Record<string, any>>(
   r: R,
   options?: SignalOptions<R>
-): SignalObject<R> => {
+): SignalRecord<R> => {
   const parent = signal<R>(() => r, options)
   const signals = {} as { [K in keyof R]: Signal<R[K]> }
 
