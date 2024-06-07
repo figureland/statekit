@@ -1,4 +1,16 @@
 # 
+## v0.0.113
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.112...v0.0.113)
+
+### 🚀 Enhancements
+
+- Changed SignalObject to record ([69c69d6](https://github.com/figureland/statekit/commit/69c69d6))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.112
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.111...v0.0.112)
