@@ -1,4 +1,8 @@
 # 
+## v0.0.116
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.115...v0.0.116)
+
 ## v0.0.115
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.114...v0.0.115)
