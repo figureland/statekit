@@ -1,5 +1,8 @@
 ![statekit illustration](./docs/statekit-hero.svg)
 
+[![CI](https://github.com/figureland/statekit/actions/workflows/ci.yml/badge.svg)](https://github.com/figureland/statekit/actions/workflows/ci.yml)
+[![NPM](https://img.shields.io/npm/v/@figureland/statekit.svg)](https://img.shields.io/npm/v/@figureland/statekit.svg)
+
 **statekit** is a simple toolkit of primitives for building apps and systems driven by data and events. Written from scratch in Typescript with no dependencies.
 
 ## Ways to use statekit
