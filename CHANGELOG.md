@@ -1,4 +1,16 @@
 # 
+## v0.0.120
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.119...v0.0.120)
+
+### 🩹 Fixes
+
+- Updated vue entrypoint to fix weird recursion issue ([dc3c5ea](https://github.com/figureland/statekit/commit/dc3c5ea))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.119
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.118...v0.0.119)
