@@ -1,16 +1,18 @@
 import { customRef, onScopeDispose } from 'vue'
-import type { Gettable } from '@figureland/statekit'
+import type { Gettable, GettableType } from '@figureland/statekit'
 
-export const useSubscribable = <S>(subscribable: Gettable<S>) =>
-  customRef<S>((track, set) => {
-    const unsubscribe = subscribable.on(set)
-    onScopeDispose(unsubscribe)
+export const useSubscribable = <S extends Gettable<any>>(s: S) =>
+  customRef<GettableType<S>>((track, set) => {
+    const unsubscribe = s.on(set)
+    onScopeDispose(() => {
+      unsubscribe()
+    })
     return {
       get: () => {
         track()
-        return subscribable.get()
+        return s.get()
       },
-      set,
+      set: () => {},
       dispose: unsubscribe
     }
   })
