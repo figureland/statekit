@@ -1,4 +1,4 @@
-import type { SettableGettable, SettableType } from '@figureland/statekit'
+import type { Settable, Gettable, SettableType } from '@figureland/statekit'
 import { isArray } from '@figureland/typekit/guards'
 
 export type StorageAPI<T> = {
@@ -20,7 +20,7 @@ export const getStorageName = (n: string | PersistenceName) => (isArray(n) ? n.j
 
 export type PersistenceName = string[]
 
-export const persist = <S extends SettableGettable<any>>(
+export const persist = <S extends Gettable<any> & Settable<any>>(
   s: S,
   storage: StorageAPI<SettableType<S>>
 ) => {
