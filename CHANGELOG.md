@@ -1,4 +1,20 @@
 # 
+## v0.0.117
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.116...v0.0.117)
+
+### 🚀 Enhancements
+
+- Removed old code and out-of-scope functionality ([0232abd](https://github.com/figureland/statekit/commit/0232abd))
+
+### 📖 Documentation
+
+- Added badges ([019aeb1](https://github.com/figureland/statekit/commit/019aeb1))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.116
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.115...v0.0.116)
