@@ -7,11 +7,11 @@ export const record = <R extends Record<string, any>>(
   r: R,
   options?: SignalOptions<R>
 ): SignalRecord<R> => {
-  const parent = signal<R>(() => r, options)
+  const parent = signal<R>(structuredClone(r), options)
   const signals = {} as { [K in keyof R]: Signal<R[K]> }
 
   for (const k in r) {
-    signals[k] = signal(() => r[k])
+    signals[k] = signal(r[k])
     parent.use(signals[k].on(() => parent.set(getObject())))
     parent.use(signals[k].dispose)
   }
@@ -28,8 +28,8 @@ export const record = <R extends Record<string, any>>(
 
   const set = (v: R | Partial<R> | ((v: R) => R | Partial<R>), sync: boolean = true): void => {
     const u = isFunction(v) ? (v as (v: R) => R)(parent.get()) : v
-    for (const k in v) {
-      key(k).set(u[k] as R[typeof k], sync)
+    for (const k of keys(v)) {
+      key(k)?.set(u[k] as R[typeof k], sync)
     }
   }
 
