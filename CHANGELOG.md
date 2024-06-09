@@ -1,4 +1,16 @@
 # 
+## v0.0.118
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.117...v0.0.118)
+
+### 🏡 Chore
+
+- Updating old types and removing old imports ([14b19a1](https://github.com/figureland/statekit/commit/14b19a1))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.117
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.116...v0.0.117)
