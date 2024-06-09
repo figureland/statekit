@@ -22,17 +22,17 @@ const context = createSignalContext()
 /**
  * Creates new {@link Signal}
  */
-export const signal = <R>(
-  fn: (use: UseSignalDependency) => R,
-  options: SignalOptions<R> = {}
-): Signal<R> => createSignal<R>(context.register(), fn, options)
+export const signal = <V>(
+  fn: V | ((use: UseSignalDependency) => V),
+  options: SignalOptions<V> = {}
+): Signal<V> => createSignal<V>(context.register(), fn, options)
 
 /**
  * Creates a simple {@link Signal} for tracking a value
  */
 const createSignal = <V>(
   id: string,
-  initial: (use: UseSignalDependency) => V,
+  initial: V | ((use: UseSignalDependency) => V),
   { merge = simpleMerge, equality = shallowEquals, throttle }: SignalOptions<V>
 ): Signal<V> => {
   const { dispose, use } = system()
@@ -49,7 +49,7 @@ const createSignal = <V>(
     return s.get()
   }
 
-  let value = initial(handleDependency)
+  let value = isFunction(initial) ? initial(handleDependency) : initial
 
   loaded = true
 
@@ -73,8 +73,10 @@ const createSignal = <V>(
     }
   }
 
-  for (const dep of dependencies) {
-    dep(() => set(initial(handleDependency)))
+  if (isFunction(initial)) {
+    for (const dep of dependencies) {
+      dep(() => set(initial(handleDependency)))
+    }
   }
 
   const on = (sub: Subscription<V>) => events.on('state', sub)

@@ -1,2 +1,1 @@
-export { useReadableSignal, useWritableSignal, useDerived } from './svelte/use-subscribable.svelte'
-export { usePersistedSignal } from './svelte/use-persisted-signal.svelte'
+export { useSubscribable } from './svelte/use-subscribable.svelte'

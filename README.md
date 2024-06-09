@@ -313,69 +313,6 @@ x.get() // 3
 h.get() // [[1714414077816, 4], [1714414077817, 5], [1714414077818, 4]]
 ```
 
-### Using `State` to manage your state using ES6 Classes
-
-> This is likely going to be removed from future versions to reduce the footprint of this library.
-
-This is a class-based extension of the `record`. It's just a different pattern for a simple architecture where you are using classes heavily. Essentially it allows a pattern like this:
-
-```typescript
-import { State } from '@figureland/statekit'
-
-type PointerState = {
-  x: number
-  y: number
-}
-
-export class Pointer extends State<PointerState> {
-  constructor() {
-    super({
-      initial: () => ({ x: 0, y: 0 })
-    })
-  }
-
-  // This is helpful for more complicated representations of state,
-  // for example if there is internal logic or you want to associate
-  // the state with additional methods
-  public transform = () => {
-    const { x, y } = this.state.get()
-    return `transform: translateX(${x}px, ${y}px);`
-  }
-}
-
-const pointer = new Pointer()
-
-// You can also reset the state to initial arguments
-
-pointer.reset()
-
-// And subscribe to it like a signal or any other object
-// which implements the Subscribable interface
-
-const x2 = signal((get) => get(pointer.key('x')) * 2)
-```
-
-In practise, I've found that extending the `State` class ends up making codebases harder to reason about and so it's better to do this just to do this:
-
-```typescript
-import { signal } from '@figureland/statekit'
-
-const initial = () => ({ x: 0, y: 0 })
-
-class Pointer {
-  public readonly state = signal(initial)
-
-  public reset = () => {
-    this.state.set(initial)
-  }
-  // and other methods
-}
-
-const pointer = new Pointer()
-
-const x2 = signal((get) => get(pointer.state).x * 2)
-```
-
 ### Notes on chaining
 
 You might have noticed that this library is very chainable, e.g. you might end up doing:

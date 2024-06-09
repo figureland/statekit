@@ -1,5 +1,5 @@
 import { customRef, onScopeDispose } from 'vue'
-import { signal, type UseSignalDependency, type Gettable } from '@figureland/statekit'
+import type { Gettable } from '@figureland/statekit'
 
 export const useSubscribable = <S>(subscribable: Gettable<S>) =>
   customRef<S>((track, set) => {
@@ -14,5 +14,3 @@ export const useSubscribable = <S>(subscribable: Gettable<S>) =>
       dispose: unsubscribe
     }
   })
-
-export const useDerived = <R>(fn: (use: UseSignalDependency) => R) => useSubscribable(signal(fn))

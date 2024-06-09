@@ -9,6 +9,12 @@ describe('signal', () => {
     const numSignal = signal(() => initialValue)
     expect(numSignal.get()).toBe(initialValue)
   })
+  it('creates a single with a primitive value', () => {
+    const numSignal = signal(20)
+    expect(numSignal.get()).toBe(20)
+    numSignal.set(30)
+    expect(numSignal.get()).toBe(30)
+  })
   it('creates a signal and retrieves its value', () => {
     const initialValue = 10
     const numSignal = signal(() => initialValue)
