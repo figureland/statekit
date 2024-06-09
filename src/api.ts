@@ -36,6 +36,8 @@ export type Settable<V extends any = any> = {
   set: (partial: V | Partial<V> | ((state: V) => V | Partial<V>), sync?: boolean) => void
 }
 
+export type GettableType<S> = S extends Gettable<infer T> ? T : never
+
 export type SettableType<S> = S extends Settable<infer T> ? T : never
 
 export type SubscribableType<S> = S extends Subscribable<infer T> ? T : never

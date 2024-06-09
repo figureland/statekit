@@ -14,7 +14,7 @@ This is the base reactive primitive.
 ```typescript
 import { signal } from '@figureland/statekit'
 
-const v = signal(() => 0)
+const v = signal(0)
 
 v.set(0) // set value to 0
 
@@ -34,7 +34,7 @@ The signal provides a `use()` method you want to attach other dependencies to th
 ```typescript
 import { signal } from '@figureland/statekit'
 
-const pointer = signal(() => ({ x: 0, y: 0 }))
+const pointer = signal({ x: 0, y: 0 })
 
 const onMove = (e: PointerEvent) =>
   pointer.set({
@@ -52,13 +52,13 @@ pointer.dispose()
 
 ### Combining multiple signals to create a derived Signal
 
-You can create new signals derived from other signals or any sources that implements the `Subscribable` interface. You can use the first argument in the initialiser function. You can wrap this around any other signals, states or reactive objects from this library. It will pick up the dependencies and update automatically whenever they change.
+You can create new signals derived from other signals or any sources that implements the `Subscribable` interface. You can use the first argument in an initialiser function. You can wrap this around any other signals, states or reactive objects from this library. It will pick up the dependencies and update automatically whenever they change.
 
 ```typescript
 import { signal } from '@figureland/statekit'
 
-const x = signal(() => 2)
-const y = signal(() => 1)
+const x = signal(2)
+const y = signal(1)
 const pos = signal((get) => ({
   x: get(x),
   y: get(y)
@@ -128,6 +128,10 @@ v.on((newValue: { arr: number[]; point: { x: number; y: number; value: string } 
 
 v.key('arr').get() // [1]
 v.key('point').get() // { x: 0, y: 0 }
+v.key('point') // Signal<{ x: 0, y: 0 }>
+v.key('point').on((v: { x: number; y: number }) => {
+  // ...
+})
 
 // Set individual properties
 v.key('point').set({ x: 1, y: 2 })
