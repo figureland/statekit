@@ -1,4 +1,16 @@
 # 
+## v0.0.119
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.118...v0.0.119)
+
+### 🩹 Fixes
+
+- Trying to update typescript behaviour for hooks ([7b5aac6](https://github.com/figureland/statekit/commit/7b5aac6))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.118
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.117...v0.0.118)
