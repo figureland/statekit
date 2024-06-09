@@ -1,4 +1,16 @@
 # 
+## v0.0.121
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.120...v0.0.121)
+
+### 🩹 Fixes
+
+- Minor tweaks to record set behaviour ([de0d58e](https://github.com/figureland/statekit/commit/de0d58e))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.120
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.119...v0.0.120)
