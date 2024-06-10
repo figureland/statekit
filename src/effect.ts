@@ -10,21 +10,51 @@ type SourceValue<S> =
 export const effect = <S extends (Signal<any> | Events<any>)[]>(
   sources: [...S],
   callback: (values: { [K in keyof S]: SourceValue<S[K]> }) => void,
-  { trigger }: { trigger?: boolean } = {}
+  { trigger, throttle }: { trigger?: boolean; throttle?: number } = {}
 ): Effect => {
   const { use, dispose } = system()
 
+  let lastExecutionTime = 0
+  let timeoutId: ReturnType<typeof setTimeout> | null = null
+
+  const clearScheduledTimeout = () => {
+    if (timeoutId !== null) {
+      clearTimeout(timeoutId)
+      timeoutId = null
+    }
+  }
+
   const updateValues = (triggeredEvent?: [keyof any, any]) => {
-    const values = sources.map((source, index) => {
-      if ('get' in source) {
-        return source.get()
-      } else if (triggeredEvent && index === sources.indexOf(source)) {
-        return triggeredEvent
+    const now = performance.now()
+
+    const executeCallback = () => {
+      clearScheduledTimeout()
+
+      const values = sources.map((source, index) => {
+        if ('get' in source) {
+          return source.get()
+        } else if (triggeredEvent && index === sources.indexOf(source)) {
+          return triggeredEvent
+        } else {
+          return undefined
+        }
+      }) as { [K in keyof S]: SourceValue<S[K]> }
+
+      callback(values)
+      lastExecutionTime = now
+    }
+
+    if (throttle) {
+      const timeSinceLastExecution = now - lastExecutionTime
+      if (timeSinceLastExecution >= throttle) {
+        executeCallback()
       } else {
-        return undefined
+        clearScheduledTimeout()
+        timeoutId = setTimeout(executeCallback, throttle - timeSinceLastExecution)
       }
-    }) as { [K in keyof S]: SourceValue<S[K]> }
-    callback(values)
+    } else {
+      executeCallback()
+    }
   }
 
   sources.forEach((source) => {
@@ -38,6 +68,9 @@ export const effect = <S extends (Signal<any> | Events<any>)[]>(
   if (trigger) {
     updateValues()
   }
+
+  // Ensure any scheduled timeout is cleared on dispose
+  use(() => clearScheduledTimeout)
 
   return {
     use,
