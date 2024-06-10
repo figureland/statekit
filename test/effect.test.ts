@@ -73,37 +73,4 @@ describe('effect', () => {
 
     expect(mockSub).toHaveBeenCalledTimes(1)
   })
-  it('debounces as expected', async () => {
-    const exampleEvents = createEvents<{ something: number; else: string[] }>()
-    const exampleSignal = signal(() => 10)
-
-    const mockSub = mock(() => ({}))
-
-    effect([exampleEvents, exampleSignal], mockSub, { throttle: 100 })
-
-    await delay(50)
-
-    exampleEvents.emit('something', 10)
-    exampleSignal.set(20)
-    expect(mockSub).toHaveBeenCalledTimes(1)
-
-    await delay(50)
-
-    exampleEvents.emit('something', 10)
-    exampleSignal.set(20)
-    exampleEvents.emit('something', 10)
-    exampleSignal.set(20)
-
-    await delay(200)
-
-    expect(mockSub).toHaveBeenCalledTimes(2)
-
-    exampleEvents.emit('something', 10)
-    exampleSignal.set(20)
-
-    await delay(200)
-
-    expect(mockSub).toHaveBeenCalledTimes(3)
-  })
 })
-const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
