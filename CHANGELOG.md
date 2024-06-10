@@ -1,4 +1,24 @@
 # 
+## v0.0.122
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.121...v0.0.122)
+
+### 🚀 Enhancements
+
+- Minor update to signal context ([2eea658](https://github.com/figureland/statekit/commit/2eea658))
+- Add throttle to effect ([23f8f0c](https://github.com/figureland/statekit/commit/23f8f0c))
+
+### 📖 Documentation
+
+- Update rationale in readme ([036522e](https://github.com/figureland/statekit/commit/036522e))
+- Add note about dependency tracking ([5ee9b12](https://github.com/figureland/statekit/commit/5ee9b12))
+- Fixed typo ([da544cf](https://github.com/figureland/statekit/commit/da544cf))
+- Tweak to readme ([d4bb823](https://github.com/figureland/statekit/commit/d4bb823))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.121
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.120...v0.0.121)
