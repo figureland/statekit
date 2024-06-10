@@ -79,7 +79,7 @@ describe('effect', () => {
 
     const mockSub = mock(() => ({}))
 
-    const e = effect([exampleEvents, exampleSignal], mockSub, { throttle: 100 })
+    effect([exampleEvents, exampleSignal], mockSub, { throttle: 100 })
 
     exampleEvents.emit('something', 10)
     exampleSignal.set(20)
@@ -87,6 +87,8 @@ describe('effect', () => {
 
     await delay(50)
 
+    exampleEvents.emit('something', 10)
+    exampleSignal.set(20)
     exampleEvents.emit('something', 10)
     exampleSignal.set(20)
 
