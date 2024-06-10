@@ -101,9 +101,9 @@ const obj = signal(() => ({ x: 0, y: [{ a: 1, b: '2', c: { x: 1 } }] }), {
 })
 ```
 
-### Creating a record of Signals with `record`
+### Creating a collection of Signals with `record`
 
-This is a helper function that creates a record of multiple signals. You can subscribe to them as a collection or individually. Although you can store an object in a regular `signal()`, this is helpful for a complex stateful object where you might want to subscribe to both the whole object and individual keys.
+This is a helper function that creates a object with a signal in each key. You can subscribe to them as a collection or individually. Although you can store an object in a regular `signal()`, this is helpful for a complex stateful object where you might want to subscribe to both the whole object and individual keys.
 
 ```typescript
 import { record } from '@figureland/statekit'
