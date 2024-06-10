@@ -9,23 +9,23 @@ import { system } from './system'
 export const createSignalContext = () => {
   let id: number = 0
 
+  const register = () => {
+    id++
+    return id.toString()
+  }
+
   return {
-    register: () => {
-      id++
-      return id.toString()
-    }
+    /**
+     * Creates new {@link Signal}
+     */
+    signal: <V>(
+      fn: V | ((use: UseSignalDependency) => V),
+      options: SignalOptions<V> = {}
+    ): Signal<V> => createSignal<V>(register(), fn, options)
   }
 }
 
-const context = createSignalContext()
-
-/**
- * Creates new {@link Signal}
- */
-export const signal = <V>(
-  fn: V | ((use: UseSignalDependency) => V),
-  options: SignalOptions<V> = {}
-): Signal<V> => createSignal<V>(context.register(), fn, options)
+export const { signal } = createSignalContext()
 
 /**
  * Creates a simple {@link Signal} for tracking a value
@@ -33,13 +33,13 @@ export const signal = <V>(
 const createSignal = <V>(
   id: string,
   initial: V | ((use: UseSignalDependency) => V),
-  { merge = simpleMerge, equality = shallowEquals, throttle }: SignalOptions<V>
+  { merge = simpleMerge, equality = shallowEquals, throttle, track = false }: SignalOptions<V>
 ): Signal<V> => {
   const { dispose, use } = system()
   const dependencies = new Set<Signal<any>['on']>()
 
   const events = use(createEvents<SubscribableEvents<V>>())
-  let loaded = false
+  let loaded = track
   let lastSyncTime: number = 0
 
   const shouldThrottle = () => throttle && performance.now() - lastSyncTime < throttle
