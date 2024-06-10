@@ -5,7 +5,7 @@
 
 **statekit** is a simple toolkit of primitives for building apps and systems driven by data and events. Written from scratch in Typescript with no dependencies.
 
-> The main purpose of this project is for learning and research. Hence why it will likely never have a major version release. The hope is that **statekit** is that eventually it will be replaced somewhat when TC39 are able to introduce [Signals](https://github.com/tc39/proposal-signals) to the Javascript language spec and it becomes mainstream in browsers, which might be a way off yet. It's not intended to be a [polyfill](https://github.com/proposal-signals/signal-polyfill/) as that hasn't been standardised yet.
+> The main purpose of this project is for learning and research. Hence why it will likely never have a major version release. The hope is that the internals of **statekit** will be gradually be replaced somewhat if/when TC39 introduce [Signals](https://github.com/tc39/proposal-signals) to the Javascript language spec and it becomes mainstream in browsers. That might be a way off yet. It's not intended to be a [polyfill](https://github.com/proposal-signals/signal-polyfill/) as that hasn't been standardised yet.
 
 ## Ways to use statekit
 
