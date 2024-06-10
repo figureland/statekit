@@ -81,6 +81,8 @@ describe('effect', () => {
 
     effect([exampleEvents, exampleSignal], mockSub, { throttle: 100 })
 
+    await delay(50)
+
     exampleEvents.emit('something', 10)
     exampleSignal.set(20)
     expect(mockSub).toHaveBeenCalledTimes(1)
