@@ -56,6 +56,8 @@ pointer.dispose()
 
 You can create new signals derived from other signals or any sources that implements the `Subscribable` interface. You can use the first argument in an initialiser function. You can wrap this around any other signals, states or reactive objects from this library. It will pick up the dependencies and update automatically whenever they change.
 
+> I am a bit torn on this API but it didn't feel worth getting hung up on it. There are standards experts and researchers who are better placed to make that call. It's nice to automatically track `Subscribable` when `.get()` is called in the initialiser function. But my personal feeling, for now at least, is that feels too much like magic for me. Maybe there's enough room in the world for both approaches!
+
 ```typescript
 import { signal } from '@figureland/statekit'
 
