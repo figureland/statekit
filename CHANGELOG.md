@@ -1,4 +1,22 @@
 # 
+## v0.0.123
+
+[compare changes](https://github.com/figureland/statekit/compare/v0.0.122...v0.0.123)
+
+### 🚀 Enhancements
+
+- Renamed events ([57b925b](https://github.com/figureland/statekit/commit/57b925b))
+
+### ✅ Tests
+
+- Update effect test ([bf7be6d](https://github.com/figureland/statekit/commit/bf7be6d))
+- Update effect test ([1adcf0c](https://github.com/figureland/statekit/commit/1adcf0c))
+- Update effect test ([abd7d8a](https://github.com/figureland/statekit/commit/abd7d8a))
+
+### ❤️ Contributors
+
+- Toby Milner-Gulland <toby@figure.land>
+
 ## v0.0.122
 
 [compare changes](https://github.com/figureland/statekit/compare/v0.0.121...v0.0.122)
