@@ -2,7 +2,7 @@ import {
   type AnimatedSignal,
   type Events,
   type Signal,
-  createEvents,
+  events,
   system,
   signal
 } from '@figureland/statekit'
@@ -20,7 +20,7 @@ type EngineEvents = {
 export const animation = ({ fps = 60 }: { fps?: number; epsilon?: number } = {}): Animated => {
   const { use, dispose } = system()
   const active = use(signal(() => false))
-  const events = use(createEvents<EngineEvents>())
+  const e = use(events<EngineEvents>())
   const animations: Set<AnimatedSignal<any>> = new Set()
 
   const timestep: number = 1000 / fps
@@ -29,12 +29,12 @@ export const animation = ({ fps = 60 }: { fps?: number; epsilon?: number } = {})
 
   const start = () => {
     active.set(true)
-    events.emit('start', undefined)
+    e.emit('start', undefined)
   }
 
   const stop = () => {
     active.set(false)
-    events.emit('stop', undefined)
+    e.emit('stop', undefined)
   }
 
   const tick = (timestamp: number) => {
@@ -51,7 +51,7 @@ export const animation = ({ fps = 60 }: { fps?: number; epsilon?: number } = {})
     for (const a of animations) {
       a.tick(delta)
     }
-    events.emit('tick', delta)
+    e.emit('tick', delta)
   }
 
   return {
@@ -62,10 +62,10 @@ export const animation = ({ fps = 60 }: { fps?: number; epsilon?: number } = {})
       active.set(false)
       dispose()
       animations.clear()
-      events.emit('dispose', undefined)
+      e.emit('dispose', undefined)
     },
     tick,
-    events,
+    events: e,
     animated: <V>(s: Signal<V>, options: AnimatedSignalOptions<V>): AnimatedSignal<V> => {
       const a = use(createAnimated(s, options))
       animations.add(a)

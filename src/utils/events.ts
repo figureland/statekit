@@ -1,32 +1,14 @@
 import { entries } from '@figureland/typekit/object'
 import { isString, isNumber, isSymbol } from '@figureland/typekit/guards'
-import {
-  createSubscriptions,
-  createTopicSubscriptions,
-  type Subscription,
-  type Unsubscribe
-} from './subscriptions'
-
-type EventKey = string | number | symbol
-type EventMap = Record<EventKey, any>
-
-export type Events<S extends EventMap, K extends keyof S = EventKey & keyof S> = {
-  on: <Key extends K>(
-    key: Key | Partial<{ [Key in K]: (eventArg: S[Key]) => void }>,
-    sub?: Subscription<S[Extract<Key, K>]>
-  ) => Unsubscribe
-  all: (sub: Subscription<[K, S[K]]>) => Unsubscribe
-  emit: <Key extends K>(key: Key, value: S[Key]) => void
-  dispose: () => void
-  size: () => number
-}
+import { createSubscriptions, createTopicSubscriptions, type Subscription } from './subscriptions'
+import type { EventsKey, EventsMap, Events } from '../api'
 
 /**
  * Creates a new event emitter
  */
-export const createEvents = <
-  S extends EventMap,
-  K extends EventKey & keyof S = EventKey & keyof S
+export const events = <
+  S extends EventsMap,
+  K extends EventsKey & keyof S = EventsKey & keyof S
 >(): Events<S, K> => {
   const subs = createTopicSubscriptions<K>()
   const allSubs = createSubscriptions<Subscription<[K, S[K]]>>()

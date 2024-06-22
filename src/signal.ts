@@ -2,7 +2,7 @@ import { isFunction, isObject, isMap, isSet } from '@figureland/typekit/guards'
 import { shallowEquals, type Equals } from '@figureland/typekit/equals'
 import { type Merge, simpleMerge } from '@figureland/typekit/merge'
 import { type Subscription } from './utils/subscriptions'
-import { createEvents } from './utils/events'
+import { events } from './utils/events'
 import type { Signal, SubscribableEvents, UseSignalDependency } from './api'
 import { system } from './system'
 
@@ -38,7 +38,7 @@ const createSignal = <V>(
   const { dispose, use } = system()
   const dependencies = new Set<Signal<any>['on']>()
 
-  const events = use(createEvents<SubscribableEvents<V>>())
+  const e = use(events<SubscribableEvents<V>>())
   let loaded = track
   let lastSyncTime: number = 0
 
@@ -56,7 +56,7 @@ const createSignal = <V>(
   const mutate = (u: (value: V) => void, sync: boolean = true) => {
     if (shouldThrottle()) return
     u(value)
-    if (sync) events.emit('state', value)
+    if (sync) e.emit('state', value)
     lastSyncTime = performance.now()
   }
 
@@ -68,8 +68,8 @@ const createSignal = <V>(
     if (!equality || !equality(value, newValue) || forceSync) {
       lastSyncTime = performance.now()
       value = newValue
-      events.emit('state', value)
-      events.emit('previous', [lastSyncTime, value])
+      e.emit('state', value)
+      e.emit('previous', [lastSyncTime, value])
     }
   }
 
@@ -79,7 +79,7 @@ const createSignal = <V>(
     }
   }
 
-  const on = (sub: Subscription<V>) => events.on('state', sub)
+  const on = (sub: Subscription<V>) => e.on('state', sub)
 
   return {
     id,
@@ -87,9 +87,9 @@ const createSignal = <V>(
     on,
     mutate,
     get: () => value,
-    events,
+    events: e,
     dispose: () => {
-      events.emit('dispose', true)
+      e.emit('dispose', true)
       dependencies.clear()
       dispose()
     },

@@ -1,10 +1,10 @@
 import { describe, it, expect, mock } from 'bun:test'
-import { createEvents, effect, signal } from '../src'
+import { effect, signal, events } from '../src'
 import { isNumber } from '@figureland/typekit/guards'
 
 describe('effect', () => {
   it('creates an effect which listens to other streams of events', () => {
-    const exampleEvents = createEvents<{ something: number; else: string[] }>()
+    const exampleEvents = events<{ something: number; else: string[] }>()
     const exampleSignal = signal(() => 10)
 
     const mockSub = mock(() => ({}))
@@ -16,7 +16,7 @@ describe('effect', () => {
     expect(mockSub).toHaveBeenCalledTimes(2)
   })
   it('receives values from events', () => {
-    const exampleEvents = createEvents<{ something: number; else: string[] }>()
+    const exampleEvents = events<{ something: number; else: string[] }>()
     const exampleSignal = signal(() => 10)
 
     let num: number = 0
@@ -46,7 +46,7 @@ describe('effect', () => {
     expect(mockSub).toHaveBeenCalledTimes(3)
   })
   it('disposes properly', () => {
-    const exampleEvents = createEvents<{ something: number; else: string[] }>()
+    const exampleEvents = events<{ something: number; else: string[] }>()
     const exampleSignal = signal(() => 10)
 
     const mockSub = mock(() => ({}))
@@ -64,7 +64,7 @@ describe('effect', () => {
     expect(mockDispose).toHaveBeenCalledTimes(1)
   })
   it('triggers as expected', () => {
-    const exampleEvents = createEvents<{ something: number; else: string[] }>()
+    const exampleEvents = events<{ something: number; else: string[] }>()
     const exampleSignal = signal(() => 10)
 
     const mockSub = mock(() => ({}))

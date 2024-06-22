@@ -1,5 +1,5 @@
 export { type PersistenceName, persist, type StorageAPI, type StorageAPIOptions } from './persist'
-export { type Events, createEvents } from './utils/events'
+export { events } from './utils/events'
 export { signal, createSignalContext } from './signal'
 export {
   type Unsubscribe,

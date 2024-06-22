@@ -1,4 +1,3 @@
-import type { Events } from './utils/events'
 import type { Subscription, Unsubscribe } from './utils/subscriptions'
 
 export type SubscribableHistoryEntry<V extends any> = [number, V]
@@ -90,3 +89,18 @@ export type SubscribableHistory<V> = Signal<V> & {
 }
 
 export type Effect = Disposable & Usable
+
+export type EventsKey = string | number | symbol
+
+export type EventsMap = Record<EventsKey, any>
+
+export type Events<S extends EventsMap, K extends keyof S = EventsKey & keyof S> = {
+  on: <Key extends K>(
+    key: Key | Partial<{ [Key in K]: (eventArg: S[Key]) => void }>,
+    sub?: Subscription<S[Extract<Key, K>]>
+  ) => Unsubscribe
+  all: (sub: Subscription<[K, S[K]]>) => Unsubscribe
+  emit: <Key extends K>(key: Key, value: S[Key]) => void
+  dispose: () => void
+  size: () => number
+}
