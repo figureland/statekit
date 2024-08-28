@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This codebase is deprecated, and has been moved to [@figureland/kit](https://github.com/figureland/kit/).
+
 ![statekit illustration](./docs/statekit-hero.svg)
 
 [![CI](https://github.com/figureland/statekit/actions/workflows/ci.yml/badge.svg)](https://github.com/figureland/statekit/actions/workflows/ci.yml)
